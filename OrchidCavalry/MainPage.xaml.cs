@@ -1,4 +1,5 @@
-﻿using OrchidCavalry.Services;
+﻿using OrchidCavalry.Popups;
+using OrchidCavalry.Services;
 
 namespace OrchidCavalry;
 
@@ -21,13 +22,15 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+
+
+
+        Navigation.PushModalAsync(new NewGame(), true);
+    }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-
-		//Navigation.PushModalAsync(new TestPage());
     }
 }
 

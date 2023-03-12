@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OrchidCavalry.Popups.NewGame"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="New Game"
+    BackgroundColor="Wheat"
+    BindingContext="OrchidCavalry.Popups.NewGame">
+    <VerticalStackLayout
+        Margin="10"
+        Padding="5"
+        VerticalOptions="CenterAndExpand">
+        <!--<Frame BorderColor="DarkGrey" Margin="5" HorizontalOptions="FillAndExpand">-->
+
+        <Label MinimumWidthRequest="300" Text="Centuries ago, an otherworldly threat arrived in our world to annihilate us all.  In an attempt to stop this invading force, retired general Mastodon Van Orchid used his resources to gather an army to overcome the threat.  This military force was called the..." />
+
+        <Image
+            Aspect="AspectFit"
+            MaximumWidthRequest="1000"
+            Source="logo.png" />
+
+        <Label
+            HorizontalOptions="CenterAndExpand"
+            Text="Gone are the days where the Orchid Cavalry protected the world.  All that remains is Orchid Island, the once illustrious headquarters of the Cavalry.  As the last scion of Mastodon Van Orchid and heir to Orchid Island, will you restore it to its former glory?  Or will you chart your own path?"
+            VerticalOptions="CenterAndExpand" />
+
+        <Entry
+            Placeholder="What will be your character's name?"
+            PlaceholderColor="DarkSlateGrey"
+            Text="{Binding Path=CharacterName, Mode=TwoWay}"
+            WidthRequest="400" />
+
+        <Button
+            Clicked="Button_Clicked"
+            IsEnabled="{Binding CanStart}"
+            Text="Start Game" />
+
+        <!--</Frame>-->
+    </VerticalStackLayout>
+</ContentPage>

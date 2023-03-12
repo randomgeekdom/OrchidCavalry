@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OrchidCavalry.Services;
 
 namespace OrchidCavalry;
 
@@ -19,6 +20,13 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+		builder.Services.AddTransient<IGameSaver, GameSaver>();
+		
+		builder.Services.AddSingleton<AppShell>();
+		builder.Services.AddSingleton<MainPage>();
+
+		var app = builder.Build();
+
+		return app;
 	}
 }

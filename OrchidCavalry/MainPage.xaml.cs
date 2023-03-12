@@ -1,13 +1,15 @@
-﻿namespace OrchidCavalry;
+﻿using OrchidCavalry.Services;
+
+namespace OrchidCavalry;
 
 public partial class MainPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+	public MainPage(IGameSaver gameSaver)
 	{
 		InitializeComponent();
-	}
+    }
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
@@ -20,5 +22,12 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+		//Navigation.PushModalAsync(new TestPage());
+    }
 }
 

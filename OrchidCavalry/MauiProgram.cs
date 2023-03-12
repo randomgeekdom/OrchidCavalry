@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using OrchidCavalry.Popups;
 using OrchidCavalry.Services;
+using OrchidCavalry.ViewModels;
 
 namespace OrchidCavalry;
 
@@ -21,11 +23,15 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddTransient<IGameSaver, GameSaver>();
-		
-		builder.Services.AddSingleton<AppShell>();
-		builder.Services.AddSingleton<MainPage>();
 
-		var app = builder.Build();
+        builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<NewGame>();
+
+        builder.Services.AddTransient<NewGameViewModel>();
+
+
+        var app = builder.Build();
 
 		return app;
 	}

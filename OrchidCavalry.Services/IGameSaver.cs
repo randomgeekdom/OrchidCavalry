@@ -4,7 +4,7 @@ namespace OrchidCavalry.Services
 {
     public interface IGameSaver
     {
-        Task<Game> DeserializeObjectFromFile<T>(string fileName);
-        Task SerializeObjectToFile<T>(Game obj, string fileName);
+        Task<Game> LoadGameAsync();
+        Task SaveGameAsync(Game obj);
     }
 }

@@ -5,15 +5,19 @@ namespace OrchidCavalry.Popups;
 
 public partial class NewGame : ContentPage, INotifyPropertyChanged
 {
-    public NewGame()
+    private readonly NewGameViewModel newGameViewModel;
+
+    public NewGame(NewGameViewModel newGameViewModel)
     {
         InitializeComponent();
 
-        this.BindingContext = new NewGameViewModel();
+        this.BindingContext = newGameViewModel;
+        this.newGameViewModel = newGameViewModel;
     }
 
     private void Button_Clicked(object sender, EventArgs e)
     {
+        this.newGameViewModel.StartAsync().RunSynchronously();
         Navigation.PopModalAsync();
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OrchidCavalry.Models;
+using OrchidCavalry.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.ViewModels
 {
-    public class NewGameViewModel : INotifyPropertyChanged
+    public class NewGameViewModel : ViewModelBase
     {
+        public NewGameViewModel(IGameSaver gameSaver)
+        {
+            this.gameSaver = gameSaver;
+        }
+
         private string characterName;
+        private readonly IGameSaver gameSaver;
 
         public string CharacterName
         {
@@ -18,17 +26,25 @@ namespace OrchidCavalry.ViewModels
             set
             {
                 characterName = value;
-                OnPropertyChanged(string.Empty);
+                this.NotifyAll();
             }
         }
 
         public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
-        
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public async Task StartAsync()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (CanStart)
+            {
+                var startingCharacter = this.CharacterName.Trim();
+                var game = new Game
+                {
+                    FirstName = startingCharacter,
+                    LastName = "Orchid"
+                };
+                
+                await this.gameSaver.SaveGameAsync(game);
+            }
         }
     }
 }

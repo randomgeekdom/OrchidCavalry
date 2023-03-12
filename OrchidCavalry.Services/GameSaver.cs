@@ -5,8 +5,9 @@ namespace OrchidCavalry.Services
 {
     public class GameSaver : IGameSaver
     {
-        public async Task SerializeObjectToFile<T>(Game obj, string fileName)
+        public async Task SaveGameAsync(Game obj)
         {
+            var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
             var serializedData = JsonSerializer.Serialize(obj);
 
@@ -16,9 +17,15 @@ namespace OrchidCavalry.Services
             }
         }
 
-        public async Task<Game> DeserializeObjectFromFile<T>(string fileName)
+        public async Task<Game> LoadGameAsync()
         {
+            var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            if(!File.Exists(filePath))
+            {
+                return null;
+            }
 
             using (var stream = new StreamReader(filePath))
             {

@@ -1,5 +1,6 @@
 ﻿using OrchidCavalry.Popups;
 using OrchidCavalry.Services;
+using OrchidCavalry.Views;
 
 namespace OrchidCavalry;
 
@@ -16,29 +17,23 @@ public partial class MainPage : ContentPage
         this.newGame = newGame;
     }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
+    
+    public void StartGame()
+    {
+        Navigation.PushAsync(new Dashboard());
     }
 
-    // change this to button press
-    protected override void OnAppearing()
+    private void StartButton_Clicked(object sender, EventArgs e)
     {
-        base.OnAppearing();
-
-        var game = this.gameSaver.LoadGameAsync().Result;
-
+        var game = this.gameSaver.LoadGame();
         if (game == null)
         {
-            var task = Navigation.PushModalAsync(this.newGame);
-            task.Wait();
+            newGame.Closed += this.StartGame;
+            Navigation.PushModalAsync(newGame).Wait();
+        }
+        else
+        {
+            StartGame();
         }
     }
 }

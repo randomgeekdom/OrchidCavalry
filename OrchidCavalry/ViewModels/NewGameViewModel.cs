@@ -32,7 +32,7 @@ namespace OrchidCavalry.ViewModels
 
         public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
 
-        public async Task StartAsync()
+        public void Start()
         {
             if (CanStart)
             {
@@ -43,7 +43,7 @@ namespace OrchidCavalry.ViewModels
                     LastName = "Orchid"
                 };
                 
-                await this.gameSaver.SaveGameAsync(game);
+                this.gameSaver.SaveGame(game);
             }
         }
     }

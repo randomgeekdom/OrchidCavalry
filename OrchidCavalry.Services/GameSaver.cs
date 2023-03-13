@@ -5,7 +5,7 @@ namespace OrchidCavalry.Services
 {
     public class GameSaver : IGameSaver
     {
-        public async Task SaveGameAsync(Game obj)
+        public void SaveGame(Game obj)
         {
             var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -13,11 +13,11 @@ namespace OrchidCavalry.Services
 
             using (var stream = new StreamWriter(filePath))
             {
-                await stream.WriteAsync(serializedData);
+                stream.WriteAsync(serializedData).Wait();
             }
         }
 
-        public async Task<Game> LoadGameAsync()
+        public Game LoadGame()
         {
             var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -29,7 +29,7 @@ namespace OrchidCavalry.Services
 
             using (var stream = new StreamReader(filePath))
             {
-                var serializedData = await stream.ReadToEndAsync();
+                var serializedData = stream.ReadToEndAsync().Result;
                 return JsonSerializer.Deserialize<Game>(serializedData);
             }
         }

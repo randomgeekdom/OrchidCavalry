@@ -1,3 +1,4 @@
+
 using OrchidCavalry.ViewModels;
 using System.ComponentModel;
 
@@ -17,7 +18,10 @@ public partial class NewGame : ContentPage, INotifyPropertyChanged
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        this.newGameViewModel.StartAsync().RunSynchronously();
+        this.newGameViewModel.Start();
         Navigation.PopModalAsync();
+        this.Closed();
     }
+
+    public Action Closed { get; set; }
 }

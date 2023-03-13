@@ -12,7 +12,7 @@
         VerticalOptions="CenterAndExpand">
         <!--<Frame BorderColor="DarkGrey" Margin="5" HorizontalOptions="FillAndExpand">-->
 
-        <Label MinimumWidthRequest="300" Text="Centuries ago, an otherworldly threat arrived in our world to annihilate us all.  In an attempt to stop this invading force, retired general Mastodon Van Orchid used his resources to gather an army to overcome the threat.  This military force was called the..." />
+        <!--<Label MinimumWidthRequest="300" Text="Centuries ago, an otherworldly threat arrived in our world to annihilate us all.  In an attempt to stop this invading force, retired general Mastodon Van Orchid used his resources to gather an army to overcome the threat.  This military force was called the..." />
 
         <Image
             Aspect="AspectFit"
@@ -22,13 +22,13 @@
         <Label
             HorizontalOptions="CenterAndExpand"
             Text="Gone are the days where the Orchid Cavalry protected the world.  All that remains is Orchid Island, the once illustrious headquarters of the Cavalry.  As the last scion of Mastodon Van Orchid and heir to Orchid Island, will you restore it to its former glory?  Or will you chart your own path?"
-            VerticalOptions="CenterAndExpand" />
+            VerticalOptions="CenterAndExpand" />-->
 
         <Entry
+            HorizontalTextAlignment="Center"
             Placeholder="What will be your character's first name?"
             PlaceholderColor="DarkSlateGrey"
             Text="{Binding Path=CharacterName, Mode=TwoWay}"
-            HorizontalTextAlignment="Center"
             WidthRequest="400" />
 
         <Button

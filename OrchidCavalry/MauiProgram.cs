@@ -24,11 +24,16 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<IGameSaver, GameSaver>();
 
+		// Views
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<NewGame>();
 
+		// View models
         builder.Services.AddTransient<NewGameViewModel>();
+
+		// Services
+        builder.Services.AddTransient<Randomizer>();
 
 
         var app = builder.Build();

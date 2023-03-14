@@ -1,24 +1,20 @@
 ﻿using OrchidCavalry.Models;
 using OrchidCavalry.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrchidCavalry.ViewModels
 {
     public class NewGameViewModel : ViewModelBase
     {
+        private readonly IGameSaver gameSaver;
+
+        private string characterName;
+
         public NewGameViewModel(IGameSaver gameSaver)
         {
             this.gameSaver = gameSaver;
         }
 
-        private string characterName;
-        private readonly IGameSaver gameSaver;
+        public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
 
         public string CharacterName
         {
@@ -30,7 +26,27 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
-        public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
+        public Gender Gender { get; set; }
+
+        public bool IsFemale
+        {
+            get => Gender == Gender.Female;
+            set
+            {
+                Gender = value ? Gender.Female : Gender.Male;
+                this.NotifyAll();
+            }
+        }
+
+        public bool IsMale
+        {
+            get => Gender == Gender.Male;
+            set
+            {
+                Gender = value ? Gender.Male : Gender.Female;
+                this.NotifyAll();
+            }
+        }
 
         public void Start()
         {
@@ -39,10 +55,9 @@ namespace OrchidCavalry.ViewModels
                 var startingCharacter = this.CharacterName.Trim();
                 var game = new Game
                 {
-                    FirstName = startingCharacter,
-                    LastName = "Orchid"
+                    PlayerCharacter = new Character(startingCharacter, "Orchid", this.Gender, 20)
                 };
-                
+
                 this.gameSaver.SaveGame(game);
             }
         }

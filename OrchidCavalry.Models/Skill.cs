@@ -1,19 +1,17 @@
 ﻿namespace OrchidCavalry.Models
 {
-    //public enum Skill
-    //{
-    //    Combat = 1,
-    //    Exploration = 2,
-    //    Mysticism = 3,
-    //    Criminal = 4,
-    //    Engineering = 5,
-    //    Commercial = 6,
-    //    Entertainment = 7,
-    //    Diplomacy = 8
-    //}
-
     public class Skill
     {
+        public override bool Equals(object obj)
+        {
+            return this.Name == (obj as Skill)?.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
+
         public Skill(string name, string belowZeroTitle, params string[] titles)
         {
             this.Name = name;
@@ -21,15 +19,32 @@
             this.Titles = titles;
         }
 
+        public static IEnumerable<Skill> GetAll()
+        {
+            return new List<Skill> { 
+                Combat,
+                Commercial,
+                Criminal,
+                Diplomacy,
+                Engineering,
+                Entertainment,
+                Exploration,
+                Mysticism
+            };
+        }
+
         public static Skill Combat { get; } = new Skill(nameof(Combat), "Coward", "Scrapper", "Brawler", "Guard", "Soldier", "Knight", "Marshal", "Captain");
         public static Skill Commercial { get; } = new Skill(nameof(Skill.Commercial), "Vagrant", "Merchandiser", "Merchant", "Entrepreneur", "Investor", "Capitalist");
         public static Skill Criminal { get; } = new Skill(nameof(Skill.Criminal), "Fugitive", "Pickpocket", "Burglar", "Thief", "Agent", "Spy");
         public static Skill Diplomacy { get; } = new Skill(nameof(Skill.Diplomacy), "Introvert", "Extrovert", "Orator", "Politician", "Representative", "Leader", "Minister", "Envoy", "Diplomat");
-        public static Skill Engineering { get; } = new Skill(nameof(Skill.Engineering), "Breaker", todo);
-        public static Skill Entertainment { get; } = new Skill(nameof(Skill.Entertainment), "Dullard", todo);
-        public static Skill Exploration { get; } = new Skill(nameof(Exploration), "Wanderer", todo);
-        public static Skill Mysticism { get; } = new Skill(nameof(Mysticism), "Secularist", todo);
+        public static Skill Engineering { get; } = new Skill(nameof(Skill.Engineering), "Breaker", "Apprentice", "Fixer", "Crafter", "Builder", "Machinist", "Engineer", "Industrialist");
+        public static Skill Entertainment { get; } = new Skill(nameof(Skill.Entertainment), "Dullard", "Sideshow", "Opener", "Jester", "Bard", "Headliner", "Superstar", "Director", "Producer");
+        public static Skill Exploration { get; } = new Skill(nameof(Exploration), "Vanished", "Wanderer", "Scout", "Explorer", "Ranger", "Navigator", "Captain", "Commodore", "Admiral");
+        public static Skill Mysticism { get; } = new Skill(nameof(Mysticism), "Secularist", "Acolyte", "Monk", "Abbot", "Cleric", "Occultist", "Shaman", "Magus", "Spellbinder", "Magister");
+        
         public string BelowZeroTitle { get; }
+        
+        
         public string[] Titles { get; }
         public string Name { get; }
 
@@ -49,4 +64,5 @@
             return Titles[index];
         }
     }
+
 }

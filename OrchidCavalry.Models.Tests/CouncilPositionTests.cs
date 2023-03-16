@@ -4,10 +4,12 @@ namespace OrchidCavalry.Models.Tests
 {
     public class CouncilPositionTests
     {
-        [Theory]
-        [InlineData(Skill.Diplomacy, "Ambassador")]
-        public void CouncilPositionIsValueObject(Skill skill, string title)
+        [Fact]
+        public void CouncilPositionIsValueObject()
         {
+            var skill = Skill.Diplomacy;
+            var title = "Ambassador";
+
             var copy = new CouncilPosition(skill, title);
             Assert.Equal(CouncilPosition.Get(skill), copy);
         }
@@ -18,8 +20,9 @@ namespace OrchidCavalry.Models.Tests
             var councilPosition = CouncilPosition.GetAll().First();
 
             var serialized = JsonConvert.SerializeObject(councilPosition);
+            var deserializedObject = JsonConvert.DeserializeObject<CouncilPosition>(serialized);
 
-            Assert.Equal(councilPosition, JsonConvert.DeserializeObject<CouncilPosition>(serialized));
+            Assert.Equal(councilPosition, deserializedObject);
         }
     }
 }

@@ -3,8 +3,9 @@
     // All the code in this file is included in all platforms.
     public class Game
     {
-        public Game()
+        public Game(Character playerCharacter)
         {
+            PlayerCharacter = playerCharacter;
             this.Council = CouncilPosition.GetAll().ToDictionary(x => x, x => default(Character));
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace OrchidCavalry.Models
 {
-    public class Character : Entity, ISkillBased
+    public class Character : Entity
     {
         private readonly int ageInDays = 0;
 
@@ -11,7 +11,7 @@
             this.Gender = gender;
             this.ageInDays = ageInyears * 365;
 
-            this.InitializeSkills();
+            this.Skills = Skill.GetAll().ToDictionary(x => x, y => 0);
         }
 
         public int Age => this.ageInDays / 365;
@@ -19,20 +19,21 @@
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.GivenTitle))
+                if (this.GivenTitles.Any())
                 {
-                    //var skills = this.Skills.OrderByDescending(x=>x.Value) ?? 
+                    return this.GivenTitles.OrderByDescending(x=>x.Value).First().Key;
                 }
 
-                return GivenTitle;
+                var orderedSkills = this.Skills.OrderByDescending(x => x.Value).ToArray();
+                return $"{orderedSkills[0].Key.GetTitle(orderedSkills[0].Value)} {orderedSkills[1].Key.GetTitle(orderedSkills[1].Value)}";
             }
         }
 
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string GivenTitle { get; set; }
-        public Gender Gender { get; private set; }
-        public Dictionary<Skill, int> Skills { get; set; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public Dictionary<string, bool> GivenTitles { get; } = new Dictionary<string, bool>();
+        public Gender Gender { get;  }
+        public Dictionary<Skill, int> Skills { get; }
     }
 }

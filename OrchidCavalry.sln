@@ -5,14 +5,16 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchidCavalry", "OrchidCavalry\OrchidCavalry.csproj", "{4B2535E3-6075-4253-BB02-B3462BEF5FAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchidCavalry.Services", "OrchidCavalry.Services\OrchidCavalry.Services.csproj", "{68E2C01B-EB2C-4B47-9770-F5777FE2A43F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchidCavalry.Services", "OrchidCavalry.Services\OrchidCavalry.Services.csproj", "{68E2C01B-EB2C-4B47-9770-F5777FE2A43F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2996105-F56B-4AD6-A340-28A31E536441}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchidCavalry.Models", "OrchidCavalry.Models\OrchidCavalry.Models.csproj", "{9CD33E86-3AF3-4FA3-8368-BF689EB62F27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchidCavalry.Models", "OrchidCavalry.Models\OrchidCavalry.Models.csproj", "{9CD33E86-3AF3-4FA3-8368-BF689EB62F27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchidCavalry.Models.Tests", "OrchidCavalry.Models.Tests\OrchidCavalry.Models.Tests.csproj", "{871D3D78-A012-4172-B113-C28BEE031CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{9CD33E86-3AF3-4FA3-8368-BF689EB62F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CD33E86-3AF3-4FA3-8368-BF689EB62F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CD33E86-3AF3-4FA3-8368-BF689EB62F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{871D3D78-A012-4172-B113-C28BEE031CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871D3D78-A012-4172-B113-C28BEE031CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871D3D78-A012-4172-B113-C28BEE031CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871D3D78-A012-4172-B113-C28BEE031CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

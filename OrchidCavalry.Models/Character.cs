@@ -4,9 +4,6 @@
     {
         private readonly int ageInDays = 0;
 
-        public Character() : this(null, null, 0)
-        { }
-
         public Character(string firstName, string lastName, Gender gender, int ageInyears = 0)
         {
             this.FirstName = firstName;
@@ -18,8 +15,23 @@
         }
 
         public int Age => this.ageInDays / 365;
+        public string Title
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.GivenTitle))
+                {
+                    //var skills = this.Skills.OrderByDescending(x=>x.Value) ?? 
+                }
+
+                return GivenTitle;
+            }
+        }
+
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string GivenTitle { get; set; }
         public Gender Gender { get; private set; }
         public Dictionary<Skill, int> Skills { get; set; }
     }

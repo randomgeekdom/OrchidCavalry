@@ -6,7 +6,6 @@ namespace OrchidCavalry;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
     private readonly IGameSaver gameSaver;
     private readonly NewGame newGame;
 

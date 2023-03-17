@@ -9,7 +9,6 @@
                 new CouncilPosition(Skill.Criminal, "Spymaster"),
                 new CouncilPosition(Skill.Diplomacy, "Ambassador"),
                 new CouncilPosition(Skill.Engineering, "Architect"),
-                new CouncilPosition(Skill.Entertainment, "Maestro"),
                 new CouncilPosition(Skill.Exploration, "Admiral"),
                 new CouncilPosition(Skill.Mysticism, "Oracle"),
             };

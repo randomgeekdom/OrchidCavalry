@@ -27,9 +27,9 @@
                 Criminal,
                 Diplomacy,
                 Engineering,
-                Entertainment,
                 Exploration,
-                Mysticism
+                Mysticism,
+                Agriculture
             };
         }
 
@@ -38,7 +38,6 @@
         public static Skill Criminal { get; } = new Skill(nameof(Skill.Criminal), "Fugitive", "Pickpocket", "Burglar", "Thief", "Agent", "Spy");
         public static Skill Diplomacy { get; } = new Skill(nameof(Skill.Diplomacy), "Introvert", "Extrovert", "Orator", "Politician", "Representative", "Leader", "Minister", "Envoy", "Diplomat");
         public static Skill Engineering { get; } = new Skill(nameof(Skill.Engineering), "Breaker", "Apprentice", "Fixer", "Crafter", "Builder", "Machinist", "Engineer", "Industrialist");
-        public static Skill Entertainment { get; } = new Skill(nameof(Skill.Entertainment), "Dullard", "Sideshow", "Opener", "Jester", "Bard", "Headliner", "Superstar", "Director", "Producer");
         public static Skill Exploration { get; } = new Skill(nameof(Exploration), "Vanished", "Wanderer", "Scout", "Explorer", "Ranger", "Navigator", "Captain", "Commodore", "Admiral");
         public static Skill Mysticism { get; } = new Skill(nameof(Mysticism), "Secularist", "Acolyte", "Monk", "Abbot", "Cleric", "Occultist", "Shaman", "Magus", "Spellbinder", "Magister");
         

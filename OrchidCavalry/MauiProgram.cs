@@ -23,22 +23,12 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		builder.Services.AddTransient<IGameSaver, GameSaver>();
-
-		// Views
-        builder.Services.AddSingleton<AppShell>();
-        builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<NewGame>();
-
-		// View models
-        builder.Services.AddTransient<NewGameViewModel>();
-
-		// Services
-        builder.Services.AddTransient<Randomizer>();
-
+        builder.Register();
 
         var app = builder.Build();
 
 		return app;
 	}
+
+	
 }

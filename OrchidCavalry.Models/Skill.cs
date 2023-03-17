@@ -28,8 +28,7 @@
                 Diplomacy,
                 Engineering,
                 Exploration,
-                Mysticism,
-                Agriculture
+                Mysticism
             };
         }
 

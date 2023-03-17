@@ -11,7 +11,7 @@
             this.Gender = gender;
             this.ageInDays = ageInyears * 365;
 
-            this.Skills = Skill.GetAll().ToDictionary(x => x, y => 0);
+            this.Skills = Skill.GetAll().ToDictionary(x => x, x => 0);
         }
 
         public int Age => this.ageInDays / 365;
@@ -19,21 +19,21 @@
         {
             get
             {
-                if (this.GivenTitles.Any())
+                if (string.IsNullOrWhiteSpace(this.GivenTitle))
                 {
-                    return this.GivenTitles.OrderByDescending(x=>x.Value).First().Key;
+                    //var skills = this.Skills.OrderByDescending(x=>x.Value) ?? 
                 }
 
-                var orderedSkills = this.Skills.OrderByDescending(x => x.Value).ToArray();
-                return $"{orderedSkills[0].Key.GetTitle(orderedSkills[0].Value)} {orderedSkills[1].Key.GetTitle(orderedSkills[1].Value)}";
+                return GivenTitle;
             }
         }
 
 
-        public string FirstName { get; }
-        public string LastName { get; }
-        public Dictionary<string, bool> GivenTitles { get; } = new Dictionary<string, bool>();
-        public Gender Gender { get;  }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string GivenTitle { get; set; }
+        public Gender Gender { get; private set; }
         public Dictionary<Skill, int> Skills { get; }
+        public string Name => $"{FirstName} {LastName}";
     }
 }

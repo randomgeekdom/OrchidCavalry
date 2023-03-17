@@ -3,6 +3,7 @@ using OrchidCavalry.Services;
 
 namespace OrchidCavalry.ViewModels
 {
+
     public class NewGameViewModel : ViewModelBase
     {
         private readonly IGameSaver gameSaver;

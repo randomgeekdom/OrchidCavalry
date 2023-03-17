@@ -5,9 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Dashboard">
     <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
+        <HorizontalStackLayout>
+            <Label Text="{Binding PlayerCharacterName}"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

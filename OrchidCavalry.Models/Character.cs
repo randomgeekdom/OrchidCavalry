@@ -2,19 +2,19 @@
 {
     public class Character : Entity
     {
-        public int AgeInDays { get; }
+        public int AgeInMonths { get; }
 
-        public Character(string firstName, string lastName, Gender gender, int ageInDays = 0)
+        public Character(string firstName, string lastName, Gender gender, int ageInMonths = 0)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;
-            this.AgeInDays = ageInDays;
+            this.AgeInMonths = ageInMonths;
 
             this.Skills = Skill.GetAll().Select(x => new SkillLevel(x, 0));
         }
 
-        public int Age => this.AgeInDays / 365;
+        public int Age => this.AgeInMonths / 12;
 
         public string FirstName { get; }
 

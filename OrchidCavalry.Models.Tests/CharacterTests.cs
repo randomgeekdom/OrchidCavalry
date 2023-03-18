@@ -5,7 +5,7 @@
         [Fact]
         public void CanGetAgeFromAgeByDays()
         {
-            Assert.Equal(1, GetCharacter(365).Age);  
+            Assert.Equal(1, GetCharacter(12).Age);  
         }
 
         [Fact]

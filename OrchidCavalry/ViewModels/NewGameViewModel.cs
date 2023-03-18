@@ -49,14 +49,16 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
+        public Game Game { get; private set; }
+
         public void Start()
         {
             if (CanStart)
             {
                 var startingCharacter = this.CharacterName.Trim();
-                var game = new Game(new Character(startingCharacter, "Orchid", this.Gender, 20));
+                this.Game = new Game(new Character(startingCharacter, "Orchid", this.Gender, 20));
 
-                this.gameSaver.SaveGame(game);
+                this.gameSaver.SaveGame(this.Game);
             }
         }
     }

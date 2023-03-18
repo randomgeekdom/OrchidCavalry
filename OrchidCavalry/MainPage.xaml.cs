@@ -29,11 +29,16 @@ public partial class MainPage : ContentPage
         var game = this.gameSaver.LoadGame();
         if (game == null)
         {
-            newGame.Closed += this.StartGame;
+            newGame.Closed += () =>
+            {
+                this.dashboard.DashboardViewModel.LoadGame(this.newGame.Game);
+                this.StartGame();
+            };
             Navigation.PushModalAsync(newGame).Wait();
         }
         else
         {
+            this.dashboard.DashboardViewModel.LoadGame(game);
             StartGame();
         }
     }

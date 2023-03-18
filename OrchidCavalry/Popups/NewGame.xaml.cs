@@ -1,4 +1,5 @@
 
+using OrchidCavalry.Models;
 using OrchidCavalry.ViewModels;
 using System.ComponentModel;
 
@@ -24,4 +25,5 @@ public partial class NewGame : ContentPage, INotifyPropertyChanged
     }
 
     public Action Closed { get; set; }
+    public Game Game => this.newGameViewModel.Game;
 }

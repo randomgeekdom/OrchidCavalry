@@ -6,10 +6,10 @@
         public Game(Character playerCharacter)
         {
             PlayerCharacter = playerCharacter;
-            this.Council = CouncilPosition.GetAll().ToDictionary(x => x, x => default(Character));
+            this.Council = CouncilPosition.GetAll().Select(x => new CouncilMember(null, x));
         }
 
-        public Dictionary<CouncilPosition, Character> Council { get; }
+        public IEnumerable<CouncilMember> Council { get; }
         public Character PlayerCharacter { get; set; }
     }
 }

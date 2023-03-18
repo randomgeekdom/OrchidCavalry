@@ -6,15 +6,27 @@ namespace OrchidCavalry.ViewModels
     public class DashboardViewModel : ViewModelBase
     {
         private readonly IGameSaver gameSaver;
-        private readonly Game game;
+        private Game game;
 
         public DashboardViewModel(IGameSaver gameSaver)
         {
             this.gameSaver = gameSaver;
-
-            this.game = this.gameSaver.LoadGame();
         }
 
-        public string PlayerCharacterName => this.game.PlayerCharacter.Name;
+        public Game Game
+        {
+            get => this.game; set
+            {
+                this.game = value;
+                this.NotifyAll(); ;
+            }
+        }
+
+        public string PlayerCharacterName => this.Game?.PlayerCharacter?.Name;
+
+        public void LoadGame(Game game)
+        {
+            this.Game = game;
+        }
     }
 }

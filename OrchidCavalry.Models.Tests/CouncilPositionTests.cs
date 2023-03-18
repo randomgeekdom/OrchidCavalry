@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace OrchidCavalry.Models.Tests
 {
@@ -12,17 +14,6 @@ namespace OrchidCavalry.Models.Tests
 
             var copy = new CouncilPosition(skill, title);
             Assert.Equal(CouncilPosition.Get(skill), copy);
-        }
-
-        [Fact]
-        public void CanSerializeAndDeserializeCouncilPosition()
-        {
-            var councilPosition = CouncilPosition.GetAll().First();
-
-            var serialized = JsonConvert.SerializeObject(councilPosition);
-            var deserializedObject = JsonConvert.DeserializeObject<CouncilPosition>(serialized);
-
-            Assert.Equal(councilPosition, deserializedObject);
         }
     }
 }

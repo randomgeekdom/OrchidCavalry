@@ -9,7 +9,7 @@ public static class Registrations
 {
     public static void Register(this MauiAppBuilder builder)
     {
-        builder.Services.AddTransient<IGameSaver, GameSaver>();
+        builder.Services.AddSingleton(builder);
 
         // Views
         builder.Services.AddSingleton<AppShell>();
@@ -22,6 +22,7 @@ public static class Registrations
         builder.Services.AddTransient<DashboardViewModel>();
 
         // Services
+        builder.Services.AddTransient<IGameSaver, GameSaver>();
         builder.Services.AddTransient<Randomizer>();
     }
 }

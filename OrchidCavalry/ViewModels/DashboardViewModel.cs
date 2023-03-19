@@ -15,14 +15,17 @@ namespace OrchidCavalry.ViewModels
 
         public Game Game
         {
-            get => this.game; set
+            get => this.game; 
+            set
             {
                 this.game = value;
-                this.NotifyAll(); ;
+                this.NotifyAll();
             }
         }
 
-        public string PlayerCharacterName => this.Game?.PlayerCharacter?.Name;
+        public string PlayerCharacterName => $"Governor: {this.Game?.PlayerCharacter?.Name}";
+        public string PlayerCharacterDetails => $"{this.Game?.PlayerCharacter?.Age} {this.Game?.PlayerCharacter?.Gender}";
+
 
         public void LoadGame(Game game)
         {

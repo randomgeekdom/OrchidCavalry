@@ -24,12 +24,12 @@
                 Content="Male"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Value="{Binding IsMale}" />
+                IsChecked="{Binding Path=IsMale, Mode=TwoWay}" />
             <RadioButton
                 Content="Female"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Value="{Binding IsFemale}" />
+                IsChecked="{Binding Path=IsFemale,Mode=TwoWay}" />
         </HorizontalStackLayout>
 
 

@@ -29,7 +29,7 @@
                 Clicked="StartButton_Clicked"
                 HorizontalOptions="Center"
                 SemanticProperties.Hint="Start a new game"
-                Text="START"
+                Text="PLAY"
                 WidthRequest="200" />
 
         </VerticalStackLayout>

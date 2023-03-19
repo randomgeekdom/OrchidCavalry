@@ -3,11 +3,28 @@
     x:Class="OrchidCavalry.Views.Dashboard"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:OrchidCavalry.Controls"
     Title="The State of Orchid Island">
     <VerticalStackLayout>
 
-        <Label Text="{Binding PlayerCharacterName}" />
-        <Label Text="{Binding PlayerCharacterDetails}" />
-
+        <Grid Margin="10" VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout>
+                <Label Text="{Binding PlayerCharacterName}" />
+                <Label Text="{Binding PlayerCharacterDetails}" />
+            </VerticalStackLayout>
+            <Button
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                FontSize="Large"
+                HorizontalOptions="Start"
+                Text="»"
+                TextColor="#4B1B98" />
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

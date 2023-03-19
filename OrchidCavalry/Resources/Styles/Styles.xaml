@@ -401,7 +401,7 @@
     </Style>
 
     <Style TargetType="VerticalStackLayout">
-        <Setter Property="BackgroundColor" Value="Wheat" />
+        <Setter Property="BackgroundColor" Value="#F5EEC3" />
     </Style>
 
 </ResourceDictionary>

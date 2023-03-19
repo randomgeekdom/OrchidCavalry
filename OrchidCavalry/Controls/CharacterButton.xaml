@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="OrchidCavalry.Controls.CharacterButton"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <VerticalStackLayout>
+        <Frame
+            BackgroundColor="LawnGreen"
+            BorderColor="RosyBrown"
+            VerticalOptions="Center">
+            <Grid VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout>
+                    <Label Text="Anthony Jones" />
+                    <Label Text="Got help anyone" />
+                </VerticalStackLayout>
+                <Button Grid.Column="1" Text="..." />
+            </Grid>
+        </Frame>
+        <Button
+            HeightRequest="50"
+            Text="Hello\r\nGoodbye"
+            WidthRequest="200" />
+    </VerticalStackLayout>
+</ContentView>

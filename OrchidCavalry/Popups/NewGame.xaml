@@ -13,6 +13,7 @@
 
         <Entry
             HorizontalTextAlignment="Center"
+            MaxLength="35"
             Placeholder="What will be your character's first name?"
             PlaceholderColor="DarkSlateGrey"
             Text="{Binding Path=CharacterName, Mode=TwoWay}"
@@ -23,13 +24,13 @@
             <RadioButton
                 Content="Male"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                IsChecked="{Binding Path=IsMale, Mode=TwoWay}" />
+                IsChecked="{Binding Path=IsMale, Mode=TwoWay}"
+                VerticalOptions="Center" />
             <RadioButton
                 Content="Female"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                IsChecked="{Binding Path=IsFemale,Mode=TwoWay}" />
+                IsChecked="{Binding Path=IsFemale, Mode=TwoWay}"
+                VerticalOptions="Center" />
         </HorizontalStackLayout>
 
 

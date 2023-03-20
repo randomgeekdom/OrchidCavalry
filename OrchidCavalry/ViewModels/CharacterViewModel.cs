@@ -20,5 +20,8 @@ namespace OrchidCavalry.ViewModels
 
         public Game Game { get; }
         public string Name => this.Character.Name;
+        public string Age => this.Character.Age.ToString();
+        public string Gender => this.Character.Gender.ToString();
+        public IEnumerable<string> Titles => this.Character.AllTitles;
     }
 }

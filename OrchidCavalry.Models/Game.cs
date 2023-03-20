@@ -6,6 +6,7 @@
         public Game(Character playerCharacter)
         {
             PlayerCharacter = playerCharacter;
+            playerCharacter.MakeRuler();
             this.Council = CouncilPosition.GetAll().Select(x => new CouncilMember(null, x));
         }
 

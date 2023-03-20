@@ -16,4 +16,9 @@ public partial class CharacterView : ContentPage
     {
         this.BindingContext = this.characterViewModel = new CharacterViewModel(playerCharacter, game);
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PopModalAsync();
+    }
 }

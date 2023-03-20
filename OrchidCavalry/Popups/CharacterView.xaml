@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrchidCavalry.Popups.CharacterView"
-             Title="CharacterView">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Name}"/>
+<ContentPage
+    x:Class="OrchidCavalry.Popups.CharacterView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
+    Title="CharacterView"
+    x:DataType="vm:CharacterViewModel">
+    <VerticalStackLayout
+        Margin="20"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <Grid VerticalOptions="StartAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Margin="5,0" Text="Name:" />
+            <Label
+                Grid.Row="1"
+                Margin="5,0"
+                Text="Age:" />
+            <Label
+                Grid.Row="2"
+                Margin="5,0"
+                Text="Gender:" />
+            <Label
+                Grid.Row="4"
+                Margin="5,0"
+                Text="Titles:" />
+
+            <Label Grid.Column="1" Text="{Binding Name}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Age}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Gender}" />
+            <ListView
+                Grid.Row="4"
+                Grid.Column="1"
+                ItemsSource="{Binding Titles}" />
+        </Grid>
+
+        <Button Clicked="Button_Clicked" Text="Back" />
     </VerticalStackLayout>
 </ContentPage>

@@ -7,17 +7,19 @@
     Title="The State of Orchid Island">
     <VerticalStackLayout>
 
-        <Grid Margin="10" VerticalOptions="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <VerticalStackLayout>
-                <Label Text="{Binding PlayerCharacterName}" />
-                <Label Text="{Binding PlayerCharacterDetails}" />
-            </VerticalStackLayout>
-            <Button
+        <Frame>
+            <Grid Margin="10" VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout>
+                    <Label Text="{Binding PlayerCharacterName}" />
+                    <Label Text="{Binding PlayerCharacterDetails}" />
+                </VerticalStackLayout>
+                <Button
+                    Clicked="Button_Clicked"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
@@ -25,6 +27,7 @@
                 HorizontalOptions="Start"
                 Text="»"
                 TextColor="#4B1B98" />
-        </Grid>
+            </Grid>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

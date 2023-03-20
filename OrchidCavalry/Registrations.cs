@@ -16,6 +16,7 @@ public static class Registrations
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<NewGame>();
         builder.Services.AddTransient<Dashboard>();
+        builder.Services.AddTransient<CharacterView>();
 
         // View models
         builder.Services.AddTransient<NewGameViewModel>();

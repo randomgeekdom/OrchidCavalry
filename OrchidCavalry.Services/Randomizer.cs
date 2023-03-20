@@ -5,7 +5,7 @@
         private readonly Random random;
         public bool GetBool(int percent = 50)
         {
-            return this.random.Next(101) < percent;
+            return this.random.Next(0,101) <= percent;
         }
     }
 }

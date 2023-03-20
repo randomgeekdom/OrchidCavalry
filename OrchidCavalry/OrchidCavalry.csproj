@@ -71,6 +71,9 @@
 	  <MauiXaml Update="Play.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Popups\CharacterView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Popups\NewGame.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

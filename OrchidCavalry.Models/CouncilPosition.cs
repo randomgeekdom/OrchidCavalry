@@ -2,6 +2,11 @@
 {
     public record CouncilPosition
     {
+        public override string ToString()
+        {
+            return this.Title;
+        }
+
         private static readonly IEnumerable<CouncilPosition> councilPositions = new List<CouncilPosition>()
             {
                 new CouncilPosition(Skill.Combat, "Commander"),
@@ -20,7 +25,7 @@
         }
 
         public Skill PrimarySkill { get; }
-        public string Title { get;  }
+        public string Title { get; }
 
         public static IEnumerable<CouncilPosition> GetAll()
         {

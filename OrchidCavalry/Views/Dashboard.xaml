@@ -16,7 +16,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Grid.Row="1" />
         </Grid.RowDefinitions>
         <VerticalStackLayout>
@@ -32,7 +32,7 @@
             HorizontalOptions="Start"
             Text="»"
             TextColor="#4B1B98" />
-        <ListView Grid.Row="1" ItemsSource="{Binding Council}">
+        <ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Council}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

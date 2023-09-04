@@ -32,7 +32,7 @@
             HorizontalOptions="Start"
             Text="»"
             TextColor="#4B1B98" />
-        <ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Council}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
+        <!--<ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Council}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -49,6 +49,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
     </Grid>
 </ContentPage>

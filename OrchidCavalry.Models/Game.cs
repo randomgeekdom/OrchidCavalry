@@ -7,19 +7,15 @@
         {
             PlayerCharacter = playerCharacter;
             playerCharacter.MakeRuler();
-            this.Council = CouncilPosition.GetAll().Select(x => new CouncilMember(null, x));
         }
 
         public int CivilianPopulation { get; set; } = 50;
-        public IEnumerable<CouncilMember> Council { get; }
         public Character PlayerCharacter { get; set; }
         public List<Character> UnassignedCitizens { get; set; } = new List<Character>();
 
         public IEnumerable<Character> GetAllCitizens()
         {
             var citizens = this.UnassignedCitizens.ToList();
-
-            citizens.AddRange(Council.Select(x => x.Character));
 
             citizens.Add(this.PlayerCharacter);
 

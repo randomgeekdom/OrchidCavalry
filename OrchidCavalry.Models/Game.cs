@@ -9,7 +9,6 @@
             playerCharacter.MakeRuler();
         }
 
-        public int CivilianPopulation { get; set; } = 50;
         public Character PlayerCharacter { get; set; }
         public List<Character> UnassignedCitizens { get; set; } = new List<Character>();
 

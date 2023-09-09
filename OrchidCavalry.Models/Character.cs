@@ -2,18 +2,17 @@
 {
     public class Character : Entity
     {
-        public Character(string firstName, string lastName, Gender gender, int ageInMonths = 0)
+        public Character(string firstName, string lastName, int ageInDays = 0)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.Gender = gender;
-            this.AgeInMonths = ageInMonths;
+            this.AgeInDays = ageInDays;
 
             this.Skills = Skill.GetAll().Select(x => new SkillLevel(x, 0));
         }
 
-        public int Age => this.AgeInMonths / 12;
-        public int AgeInMonths { get; }
+        public int Age => this.AgeInDays / 365;
+        public int AgeInDays { get; }
 
         public IEnumerable<string> AllTitles
         {
@@ -26,8 +25,6 @@
         }
 
         public string FirstName { get; }
-
-        public Gender Gender { get; }
 
         public string GeneratedTitle
         {

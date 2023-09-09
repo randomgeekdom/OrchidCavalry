@@ -24,9 +24,7 @@ namespace OrchidCavalry.ViewModels
         }
 
         public string PlayerCharacterName => $"Governor: {this.Game?.PlayerCharacter?.Name}";
-        public string PlayerCharacterDetails => $"{this.GenderSymbol} Age: {this.Game?.PlayerCharacter?.Age}";
-
-        public char GenderSymbol => this.Game?.PlayerCharacter?.Gender == Gender.Male ? '♂' : '♀';
+        public string PlayerCharacterDetails => $"Age: {this.Game?.PlayerCharacter?.Age}";
 
         public void LoadGame(Game game)
         {

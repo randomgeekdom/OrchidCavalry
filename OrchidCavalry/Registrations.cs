@@ -24,7 +24,6 @@ public static class Registrations
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();
-        builder.Services.AddTransient<ICharacterNameGenerator, CharacterNameGenerator>();
         builder.Services.AddTransient<Randomizer>();
     }
 }

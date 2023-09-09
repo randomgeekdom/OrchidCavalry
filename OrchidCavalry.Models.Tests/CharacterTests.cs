@@ -5,7 +5,7 @@
         [Fact]
         public void CanGetAgeFromAgeByDays()
         {
-            Assert.Equal(1, GetCharacter(12).Age);  
+            Assert.Equal(1, GetCharacter(365).Age);  
         }
 
         [Fact]
@@ -37,7 +37,7 @@
 
         private static Character GetCharacter(int ageInDays = 0)
         {
-            return new Character("firs", "last", Gender.Female, ageInDays);
+            return new Character("firs", "last", ageInDays);
         }
     }
 }

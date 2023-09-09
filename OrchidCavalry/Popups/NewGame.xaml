@@ -11,27 +11,18 @@
         Padding="5"
         VerticalOptions="CenterAndExpand">
 
+
+
+        <Label WidthRequest="400" FlowDirection="MatchParent" Text="You have inherited the title of Governor of Orchid Island.  What was once the command center of the greatest military force in the world has become a skeleton of what it once was.  However, you don't plan to let Orchid Island remain a merely a meager homestead.  You plan to reignite the name that once made this island proud.  However, it's up to you to decide what the Orchid Cavalry will become.">
+        </Label>
+        
         <Entry
             HorizontalTextAlignment="Center"
             MaxLength="35"
-            Placeholder="What will be your character's first name?"
+            Placeholder="Character first name?"
             PlaceholderColor="DarkSlateGrey"
             Text="{Binding Path=CharacterName, Mode=TwoWay}"
             WidthRequest="400" />
-
-        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-
-            <RadioButton
-                Content="Male"
-                HorizontalOptions="Center"
-                IsChecked="{Binding Path=IsMale, Mode=TwoWay}"
-                VerticalOptions="Center" />
-            <RadioButton
-                Content="Female"
-                HorizontalOptions="Center"
-                IsChecked="{Binding Path=IsFemale, Mode=TwoWay}"
-                VerticalOptions="Center" />
-        </HorizontalStackLayout>
 
 
         <Button

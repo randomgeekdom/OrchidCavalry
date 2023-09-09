@@ -27,36 +27,14 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
-        public Gender Gender { get; set; }
-
-        public bool IsFemale
-        {
-            get => Gender == Gender.Female;
-            set
-            {
-                Gender = value ? Gender.Female : Gender.Male;
-                this.NotifyAll();
-            }
-        }
-
-        public bool IsMale
-        {
-            get => Gender == Gender.Male;
-            set
-            {
-                Gender = value ? Gender.Male : Gender.Female;
-                this.NotifyAll();
-            }
-        }
-
         public Game Game { get; private set; }
 
         public void Start()
         {
             if (CanStart)
             {
-                var startingCharacter = this.CharacterName.Trim();
-                var character = new Character(startingCharacter, "Orchid", this.Gender, 20 * 12);
+                var startingCharacterName = this.CharacterName.Trim();
+                var character = new Character(startingCharacterName, "Orchid", 20 * 365);
                 this.Game = new Game(character);
 
                 this.gameSaver.SaveGame(this.Game);

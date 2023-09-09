@@ -11,7 +11,7 @@ namespace OrchidCavalry.Models.Tests
         [Fact]
         public void InitializingGameShouldCreateCouncilAndHaveMainCharacter()
         {
-            var game = new Game(new Character("test", "test", Gender.Female));
+            var game = new Game(new Character("test", "test"));
             Assert.NotNull(game.PlayerCharacter);
         }
     }

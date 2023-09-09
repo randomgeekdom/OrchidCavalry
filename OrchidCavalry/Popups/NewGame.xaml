@@ -22,11 +22,13 @@
             Placeholder="Character first name?"
             PlaceholderColor="DarkSlateGrey"
             Text="{Binding Path=CharacterName, Mode=TwoWay}"
+            Keyboard="Text"
+            Completed="StartGame"
             WidthRequest="400" />
 
 
         <Button
-            Clicked="Button_Clicked"
+            Clicked="StartGame"
             IsEnabled="{Binding CanStart}"
             Text="Start Game"
             WidthRequest="200" />

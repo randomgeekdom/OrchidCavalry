@@ -23,8 +23,7 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
-        public string PlayerCharacterName => $"Governor: {this.Game?.PlayerCharacter?.Name}";
-        public string PlayerCharacterDetails => $"Age: {this.Game?.PlayerCharacter?.Age}";
+        public string PlayerCharacterName => $"Governor: {this.Game?.PlayerCharacter?.GetName()}";
 
         public void LoadGame(Game game)
         {

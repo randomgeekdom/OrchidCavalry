@@ -22,7 +22,7 @@ namespace OrchidCavalry.Services
             return new Unit
             {
                 Name = "Orchid Civilian Guard",
-                Leader = this.characterService.GenerateCharacter(30),
+                Leader = this.characterService.GenerateCharacter(),
                 Characters = new List<Character>
                 {
                     this.characterService.GenerateCharacter(),

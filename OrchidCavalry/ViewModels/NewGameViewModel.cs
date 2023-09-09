@@ -36,7 +36,7 @@ namespace OrchidCavalry.ViewModels
             if (CanStart)
             {
                 var startingCharacterName = this.CharacterName.Trim();
-                var character = new Character(startingCharacterName, "Orchid", 20 * 365);
+                var character = new Character(startingCharacterName, "Orchid");
                 this.Game = new Game(character)
                 {
                     Units = new List<Unit>

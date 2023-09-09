@@ -3,12 +3,6 @@
     public class CharacterTests
     {
         [Fact]
-        public void CanGetAgeFromAgeByDays()
-        {
-            Assert.Equal(1, GetCharacter(365).Age);  
-        }
-
-        [Fact]
         public void CanInitilaizeCharacter()
         {
             Character character = GetCharacter();
@@ -24,7 +18,7 @@
             character.GivenTitles.Add("Loser of the Rinyard", false);
             character.GivenTitles.Add(positiveTitle, true);
 
-            Assert.Equal(positiveTitle, character.Title);
+            Assert.Equal(positiveTitle, character.GetTitle());
         }
 
         [Fact]
@@ -32,12 +26,12 @@
         {
             var character = GetCharacter();
 
-            Assert.NotNull(character.Title);
+            Assert.NotNull(character.GetTitle());
         }
 
-        private static Character GetCharacter(int ageInDays = 0)
+        private static Character GetCharacter()
         {
-            return new Character("firs", "last", ageInDays);
+            return new Character("firs", "last");
         }
     }
 }

@@ -21,7 +21,7 @@ public partial class MainPage : ContentPage
     
     public void StartGame()
     {
-        Navigation.PushAsync(dashboard);
+        Navigation.PushAsync(dashboard, true);
     }
 
     private void StartButton_Clicked(object sender, EventArgs e)

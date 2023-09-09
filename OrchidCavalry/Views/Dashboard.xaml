@@ -29,7 +29,6 @@
         </FlexLayout>-->
         <VerticalStackLayout Grid.Row="1">
             <Label Text="{Binding PlayerCharacterName}" />
-            <Label Text="{Binding PlayerCharacterDetails}" />
         </VerticalStackLayout>
         <HorizontalStackLayout Grid.Column="1" Grid.Row="1">
             <Button

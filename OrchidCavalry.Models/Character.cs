@@ -4,16 +4,13 @@ namespace OrchidCavalry.Models
 {
     public class Character : Entity
     {
-        public Character(string firstName, string lastName, int ageInDays = 0)
+        public Character(string firstName, string lastName)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.AgeInDays = ageInDays;
 
-            this.Skills = Skill.GetAll().Select(x => new PercentageAttribute<Skill>(x, 0));
+            this.Skills = Skill.GetAll().Select(x => new PercentageAttribute<Skill>(x, 0)).ToList();
         }
-
-        public int AgeInDays { get; }
 
         public string FirstName { get; }
 
@@ -22,8 +19,6 @@ namespace OrchidCavalry.Models
         public string LastName { get; }
 
         public IEnumerable<PercentageAttribute<Skill>> Skills { get; }
-
-        public int GetAge() => this.AgeInDays / 365;
 
         public IEnumerable<string> GetAllTitles()
         {

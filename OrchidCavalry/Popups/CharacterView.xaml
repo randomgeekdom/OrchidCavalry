@@ -24,20 +24,20 @@
             </Grid.RowDefinitions>
 
             <Label Margin="5,0" Text="Name:" />
-            <Label
+            <!--<Label
                 Grid.Row="1"
                 Margin="5,0"
-                Text="Age:" />
+                Text="Age:" />-->
             <Label
                 Grid.Row="4"
                 Margin="5,0"
                 Text="Titles:" />
 
             <Label Grid.Column="1" Text="{Binding Name}" />
-            <Label
+            <!--<Label
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding Age}" />
+                Text="{Binding Age}" />-->
             <ListView
                 Grid.Row="4"
                 Grid.Column="1"

@@ -17,7 +17,7 @@ public partial class NewGame : ContentPage, INotifyPropertyChanged
         this.newGameViewModel = newGameViewModel;
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private void StartGame(object sender, EventArgs e)
     {
         this.newGameViewModel.Start();
         Navigation.PopModalAsync();

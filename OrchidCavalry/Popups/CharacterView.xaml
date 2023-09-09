@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
     Title="CharacterView"
+    BackgroundColor="Wheat"
     x:DataType="vm:CharacterViewModel">
     <VerticalStackLayout
         Margin="20"

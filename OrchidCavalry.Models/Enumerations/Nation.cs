@@ -8,8 +8,11 @@ namespace OrchidCavalry.Models.Enumerations
 {
     public enum Nation
     {
-        Celoral,    // Think like classic fantasy
-        Falklur,    // Think like fairy tale and mythology
-        Nyctopylae  // Think dark mythology and the supernatural
+        Celoral,        // Think like classic fantasy.  Greenlands and forests and plains
+        Cyllica,        // Desert kingdom with remnants of the american southwest, mexico, africa, australia, and middle east
+        Falklur,        // Think like fairy tale and mythology.  Frostlands
+        Machination,    // A robot nation.  artificial
+        Northlands,     // Mountainous crags.  Dwarves maybe?  Also, maybe some asian influence maybe 
+        Nyctopylae,     // Think dark mythology and the supernatural.  Dark forests and swamps
     }
 }

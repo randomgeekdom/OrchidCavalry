@@ -27,9 +27,6 @@
             <Button Text="Units" MinimumWidthRequest="100"/>
             <Button Text="Units" MinimumWidthRequest="100"/>
         </FlexLayout>-->
-        <VerticalStackLayout Grid.Row="1">
-            <Label Text="{Binding PlayerCharacterName}" />
-        </VerticalStackLayout>
         <HorizontalStackLayout Grid.Column="1" Grid.Row="1">
             <Button
 
@@ -38,7 +35,7 @@
     Clicked="Button_Clicked"
     FontSize="Large"
     HorizontalOptions="Start"
-    Text="»"
+    Text="{Binding PlayerCharacterName}"
     TextColor="#4B1B98" />
         </HorizontalStackLayout>
 

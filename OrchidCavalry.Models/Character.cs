@@ -13,51 +13,41 @@ namespace OrchidCavalry.Models
             this.Skills = Skill.GetAll().Select(x => new PercentageAttribute<Skill>(x, 0));
         }
 
-        public int Age => this.AgeInDays / 365;
         public int AgeInDays { get; }
-
-        [JsonIgnore]
-        public IEnumerable<string> AllTitles
-        {
-            get
-            {
-                var allTitles = this.GivenTitles.Keys.ToList();
-                allTitles.Add(GeneratedTitle);
-                return allTitles;
-            }
-        }
 
         public string FirstName { get; }
 
-        [JsonIgnore]
-        public string GeneratedTitle
-        {
-            get
-            {
-                var orderedSkills = this.Skills.OrderByDescending(x => x.Level).ToArray();
-                return $"{orderedSkills[0].Attribute.GetTitle(orderedSkills[0].Level)} {orderedSkills[1].Attribute.GetTitle(orderedSkills[1].Level)}";
-            }
-        }
-
         public Dictionary<string, bool> GivenTitles { get; } = new Dictionary<string, bool>();
-        public string LastName { get; }
 
-        public string Name => $"{FirstName} {LastName}";
+        public string LastName { get; }
 
         public IEnumerable<PercentageAttribute<Skill>> Skills { get; }
 
-        [JsonIgnore]
-        public string Title
-        {
-            get
-            {
-                if (this.GivenTitles.Any())
-                {
-                    return this.GivenTitles.OrderByDescending(x => x.Value).First().Key;
-                }
+        public int GetAge() => this.AgeInDays / 365;
 
-                return GeneratedTitle;
+        public IEnumerable<string> GetAllTitles()
+        {
+            var allTitles = this.GivenTitles.Keys.ToList();
+            allTitles.Add(GetGeneratedTitle());
+            return allTitles;
+        }
+
+        public string GetGeneratedTitle()
+        {
+            var orderedSkills = this.Skills.OrderByDescending(x => x.Level).ToArray();
+            return $"{orderedSkills[0].Attribute.GetTitle(orderedSkills[0].Level)} {orderedSkills[1].Attribute.GetTitle(orderedSkills[1].Level)}";
+        }
+
+        public string GetName() => $"{FirstName} {LastName}";
+
+        public string GetTitle()
+        {
+            if (this.GivenTitles.Any())
+            {
+                return this.GivenTitles.OrderByDescending(x => x.Value).First().Key;
             }
+
+            return GetGeneratedTitle();
         }
 
         public void MakeRuler()

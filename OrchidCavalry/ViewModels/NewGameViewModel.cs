@@ -29,6 +29,8 @@ namespace OrchidCavalry.ViewModels
 
         public Game Game { get; private set; }
 
+        private static readonly object lockObject = new();
+
         public void Start()
         {
             if (CanStart)
@@ -43,7 +45,10 @@ namespace OrchidCavalry.ViewModels
                     }
                 };
 
-                this.gameSaver.SaveGame(this.Game);
+                lock(lockObject)
+                {
+                    this.gameSaver.SaveGameAsync(this.Game);
+                }
             }
         }
     }

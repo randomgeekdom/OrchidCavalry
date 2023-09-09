@@ -33,15 +33,21 @@ namespace OrchidCavalry.Services
             }
         }
 
-        public void SaveGame(Game obj)
+        public async Task SaveGameAsync(Game obj)
         {
             var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            if (File.Exists(filePath))
+            {
+                File.Move(filePath, Path.Combine(FileSystem.AppDataDirectory, filePath + ".backup"), true);
+            }
+
             var serializedData = JsonConvert.SerializeObject(obj, this.serializerSettings);
 
             using (var stream = new StreamWriter(filePath))
             {
-                stream.WriteAsync(serializedData).Wait();
+                await stream.WriteAsync(serializedData);
             }
         }
     }

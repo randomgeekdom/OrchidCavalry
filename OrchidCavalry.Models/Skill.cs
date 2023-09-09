@@ -20,19 +20,25 @@ namespace OrchidCavalry.Models
             this.Titles = titles;
         }
 
-        public static Skill Combat { get; } = new Skill(nameof(Combat), "Coward", "Scrapper", "Brawler", "Guard", "Soldier", "Knight", "Marshal", "Captain");
+        public static Skill Academics { get; } = new Skill(nameof(Academics), "Dunce", "Student", "Tutor", "Teacher", "Professor", "Intellectual", "Technician", "Researcher", "Scientist", "Philosopher");
 
-        public static Skill Commercial { get; } = new Skill(nameof(Skill.Commercial), "Vagrant", "Merchandiser", "Merchant", "Entrepreneur", "Investor", "Capitalist");
+        public static Skill Combat { get; } = new Skill(nameof(Combat), "Coward", "Scrapper", "Brawler", "Soldier", "Knight", "Marshal", "Captain");
 
-        public static Skill Criminal { get; } = new Skill(nameof(Skill.Criminal), "Fugitive", "Pickpocket", "Burglar", "Thief", "Agent", "Spy");
-
-        public static Skill Diplomacy { get; } = new Skill(nameof(Skill.Diplomacy), "Introvert", "Extrovert", "Orator", "Politician", "Representative", "Leader", "Minister", "Envoy", "Diplomat");
-
-        public static Skill Engineering { get; } = new Skill(nameof(Skill.Engineering), "Breaker", "Apprentice", "Fixer", "Crafter", "Builder", "Machinist", "Engineer", "Industrialist");
+        public static Skill Commerce { get; } = new Skill(nameof(Skill.Commerce), "Vagrant", "Merchandiser", "Merchant", "Entrepreneur", "Investor", "Capitalist");
 
         public static Skill Exploration { get; } = new Skill(nameof(Exploration), "Vanished", "Wanderer", "Scout", "Explorer", "Ranger", "Navigator", "Captain", "Commodore", "Admiral");
 
+        public static Skill Justice { get; } = new Skill(nameof(Justice), "Criminal", "Citizen", "Guard", "Warden", "Detective", "Inspector", "Prosecutor", "Defender", "Magistrate");
+
+        public static Skill Mechanics { get; } = new Skill(nameof(Mechanics), "Breaker", "Apprentice", "Fixer", "Crafter", "Builder", "Machinist", "Engineer", "Industrialist");
+
         public static Skill Mysticism { get; } = new Skill(nameof(Mysticism), "Secularist", "Acolyte", "Monk", "Abbot", "Cleric", "Occultist", "Shaman", "Magus", "Spellbinder", "Magister");
+
+        public static Skill Nature { get; } = new Skill(nameof(Nature), "Artificialist", "Hiker", "Camper", "Gatherer", "Hunter", "Tamer", "Naturalist", "Druid");
+
+        public static Skill Politics { get; } = new Skill(nameof(Skill.Politics), "Introvert", "Extrovert", "Orator", "Debater", "Politician", "Representative", "Leader", "Minister", "Envoy", "Diplomat");
+
+        public static Skill Subterfuge { get; } = new Skill(nameof(Skill.Subterfuge), "Fugitive", "Rebel", "Rogue", "Renegade", "Agent", "Spy", "Spymaster");
 
         [JsonIgnore]
         public string BelowZeroTitle { get; }
@@ -46,12 +52,15 @@ namespace OrchidCavalry.Models
         {
             return new List<Skill> {
                 Combat,
-                Commercial,
-                Criminal,
-                Diplomacy,
-                Engineering,
+                Commerce,
+                Subterfuge,
+                Politics,
+                Mechanics,
                 Exploration,
-                Mysticism
+                Mysticism,
+                Academics,
+                Justice,
+                Nature
             };
         }
 

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace OrchidCavalry.Models
 {
@@ -34,12 +34,12 @@ namespace OrchidCavalry.Models
 
         public static Skill Mysticism { get; } = new Skill(nameof(Mysticism), "Secularist", "Acolyte", "Monk", "Abbot", "Cleric", "Occultist", "Shaman", "Magus", "Spellbinder", "Magister");
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        [JsonIgnore]
         public string BelowZeroTitle { get; }
 
         public string Name { get; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        [JsonIgnore]
         public string[] Titles { get; }
 
         public static IEnumerable<Skill> GetAll()

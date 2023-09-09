@@ -6,32 +6,49 @@
     xmlns:controls="clr-namespace:OrchidCavalry.Controls"
     xmlns:m="clr-namespace:OrchidCavalry.Models;assembly=OrchidCavalry.Models"
     xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
-    Title="The State of Orchid Island"
     x:DataType="vm:DashboardViewModel"
     BackgroundColor="Wheat">
-    <Grid Margin="10" VerticalOptions="StartAndExpand">
+    <Grid Margin="10" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Grid.Row="1" />
         </Grid.RowDefinitions>
-        <VerticalStackLayout>
+        <!--
+        This section we can use to create a navbar of sorts
+        <FlexLayout HorizontalOptions="CenterAndExpand" BackgroundColor="AliceBlue" >
+            <Button Text="Units" MinimumWidthRequest="100"/>
+            <Button Text="Units" MinimumWidthRequest="100"/>
+            <Button Text="Units" MinimumWidthRequest="100"/>
+        </FlexLayout>-->
+        <VerticalStackLayout Grid.Row="1">
             <Label Text="{Binding PlayerCharacterName}" />
             <Label Text="{Binding PlayerCharacterDetails}" />
         </VerticalStackLayout>
-        <Button
-            Grid.Column="1"
-            BackgroundColor="Transparent"
-            BorderWidth="0"
-            Clicked="Button_Clicked"
-            FontSize="Large"
-            HorizontalOptions="Start"
-            Text="»"
-            TextColor="#4B1B98" />
+        <HorizontalStackLayout Grid.Column="1" Grid.Row="1">
+            <Button
+
+    BackgroundColor="Transparent"
+    BorderWidth="0"
+    Clicked="Button_Clicked"
+    FontSize="Large"
+    HorizontalOptions="Start"
+    Text="»"
+    TextColor="#4B1B98" />
+        </HorizontalStackLayout>
+
+        <!--<Button
+    BorderWidth="0"
+    Clicked="Button_Clicked"
+    HorizontalOptions="Start"
+    Text="Check Units" Grid.Row="2"/>-->
+
         <!--<ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Council}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>

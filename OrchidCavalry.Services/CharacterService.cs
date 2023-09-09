@@ -16,7 +16,7 @@ namespace OrchidCavalry.Services
         public Character GenerateCharacter(int minimumAge = 18, int maximumAge = 50)
         {
             var generatedCharacter = this.characterRoller.Get();
-            return new Character(generatedCharacter.FirstName, generatedCharacter.LastName, random.Next(minimumAge, maximumAge + 1));
+            return new Character(generatedCharacter.FirstName, generatedCharacter.LastName, random.Next(minimumAge, maximumAge + 1) * 365);
         }
     }
 }

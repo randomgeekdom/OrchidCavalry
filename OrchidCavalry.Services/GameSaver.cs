@@ -1,20 +1,19 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Services
 {
     public class GameSaver : IGameSaver
     {
-        public void SaveGame(Game obj)
-        {
-            var fileName = "orchid.sav";
-            var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
-            var serializedData = JsonSerializer.Serialize(obj);
+        private JsonSerializerSettings serializerSettings;
 
-            using (var stream = new StreamWriter(filePath))
+        public GameSaver()
+        {
+            this.serializerSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                stream.WriteAsync(serializedData).Wait();
-            }
+                TypeNameHandling = TypeNameHandling.Auto
+            };
         }
 
         public Game LoadGame()
@@ -22,7 +21,7 @@ namespace OrchidCavalry.Services
             var fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
 
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return null;
             }
@@ -30,7 +29,19 @@ namespace OrchidCavalry.Services
             using (var stream = new StreamReader(filePath))
             {
                 var serializedData = stream.ReadToEndAsync().Result;
-                return JsonSerializer.Deserialize<Game>(serializedData);
+                return JsonConvert.DeserializeObject<Game>(serializedData, this.serializerSettings);
+            }
+        }
+
+        public void SaveGame(Game obj)
+        {
+            var fileName = "orchid.sav";
+            var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            var serializedData = JsonConvert.SerializeObject(obj, this.serializerSettings);
+
+            using (var stream = new StreamWriter(filePath))
+            {
+                stream.WriteAsync(serializedData).Wait();
             }
         }
     }

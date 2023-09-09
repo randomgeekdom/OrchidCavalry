@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Mudless.NameGenerator" Version="1.0.1" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
 	  <PackageReference Include="Rollbard.Library" Version="1.2.44" />
 	</ItemGroup>

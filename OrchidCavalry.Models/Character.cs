@@ -1,4 +1,6 @@
-﻿namespace OrchidCavalry.Models
+﻿using Newtonsoft.Json;
+
+namespace OrchidCavalry.Models
 {
     public class Character : Entity
     {
@@ -14,6 +16,7 @@
         public int Age => this.AgeInDays / 365;
         public int AgeInDays { get; }
 
+        [JsonIgnore]
         public IEnumerable<string> AllTitles
         {
             get
@@ -26,6 +29,7 @@
 
         public string FirstName { get; }
 
+        [JsonIgnore]
         public string GeneratedTitle
         {
             get
@@ -42,6 +46,7 @@
 
         public IEnumerable<PercentageAttribute<Skill>> Skills { get; }
 
+        [JsonIgnore]
         public string Title
         {
             get

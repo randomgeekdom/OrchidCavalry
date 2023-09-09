@@ -17,13 +17,14 @@ public partial class NewGame : ContentPage, INotifyPropertyChanged
         this.newGameViewModel = newGameViewModel;
     }
 
-    private void StartGame(object sender, EventArgs e)
+    private async void StartGameAsync(object sender, EventArgs e)
     {
-        this.newGameViewModel.Start();
-        Navigation.PopModalAsync();
+        await this.newGameViewModel.StartAsync();
+        await Navigation.PopModalAsync();
         this.Closed();
     }
 
     public Action Closed { get; set; }
     public Game Game => this.newGameViewModel.Game;
+
 }

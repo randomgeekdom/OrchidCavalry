@@ -23,12 +23,12 @@
             PlaceholderColor="DarkSlateGrey"
             Text="{Binding Path=CharacterName, Mode=TwoWay}"
             Keyboard="Text"
-            Completed="StartGame"
+            Completed="StartGameAsync"
             WidthRequest="400" />
 
 
         <Button
-            Clicked="StartGame"
+            Clicked="StartGameAsync"
             IsEnabled="{Binding CanStart}"
             Text="Start Game"
             WidthRequest="200" />

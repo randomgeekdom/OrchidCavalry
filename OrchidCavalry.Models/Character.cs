@@ -8,7 +8,7 @@
             this.LastName = lastName;
             this.AgeInDays = ageInDays;
 
-            this.Skills = Skill.GetAll().Select(x => new SkillLevel(x, 0));
+            this.Skills = Skill.GetAll().Select(x => new PercentageAttribute<Skill>(x, 0));
         }
 
         public int Age => this.AgeInDays / 365;
@@ -31,7 +31,7 @@
             get
             {
                 var orderedSkills = this.Skills.OrderByDescending(x => x.Level).ToArray();
-                return $"{orderedSkills[0].Skill.GetTitle(orderedSkills[0].Level)} {orderedSkills[1].Skill.GetTitle(orderedSkills[1].Level)}";
+                return $"{orderedSkills[0].Attribute.GetTitle(orderedSkills[0].Level)} {orderedSkills[1].Attribute.GetTitle(orderedSkills[1].Level)}";
             }
         }
 
@@ -40,7 +40,7 @@
 
         public string Name => $"{FirstName} {LastName}";
 
-        public IEnumerable<SkillLevel> Skills { get; }
+        public IEnumerable<PercentageAttribute<Skill>> Skills { get; }
 
         public string Title
         {
@@ -59,8 +59,8 @@
         {
             var currentTitles = GivenTitles.ToList();
             GivenTitles.Clear();
-            GivenTitles.Add("Ruler of Orchid Island", true);
-            foreach(var title in currentTitles)
+            GivenTitles.Add("Orchid Cavalry Commander", true);
+            foreach (var title in currentTitles)
             {
                 GivenTitles.Add(title.Key, title.Value);
             }

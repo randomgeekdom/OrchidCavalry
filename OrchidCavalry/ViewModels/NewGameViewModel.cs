@@ -3,16 +3,16 @@ using OrchidCavalry.Services;
 
 namespace OrchidCavalry.ViewModels
 {
-
     public class NewGameViewModel : ViewModelBase
     {
         private readonly IGameSaver gameSaver;
-
+        private readonly IUnitService unitService;
         private string characterName;
 
-        public NewGameViewModel(IGameSaver gameSaver)
+        public NewGameViewModel(IGameSaver gameSaver, IUnitService unitService)
         {
             this.gameSaver = gameSaver;
+            this.unitService = unitService;
         }
 
         public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
@@ -35,7 +35,13 @@ namespace OrchidCavalry.ViewModels
             {
                 var startingCharacterName = this.CharacterName.Trim();
                 var character = new Character(startingCharacterName, "Orchid", 20 * 365);
-                this.Game = new Game(character);
+                this.Game = new Game(character)
+                {
+                    Units = new List<Unit>
+                    {
+                        this.unitService.GetStarterUnit()
+                    }
+                };
 
                 this.gameSaver.SaveGame(this.Game);
             }

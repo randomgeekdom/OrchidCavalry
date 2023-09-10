@@ -17,9 +17,13 @@ public static class Registrations
         builder.Services.AddTransient<NewGame>();
         builder.Services.AddTransient<Dashboard>();
         builder.Services.AddTransient<CharacterView>();
+
         // View models
         builder.Services.AddTransient<NewGameViewModel>();
         builder.Services.AddTransient<DashboardViewModel>();
+
+        // UI service
+        builder.Services.AddTransient<IAlertService, AlertService>();   
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();

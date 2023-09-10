@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Models.ValueTypes
 {
-    public class Percent : IComparable
+    public class Percent : ValueObject<byte>, IComparable
     {
         public Percent(byte value)
         {
             Value = value;
         }
-
-        public byte Value { get; }
 
         public static implicit operator byte(Percent value)
         {
@@ -38,16 +36,6 @@ namespace OrchidCavalry.Models.ValueTypes
         public int CompareTo(object obj)
         {
             return this.Value.CompareTo((obj as Percent)?.Value);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Value == (obj as Percent)?.Value;
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Value.GetHashCode();
         }
     }
 }

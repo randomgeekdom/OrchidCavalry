@@ -34,6 +34,27 @@
             </VerticalStackLayout>
         </Border>
 
+        <ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Alerts}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout x:DataType="x:String">
+                            <Label Text="{Binding}" />
+                            <Button
+                                BackgroundColor="FloralWhite"
+                                BorderColor="DarkGrey"
+                                HeightRequest="150"
+                                Text="X"
+                                TextColor="Firebrick"
+                                WidthRequest="150" 
+                                Command="Delete"
+                                CommandParameter="{Binding}"
+                                />
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <!--<Button
     BorderWidth="0"
     Clicked="Button_Clicked"

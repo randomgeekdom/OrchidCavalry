@@ -1,20 +1,18 @@
 ﻿namespace OrchidCavalry.Models.ValueTypes
 {
-    public record Trait
+    public class Trait : ValueObject<Percent>
     {
         public string Name { get; }
 
         public Trait(string name, Percent level)
         {
             Name = name;
-            Level = level;
+            Value = level;
         }
 
         public void IncreaseValue(int amount)
         {
-            Level += amount;
+            Value += amount;
         }
-
-        public Percent Level { get; set; }
     }
 }

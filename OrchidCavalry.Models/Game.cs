@@ -15,11 +15,11 @@
         }
 
         public Character Commander { get; set; }
-        public List<Character> Characters { get; } = new List<Character>();
+        public List<Character> Characters { get; set; } = new List<Character>();
 
         public Character ReplaceLeader()
         {
-            return this.Characters.OrderByDescending(x => x.Traits.Sum(y => y.Level.Value)).FirstOrDefault();
+            return this.Characters.OrderByDescending(x => x.Traits.Sum(y => y.Value.Value)).FirstOrDefault();
         }
     }
 }

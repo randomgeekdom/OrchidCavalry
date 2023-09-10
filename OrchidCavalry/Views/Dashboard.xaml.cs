@@ -17,11 +17,6 @@ public partial class Dashboard : ContentPage
 
     public DashboardViewModel DashboardViewModel { get; }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-    }
-
     private async void Button_Clicked(object sender, EventArgs e)
     {
         characterView.LoadViewModel(

@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>OrchidCavalry</ApplicationTitle>
+		<ApplicationTitle>Orchid Cavalry</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.orchidcavalry</ApplicationId>

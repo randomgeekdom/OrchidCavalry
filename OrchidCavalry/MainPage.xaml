@@ -20,10 +20,12 @@
             <Label
                 FontFamily="GreatVibes"
                 FontSize="150"
+                
                 HorizontalOptions="CenterAndExpand"
                 Text="Orchid Cavalry" />
 
-            <HorizontalStackLayout 
+            <FlexLayout 
+                Wrap="Wrap"
                 HorizontalOptions="Center">
                 <Button
                 x:Name="StartButton"
@@ -36,7 +38,7 @@
                 HorizontalOptions="Center"
                 Text="EXIT"
                 WidthRequest="200" />
-            </HorizontalStackLayout>
+            </FlexLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

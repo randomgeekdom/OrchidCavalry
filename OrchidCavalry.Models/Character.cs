@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Models
 {
     public class Character : Entity
     {
+        public Character() { }
         public Character(string firstName, string lastName)
         {
             this.FirstName = firstName;
@@ -12,13 +14,13 @@ namespace OrchidCavalry.Models
             this.Skills = Skill.GetAll().Select(x => new PercentageAttribute<Skill>(x, 0)).ToList();
         }
 
-        public string FirstName { get; }
+        public string FirstName { get; set; }
 
         public Dictionary<string, bool> GivenTitles { get; } = new Dictionary<string, bool>();
 
-        public string LastName { get; }
+        public string LastName { get; set; }
 
-        public IEnumerable<PercentageAttribute<Skill>> Skills { get; }
+        public IEnumerable<PercentageAttribute<Skill>> Skills { get; set; }
 
         public IEnumerable<string> GetAllTitles()
         {
@@ -47,13 +49,7 @@ namespace OrchidCavalry.Models
 
         public void MakeRuler()
         {
-            var currentTitles = GivenTitles.ToList();
-            GivenTitles.Clear();
             GivenTitles.Add("Orchid Cavalry Commander", true);
-            foreach (var title in currentTitles)
-            {
-                GivenTitles.Add(title.Key, title.Value);
-            }
         }
     }
 }

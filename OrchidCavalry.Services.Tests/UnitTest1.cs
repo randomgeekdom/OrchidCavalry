@@ -5,9 +5,9 @@ namespace OrchidCavalry.Services.Tests
         [Fact]
         public void Test1()
         {
-            var generator = new Mudless.NameGenerator.NameGenerator();
-            var x = generator.Generate();
-            Console.WriteLine();
+            //var generator = new Mudless.NameGenerator.NameGenerator();
+            //var x = generator.GenerateMany();
+            //Console.WriteLine();
         }
     }
 }

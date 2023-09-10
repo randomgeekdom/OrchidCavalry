@@ -16,10 +16,12 @@ namespace OrchidCavalry.ViewModels
         {
             this.Character = character;
             this.Game = game;
+            this.Titles = this.Character.GetAllTitles();
+            this.Name = this.Character.GetName();
         }
 
         public Game Game { get; }
-        public string Name => this.Character.GetName();
-        public IEnumerable<string> Titles => this.Character.GetAllTitles();
+        public string Name { get; }
+        public IEnumerable<string> Titles { get; }
     }
 }

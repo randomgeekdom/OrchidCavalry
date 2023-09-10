@@ -27,17 +27,14 @@
             <Button Text="Units" MinimumWidthRequest="100"/>
             <Button Text="Units" MinimumWidthRequest="100"/>
         </FlexLayout>-->
-        <HorizontalStackLayout Grid.Column="1" Grid.Row="1">
-            <Button
-
-    BackgroundColor="Transparent"
-    BorderWidth="0"
+        <VerticalStackLayout Grid.Column="1" Grid.Row="1">
+            <Label Text="Orchid Commander" FontSize="Subtitle" HorizontalOptions="CenterAndExpand"/>
+            <Button Text="{Binding CommanderName}"
     Clicked="Button_Clicked"
-    FontSize="Large"
-    HorizontalOptions="Start"
-    Text="{Binding PlayerCharacterName}"
-    TextColor="#4B1B98" />
-        </HorizontalStackLayout>
+    HorizontalOptions="CenterAndExpand">
+            </Button>
+            <Line FlowDirection="LeftToRight" WidthRequest="200" BackgroundColor="AliceBlue" StrokeThickness="3"/>
+        </VerticalStackLayout>
 
         <!--<Button
     BorderWidth="0"

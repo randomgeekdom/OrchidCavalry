@@ -25,8 +25,8 @@ public partial class Dashboard : ContentPage
     private void Button_Clicked(object sender, EventArgs e)
     {
         characterView.LoadViewModel(
-            this.DashboardViewModel.Game.PlayerCharacter,
+            this.DashboardViewModel.Game.Commander,
             this.DashboardViewModel.Game);
-        Navigation.PushModalAsync(characterView);
+        Navigation.PushModalAsync(characterView, true);
     }
 }

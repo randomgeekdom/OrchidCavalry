@@ -5,16 +5,17 @@ namespace OrchidCavalry.Popups;
 
 public partial class CharacterView : ContentPage
 {
-    private CharacterViewModel characterViewModel;
-
     public CharacterView()
 	{
 		InitializeComponent();
     }
 
-    internal void LoadViewModel(Character playerCharacter, Game game)
+    internal void LoadViewModel(Character character, Game game)
     {
-        this.BindingContext = this.characterViewModel = new CharacterViewModel(playerCharacter, game);
+        if (this.BindingContext is not CharacterViewModel vm || vm.Character != character)
+        {
+            this.BindingContext = new CharacterViewModel(character, game);
+        }
     }
 
     private void Button_Clicked(object sender, EventArgs e)

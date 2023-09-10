@@ -6,13 +6,20 @@
         public Game()
         { }
 
-        public Game(Character playerCharacter)
+        public Game(Character commander)
         {
-            PlayerCharacter = playerCharacter;
-            playerCharacter.MakeRuler();
+            Commander = commander;
+            this.Characters.Add(commander);
+
+            commander.MakeRuler();
         }
 
-        public Character PlayerCharacter { get; set; }
-        public IEnumerable<Unit> Units { get; set; }
+        public Character Commander { get; set; }
+        public List<Character> Characters { get; } = new List<Character>();
+
+        public Character ReplaceLeader()
+        {
+            return this.Characters.OrderByDescending(x => x.Skills.Sum(y => y.Level.Value)).FirstOrDefault();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace OrchidCavalry.Models.Tests
         public void InitializingGameShouldCreateCouncilAndHaveMainCharacter()
         {
             var game = new Game(new Character("test", "test"));
-            Assert.NotNull(game.PlayerCharacter);
+            Assert.NotNull(game.Commander);
         }
     }
 }

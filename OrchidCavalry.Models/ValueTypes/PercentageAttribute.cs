@@ -1,6 +1,4 @@
-﻿using OrchidCavalry.Models.ValueTypes;
-
-namespace OrchidCavalry.Models
+﻿namespace OrchidCavalry.Models.ValueTypes
 {
     public record PercentageAttribute<T>
     {
@@ -8,13 +6,13 @@ namespace OrchidCavalry.Models
 
         public PercentageAttribute(T attribute, Percent level)
         {
-            this.Attribute = attribute;
-            this.Level = level;
+            Attribute = attribute;
+            Level = level;
         }
 
         public void IncreaseValue(int amount)
         {
-            this.Level += amount;
+            Level += amount;
         }
 
         public Percent Level { get; set; }

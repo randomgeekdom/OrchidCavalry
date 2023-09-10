@@ -6,13 +6,11 @@ namespace OrchidCavalry.ViewModels
     public class NewGameViewModel : ViewModelBase
     {
         private readonly IGameSaver gameSaver;
-        private readonly IUnitService unitService;
         private string characterName;
 
-        public NewGameViewModel(IGameSaver gameSaver, IUnitService unitService)
+        public NewGameViewModel(IGameSaver gameSaver)
         {
             this.gameSaver = gameSaver;
-            this.unitService = unitService;
         }
 
         public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);
@@ -35,16 +33,9 @@ namespace OrchidCavalry.ViewModels
             {
                 var startingCharacterName = this.CharacterName.Trim();
                 var character = new Character(startingCharacterName, "Orchid");
-                this.Game = new Game(character)
-                {
-                    Units = new List<Unit>
-                    {
-                        this.unitService.GetStarterUnit()
-                    }
-                };
+                this.Game = new Game(character);
 
-
-                this.gameSaver.SaveGameAsync(this.Game);
+                await this.gameSaver.SaveGameAsync(this.Game);
             }
         }
     }

@@ -23,7 +23,7 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
-        public string PlayerCharacterName => $"Orchid Leader: {this.Game?.PlayerCharacter?.GetName()}";
+        public string CommanderName => $"{this.Game?.Commander?.GetName()}";
 
         public void LoadGame(Game game)
         {

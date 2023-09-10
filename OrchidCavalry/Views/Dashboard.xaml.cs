@@ -27,6 +27,12 @@ public partial class Dashboard : ContentPage
         characterView.LoadViewModel(
             this.DashboardViewModel.Game.Commander,
             this.DashboardViewModel.Game);
-        Navigation.PushModalAsync(characterView, true);
+        Navigation.PushAsync(characterView, true);
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        Navigation.PopAsync(true);
+        return base.OnBackButtonPressed();
     }
 }

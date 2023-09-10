@@ -16,7 +16,7 @@ namespace OrchidCavalry.ViewModels
         {
             this.Character = character;
             this.Game = game;
-            this.Titles = this.Character.GetAllTitles();
+            this.Titles = this.Character.Titles;
             this.Name = this.Character.GetName();
         }
 

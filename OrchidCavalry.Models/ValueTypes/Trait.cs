@@ -1,12 +1,12 @@
 ﻿namespace OrchidCavalry.Models.ValueTypes
 {
-    public record PercentageAttribute<T>
+    public record Trait
     {
-        public T Attribute { get; }
+        public string Name { get; }
 
-        public PercentageAttribute(T attribute, Percent level)
+        public Trait(string name, Percent level)
         {
-            Attribute = attribute;
+            Name = name;
             Level = level;
         }
 

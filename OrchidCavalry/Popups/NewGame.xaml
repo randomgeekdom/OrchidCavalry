@@ -6,34 +6,32 @@
     Title="New Game"
     BackgroundColor="Wheat"
     BindingContext="OrchidCavalry.Popups.NewGame">
-    <VerticalStackLayout
-        Margin="10"
-        Padding="5"
-        VerticalOptions="CenterAndExpand">
 
+    <ScrollView  VerticalOptions="CenterAndExpand" VerticalScrollBarVisibility="Default">
+        <VerticalStackLayout
+    Margin="10"
+    Padding="5"
+    VerticalOptions="CenterAndExpand">
 
+            <Label MaximumWidthRequest="400" FlowDirection="MatchParent" Text="{Binding OpeningText}" Margin="0, 25" />
 
-        <Label WidthRequest="400" FlowDirection="MatchParent" Text="You have inherited the title of Governor of Orchid Island.  What was once the command center of the greatest military force in the world has become a skeleton of what it once was.  However, you don't plan to let Orchid Island remain a merely a meager homestead.  You plan to reignite the name that once made this island proud.  However, it's up to you to decide what the Orchid Cavalry will become.">
-        </Label>
-        
-        <Entry
-            HorizontalTextAlignment="Center"
-            MaxLength="35"
-            Placeholder="Character first name?"
-            PlaceholderColor="DarkSlateGrey"
-            Text="{Binding Path=CharacterName, Mode=TwoWay}"
-            Keyboard="Text"
-            Completed="StartGameAsync"
-            WidthRequest="400" />
+            <Entry
+        HorizontalTextAlignment="Center"
+        MaxLength="35"
+        Placeholder="Character first name?"
+        PlaceholderColor="DarkSlateGrey"
+        Text="{Binding Path=CharacterName, Mode=TwoWay}"
+        Keyboard="Text"
+        Completed="StartGameAsync"
+        WidthRequest="400" />
 
+            <Button
+        Clicked="StartGameAsync"
+        IsEnabled="{Binding CanStart}"
+        Text="Start Game"
+        WidthRequest="200" />
 
-        <Button
-            Clicked="StartGameAsync"
-            IsEnabled="{Binding CanStart}"
-            Text="Start Game"
-            WidthRequest="200" />
-
-
-        <!--</Frame>-->
-    </VerticalStackLayout>
+            <!--</Frame>-->
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

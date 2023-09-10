@@ -24,7 +24,7 @@ public partial class MainPage : ContentPage
         Navigation.PushAsync(dashboard, true);
     }
 
-    private void StartButton_Clicked(object sender, EventArgs e)
+    private async void StartButton_Clicked(object sender, EventArgs e)
     {
         var game = this.gameSaver.LoadGame();
         if (game == null)
@@ -34,13 +34,18 @@ public partial class MainPage : ContentPage
                 this.dashboard.DashboardViewModel.LoadGame(this.newGame.Game);
                 this.StartGame();
             };
-            Navigation.PushModalAsync(newGame).Wait();
+            await Navigation.PushModalAsync(newGame);
         }
         else
         {
             this.dashboard.DashboardViewModel.LoadGame(game);
             StartGame();
         }
+    }
+
+    private void ExitButton_Clicked(object sender, EventArgs e)
+    {
+        System.Environment.Exit(0);
     }
 }
 

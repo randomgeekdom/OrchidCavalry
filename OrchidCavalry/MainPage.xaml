@@ -23,16 +23,20 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Orchid Cavalry" />
 
-
-            <Button
+            <HorizontalStackLayout 
+                HorizontalOptions="Center">
+                <Button
                 x:Name="StartButton"
                 Clicked="StartButton_Clicked"
-                HorizontalOptions="Center"
-                SemanticProperties.Hint="Start a new game"
                 Text="PLAY"
                 WidthRequest="200" />
-
+                <Button
+                x:Name="ExitButton"
+                    Clicked="ExitButton_Clicked"
+                HorizontalOptions="Center"
+                Text="EXIT"
+                WidthRequest="200" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

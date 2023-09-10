@@ -22,17 +22,17 @@ public partial class Dashboard : ContentPage
         base.OnAppearing();
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
         characterView.LoadViewModel(
             this.DashboardViewModel.Game.Commander,
             this.DashboardViewModel.Game);
-        Navigation.PushAsync(characterView, true);
+        await Navigation.PushAsync(characterView, true);
     }
 
-    protected override bool OnBackButtonPressed()
-    {
-        Navigation.PopAsync(true);
-        return base.OnBackButtonPressed();
-    }
+    //protected override bool OnBackButtonPressed()
+    //{
+    //    Navigation.PopAsync(true);
+    //    return base.OnBackButtonPressed();
+    //}
 }

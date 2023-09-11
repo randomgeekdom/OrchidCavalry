@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\OrchidCavalry.Models\OrchidCavalry.Models.csproj" />
+	  <ProjectReference Include="..\OrchidCavalry.Domain\OrchidCavalry.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

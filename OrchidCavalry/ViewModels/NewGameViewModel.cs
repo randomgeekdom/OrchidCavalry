@@ -1,5 +1,6 @@
 ﻿using OrchidCavalry.Models;
 using OrchidCavalry.Services;
+using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.ViewModels
 {
@@ -8,9 +9,11 @@ namespace OrchidCavalry.ViewModels
         private readonly IGameSaver gameSaver;
         private string characterName;
 
-        public NewGameViewModel(IGameSaver gameSaver)
+        public NewGameViewModel(IGameSaver gameSaver, INameRoller nameRoller)
         {
             this.gameSaver = gameSaver;
+
+            this.CharacterName = nameRoller.GetFirstName();
         }
 
         public bool CanStart => !string.IsNullOrWhiteSpace(this.CharacterName);

@@ -15,6 +15,7 @@
 
             <Label MaximumWidthRequest="400" FlowDirection="MatchParent" Text="{Binding OpeningText}" Margin="0, 25" />
 
+            <Label HorizontalOptions="Center" FontSize="Caption" Text="Choose your starting character's name:"/>
             <Entry
         HorizontalTextAlignment="Center"
         MaxLength="35"

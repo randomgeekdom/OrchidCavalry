@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Services
@@ -18,7 +17,7 @@ namespace OrchidCavalry.Services
 
         public Game LoadGame()
         {
-            var fileName = "orchid.sav";
+            const string fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
 
             if (!File.Exists(filePath))

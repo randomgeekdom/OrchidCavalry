@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Services
 {
-    public class GameplayService
+    public class GameplayService : IGameplayService
     {
         public GameplayService(ICharacterService characterService, IAlertService alertService)
         {
@@ -21,16 +21,19 @@ namespace OrchidCavalry.Services
 
         public async Task NextTurnAsync(Game game)
         {
-            if(game.Characters.Count < 8)
+            if (game.Characters.Count < 8)
             {
-                var numberOfConscripts = this.random.Next(1, 4);
+                var numberOfConscripts = this.random.Next(2, 4);
                 var conscripts = new List<Character>();
-                for(int i = 0; i < numberOfConscripts; i++)
+                for (int i = 0; i < numberOfConscripts; i++)
                 {
-                    conscripts.Add(this.characterService.GenerateCharacter());
+                    var character = this.characterService.GenerateCharacter();
+                    conscripts.Add(character);
+                    game.Characters.Add(character);
                 }
 
-                this.alertService.DisplayAlert($"Due to the lack of members, you have conscripted {numberOfConscripts} people into the Orchid Cavalry from the civilian population of Orchid Island.  They are the following: {string.Join(", ", conscripts.SelectMany(x => x.GetName()))}", "Civilians Conscripted");
+                var alertText = $"Due to the lack of members, you have conscripted {numberOfConscripts} people into the Orchid Cavalry from the civilian population of Orchid Island: {string.Join(", ", conscripts.Select(x => x.GetName()))}";
+                await this.alertService.DisplayAlert(alertText, "Civilians Conscripted");
             }
         }
     }

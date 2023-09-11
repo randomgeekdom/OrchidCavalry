@@ -15,10 +15,10 @@
             var character = GetCharacter();
 
             var positiveTitle = "Ruler of the Realm";
-            character.GivenTitles.Add("Loser of the Rinyard", false);
-            character.GivenTitles.Add(positiveTitle, true);
+            character.Titles.Add("Loser of the Rinyard");
+            character.Titles.Add(positiveTitle);
 
-            Assert.Equal(positiveTitle, character.GetTitle());
+            Assert.Equal(positiveTitle, character.Titles.First());
         }
 
         [Fact]
@@ -26,7 +26,7 @@
         {
             var character = GetCharacter();
 
-            Assert.NotNull(character.GetTitle());
+            Assert.NotNull(character.Titles.First());
         }
 
         private static Character GetCharacter()

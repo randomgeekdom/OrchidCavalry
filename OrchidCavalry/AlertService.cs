@@ -9,10 +9,10 @@ namespace OrchidCavalry
 {
     public class AlertService : IAlertService
     {
-        public void DisplayAlert(string message, string header = "")
+        public async Task DisplayAlert(string message, string header = "")
         {
             Page page = Application.Current?.MainPage ?? throw new NullReferenceException();
-            page.DisplayAlert(message, header, "Cancel");
+            await page.DisplayAlert(header, message, "Close");
         }
     }
 }

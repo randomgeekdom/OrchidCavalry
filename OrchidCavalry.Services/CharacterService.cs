@@ -5,17 +5,16 @@ namespace OrchidCavalry.Services
 {
     public class CharacterService : ICharacterService
     {
-        private readonly ICharacterRoller characterRoller;
+        private readonly INameRoller nameRoller;
 
-        public CharacterService(ICharacterRoller characterRoller)
+        public CharacterService(INameRoller nameRoller)
         {
-            this.characterRoller = characterRoller;
+            this.nameRoller = nameRoller;
         }
 
         public Character GenerateCharacter()
         {
-            var generatedCharacter = this.characterRoller.Get();
-            return new Character(generatedCharacter.FirstName, generatedCharacter.LastName);
+            return new Character(this.nameRoller.GetFirstName(), this.nameRoller.GetLastName());
         }
     }
 }

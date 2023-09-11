@@ -56,6 +56,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
 		<PackageReference Include="Rollbard.Library" Version="1.2.44" />
@@ -73,10 +74,10 @@
 	  <MauiXaml Update="Play.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Popups\CharacterView.xaml">
+	  <MauiXaml Update="Views\CharacterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Popups\NewGame.xaml">
+	  <MauiXaml Update="Views\NewGame.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboard.xaml">

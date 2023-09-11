@@ -9,17 +9,15 @@ namespace OrchidCavalry.Services
 {
     public class GameplayService : IGameplayService
     {
-        public GameplayService(ICharacterService characterService, IAlertService alertService)
+        public GameplayService(ICharacterService characterService)
         {
             this.characterService = characterService;
-            this.alertService = alertService;
         }
 
         private readonly Random random = new();
         private readonly ICharacterService characterService;
-        private readonly IAlertService alertService;
 
-        public async Task NextTurnAsync(Game game)
+        public void NextTurn(Game game)
         {
             if (game.Characters.Count < 8)
             {
@@ -33,7 +31,7 @@ namespace OrchidCavalry.Services
                 }
 
                 var alertText = $"Due to the lack of members, you have conscripted {numberOfConscripts} people into the Orchid Cavalry from the civilian population of Orchid Island: {string.Join(", ", conscripts.Select(x => x.GetName()))}";
-                await this.alertService.DisplayAlert(alertText, "Civilians Conscripted");
+                game.Alerts.Add(new Alert("Civilians Conscripted", alertText));
             }
         }
     }

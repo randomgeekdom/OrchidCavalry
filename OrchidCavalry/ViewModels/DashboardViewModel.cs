@@ -8,12 +8,14 @@ namespace OrchidCavalry.ViewModels
     public class DashboardViewModel : ViewModelBase
     {
         private readonly IGameplayService gameplayService;
-
+        private readonly IAlertService alertService;
         private Game game;
 
-        public DashboardViewModel(IGameplayService gameplayService)
+        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService)
         {
             this.gameplayService = gameplayService;
+            this.alertService = alertService;
+            this.EndTurnCommand = new Command(NextTurn);
         }
 
         public string CommanderName => $"{this.Game?.Commander?.GetName()}";
@@ -30,11 +32,36 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
+        public string EndTurnText
+        {
+            get
+            {
+                if (this.game?.Alerts.Any() == true)
+                {
+                    return $"Alerts ({game.Alerts.Count})";
+                }
+                else { return "Next Turn"; }
+            }
+        }
+
         public void LoadGame(Game game)
         {
             this.Game = game;
+        }
 
-            this.EndTurnCommand = new AsyncRelayCommand(async () => await this.gameplayService.NextTurnAsync(this.game));
+        public void NextTurn()
+        {
+            if (this.game.Alerts.Any())
+            {
+                var alert = this.game.Alerts[0];
+                this.alertService.DisplayAlert(alert.Message, alert.Header);
+                this.game.Alerts.Remove(alert);
+            }
+            else
+            {
+                this.gameplayService.NextTurn(game);
+            }
+
             OnPropertyChanged(string.Empty);
         }
     }

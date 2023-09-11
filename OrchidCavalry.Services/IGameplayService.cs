@@ -4,6 +4,6 @@ namespace OrchidCavalry.Services
 {
     public interface IGameplayService
     {
-        Task NextTurnAsync(Game game);
+        void NextTurn(Game game);
     }
 }

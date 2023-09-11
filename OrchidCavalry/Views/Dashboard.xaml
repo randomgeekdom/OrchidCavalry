@@ -24,7 +24,7 @@
                     Command="{Binding EndTurnCommand}"
                     BorderWidth="0"
                     HorizontalOptions="CenterAndExpand"
-                    Text="End Turn" />
+                    Text="{Binding EndTurnText}" />
 
             <Border Padding="10">
                 <VerticalStackLayout Grid.Column="1" Grid.Row="1">

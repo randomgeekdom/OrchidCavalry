@@ -9,7 +9,7 @@ namespace OrchidCavalry
 {
     public class AlertService : IAlertService
     {
-        public async Task DisplayAlert(string message, string header = "")
+        public async Task DisplayAlertAsync(string message, string header = "")
         {
             Page page = Application.Current?.MainPage ?? throw new NullReferenceException();
             await page.DisplayAlert(header, message, "Close");

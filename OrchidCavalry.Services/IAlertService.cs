@@ -8,6 +8,6 @@ namespace OrchidCavalry.Services
 {
     public interface IAlertService
     {
-        Task DisplayAlert(string message, string header = "");
+        Task DisplayAlertAsync(string message, string header = "");
     }
 }

@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:OrchidCavalry.Controls"
-    xmlns:m="clr-namespace:OrchidCavalry.Models;assembly=OrchidCavalry.Models"
+    xmlns:m="clr-namespace:OrchidCavalry.Domain;assembly=OrchidCavalry.Domain"
     xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
     x:DataType="vm:DashboardViewModel"
     BackgroundColor="Wheat">
@@ -29,7 +29,11 @@
             <Border Padding="10">
                 <VerticalStackLayout Grid.Column="1" Grid.Row="1">
                     <Label Text="Orchid Commander" FontSize="Subtitle" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding CommanderName}" HorizontalOptions="CenterAndExpand"/>
+                    <!--<Label Text="{Binding CommanderName}" HorizontalOptions="CenterAndExpand"/>-->
+                    <Button Text="{Binding CommanderName}"
+                         Clicked="Button_Clicked"
+                         HorizontalOptions="CenterAndExpand">
+                    </Button>
                 </VerticalStackLayout>
             </Border>
 

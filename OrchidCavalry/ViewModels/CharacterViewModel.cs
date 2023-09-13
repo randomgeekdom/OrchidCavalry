@@ -12,15 +12,13 @@ namespace OrchidCavalry.ViewModels
         public Character Character { get; }
 
 
-        public CharacterViewModel(Character character, Game game)
+        public CharacterViewModel(Character character)
         {
             this.Character = character;
-            this.Game = game;
             this.Titles = this.Character.Titles;
-            this.Name = this.Character.GetName();
+            this.Name = this.Character.GetNameAndRank();
         }
 
-        public Game Game { get; }
         public string Name { get; }
         public IEnumerable<string> Titles { get; }
     }

@@ -9,15 +9,37 @@ namespace OrchidCavalry.Services
 {
     public class GameplayService : IGameplayService
     {
-        public GameplayService(ICharacterService characterService)
-        {
-            this.characterService = characterService;
-        }
-
-        private readonly Random random = new();
         private readonly ICharacterService characterService;
 
-        public void NextTurn(Game game)
+        private readonly IGameSaver gameSaver;
+
+        private readonly Random random = new();
+
+        public GameplayService(ICharacterService characterService, IGameSaver gameSaver)
+        {
+            this.characterService = characterService;
+            this.gameSaver = gameSaver;
+        }
+
+        public async Task NextTurnAsync(Game game)
+        {
+            RecruitConscriptsIfNecessary(game);
+            ReplaceCommanderIfNecessary(game);
+
+            await this.gameSaver.SaveGameAsync(game);
+        }
+
+        private static void ReplaceCommanderIfNecessary(Game game)
+        {
+            if (!game.Characters.Contains(game.Commander))
+            {
+                var previousCommander = game.Commander;
+                game.ReplaceLeader();
+                game.Alerts.Add(new Alert("A New Commander", $"Having lost Commander {previousCommander.GetName()}, a new commander has taking leadership of the Orchid Cavalry: {game.Commander.GetNameAndRank()}"));
+            }
+        }
+
+        private void RecruitConscriptsIfNecessary(Game game)
         {
             if (game.Characters.Count < 8)
             {
@@ -30,7 +52,7 @@ namespace OrchidCavalry.Services
                     game.Characters.Add(character);
                 }
 
-                var alertText = $"Due to the lack of members, you have conscripted {numberOfConscripts} people into the Orchid Cavalry from the civilian population of Orchid Island: {string.Join(", ", conscripts.Select(x => x.GetName()))}";
+                var alertText = $"Due to the lack of members, you have conscripted {conscripts.Count} people into the Orchid Cavalry from the civilian population of Orchid Island: {string.Join(", ", conscripts.Select(x => x.GetName()))}";
                 game.Alerts.Add(new Alert("Civilians Conscripted", alertText));
             }
         }

@@ -23,8 +23,9 @@ public static class Registrations
         builder.Services.AddTransient<DashboardViewModel>();
 
         // UI service
-        builder.Services.AddTransient<IAlertService, AlertService>();   
+        builder.Services.AddTransient<IAlertService, AlertService>();
         builder.Services.AddTransient<IGameplayService, GameplayService>();
+        builder.Services.AddTransient<ICharacterPopupService, CharacterPopupService>();
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();

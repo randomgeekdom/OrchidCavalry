@@ -2,13 +2,12 @@
 {
     public class Trait : ValueObject<Percent>
     {
-        public string Name { get; }
-
-        public Trait(string name, Percent level)
+        public Trait(string name, Percent level) : base(level)
         {
             Name = name;
-            Value = level;
         }
+
+        public string Name { get; }
 
         public void IncreaseValue(int amount)
         {

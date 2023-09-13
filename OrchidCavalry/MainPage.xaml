@@ -19,7 +19,7 @@
 
             <Label
                 FontFamily="GreatVibes"
-                FontSize="150"
+                FontSize="100"
                 
                 HorizontalOptions="CenterAndExpand"
                 Text="Orchid Cavalry" />

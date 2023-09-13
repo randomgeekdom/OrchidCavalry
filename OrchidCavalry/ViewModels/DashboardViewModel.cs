@@ -15,7 +15,7 @@ namespace OrchidCavalry.ViewModels
         {
             this.gameplayService = gameplayService;
             this.alertService = alertService;
-            this.EndTurnCommand = new Command(NextTurn);
+            this.EndTurnCommand = new RelayCommand(async () => await this.NextTurnAsync());
         }
 
         public string CommanderName => $"{this.Game?.Commander?.GetName()}";
@@ -49,17 +49,17 @@ namespace OrchidCavalry.ViewModels
             this.Game = game;
         }
 
-        public void NextTurn()
+        public async Task NextTurnAsync()
         {
             if (this.game.Alerts.Any())
             {
                 var alert = this.game.Alerts[0];
-                this.alertService.DisplayAlert(alert.Message, alert.Header);
+                await this.alertService.DisplayAlertAsync(alert.Message, alert.Header);
                 this.game.Alerts.Remove(alert);
             }
             else
             {
-                this.gameplayService.NextTurn(game);
+                await this.gameplayService.NextTurnAsync(game);
             }
 
             OnPropertyChanged(string.Empty);

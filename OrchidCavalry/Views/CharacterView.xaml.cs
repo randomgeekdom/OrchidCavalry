@@ -10,8 +10,8 @@ public partial class CharacterView : ContentPage
         InitializeComponent();
     }
 
-    internal void LoadViewModel(Character character, Game game)
+    internal void LoadViewModel(Character character)
     {
-        this.BindingContext = new CharacterViewModel(character, game);
+        this.BindingContext = new CharacterViewModel(character);
     }
 }

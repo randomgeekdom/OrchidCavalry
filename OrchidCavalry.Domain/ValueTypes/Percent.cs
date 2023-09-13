@@ -8,9 +8,8 @@ namespace OrchidCavalry.Models.ValueTypes
 {
     public class Percent : ValueObject<byte>, IComparable
     {
-        public Percent(byte value)
+        public Percent(byte value):base(value)
         {
-            Value = value;
         }
 
         public static implicit operator byte(Percent value)

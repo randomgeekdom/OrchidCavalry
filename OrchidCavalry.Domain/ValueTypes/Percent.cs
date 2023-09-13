@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Models.ValueTypes
 {
-    public class Percent : ValueObject<byte>, IComparable
+    public class Percent : ValueObject<byte>
     {
         public Percent(byte value):base(value)
         {
@@ -30,11 +30,6 @@ namespace OrchidCavalry.Models.ValueTypes
         public static implicit operator Percent(int value)
         {
             return new Percent((byte)Math.Max(Math.Min(99, value), 0));
-        }
-
-        public int CompareTo(object obj)
-        {
-            return this.Value.CompareTo((obj as Percent)?.Value);
         }
     }
 }

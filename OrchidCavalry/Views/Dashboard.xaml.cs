@@ -1,3 +1,4 @@
+using OrchidCavalry.Models;
 using OrchidCavalry.Popups;
 using OrchidCavalry.Services;
 using OrchidCavalry.ViewModels;
@@ -6,8 +7,8 @@ namespace OrchidCavalry.Views;
 
 public partial class Dashboard : ContentPage
 {
-    private readonly CharacterView characterView;
     private readonly ICharacterPopupService characterPopupService;
+    private readonly CharacterView characterView;
 
     public Dashboard(DashboardViewModel dashboardViewModel, CharacterView characterView, ICharacterPopupService characterPopupService)
     {
@@ -20,14 +21,13 @@ public partial class Dashboard : ContentPage
 
     public DashboardViewModel DashboardViewModel { get; }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    private async Task ShowCharacter(Character character)
     {
-        await this.characterPopupService.ShowCharacterAsync(this.DashboardViewModel.Game.Commander, this.Navigation);
+        await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.Navigation });
     }
 
-    //protected override bool OnBackButtonPressed()
-    //{
-    //    Navigation.PopAsync(true);
-    //    return base.OnBackButtonPressed();
-    //}
+    private async void ShowCommander(object sender, EventArgs e)
+    {
+        await ShowCharacter(this.DashboardViewModel.Game.Commander);
+    }
 }

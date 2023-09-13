@@ -9,6 +9,6 @@ namespace OrchidCavalry.Services
 {
     public interface ICharacterPopupService
     {
-        Task ShowCharacterAsync(Character character, INavigation navigation);
+        Task ShowCharacterAsync(CharacterPopupModel model);
     }
 }

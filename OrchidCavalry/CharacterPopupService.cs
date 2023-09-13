@@ -18,10 +18,10 @@ namespace OrchidCavalry
             this.characterView = characterView;
         }
 
-        public async Task ShowCharacterAsync(Character character, INavigation navigation)
+        public async Task ShowCharacterAsync(CharacterPopupModel model)
         {
-            characterView.LoadViewModel(character);
-            await navigation.PushAsync(characterView, true);
+            characterView.LoadViewModel(model.Character);
+            await model.Navigation.PushAsync(characterView, true);
         }
     }
 }

@@ -31,7 +31,7 @@
                     <Label Text="Orchid Commander" FontSize="Subtitle" HorizontalOptions="CenterAndExpand"/>
                     <!--<Label Text="{Binding CommanderName}" HorizontalOptions="CenterAndExpand"/>-->
                     <Button Text="{Binding CommanderName}"
-                         Clicked="Button_Clicked"
+                         Clicked="ShowCommander"
                          HorizontalOptions="CenterAndExpand">
                     </Button>
                 </VerticalStackLayout>

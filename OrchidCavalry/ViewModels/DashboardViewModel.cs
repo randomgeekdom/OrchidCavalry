@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using OrchidCavalry.Services;
 using CommunityToolkit.Mvvm.Input;
+using MvvmHelpers.Commands;
 
 namespace OrchidCavalry.ViewModels
 {
@@ -10,6 +11,7 @@ namespace OrchidCavalry.ViewModels
         private readonly IAlertService alertService;
         private readonly ICharacterPopupService characterPopupService;
         private readonly IGameplayService gameplayService;
+        private  INavigation navigation;
         private Game game;
 
         public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService)
@@ -17,13 +19,16 @@ namespace OrchidCavalry.ViewModels
             this.gameplayService = gameplayService;
             this.alertService = alertService;
             this.characterPopupService = characterPopupService;
-            this.EndTurnCommand = new RelayCommand(async () => await this.NextTurnAsync());
+            this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
+            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Character>(x => this.ShowCharacterPopup(x));
         }
+
+        public Character Commander => this.Game?.Commander;
 
         public string CommanderName => $"{this.Game?.Commander?.GetName()}";
 
         public ICommand EndTurnCommand { get; set; }
-
+        public ICommand ShowCharacterPopupCommand { get; }
         public string EndTurnText
         {
             get
@@ -67,9 +72,14 @@ namespace OrchidCavalry.ViewModels
             OnPropertyChanged(string.Empty);
         }
 
-        public async Task ShowCharacterPopup(CharacterPopupModel characterPopupModel)
+        public void SetNavigation(INavigation navigation)
         {
-            await this.characterPopupService.ShowCharacterAsync(characterPopupModel);
+            this.navigation = navigation;
+        }
+
+        public async Task ShowCharacterPopup(Character character)
+        {
+            await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.navigation});
         }
     }
 }

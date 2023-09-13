@@ -30,9 +30,10 @@
                 <VerticalStackLayout Grid.Column="1" Grid.Row="1">
                     <Label Text="Orchid Commander" FontSize="Subtitle" HorizontalOptions="CenterAndExpand"/>
                     <!--<Label Text="{Binding CommanderName}" HorizontalOptions="CenterAndExpand"/>-->
-                    <Button Text="{Binding CommanderName}"
-                         Clicked="ShowCommander"
-                         HorizontalOptions="CenterAndExpand">
+                    <Button Text="{Binding Commander}"
+                         HorizontalOptions="CenterAndExpand"
+                            Command="{Binding ShowCharacterPopupCommand}"
+                            CommandParameter="{Binding Commander}">
                     </Button>
                 </VerticalStackLayout>
             </Border>

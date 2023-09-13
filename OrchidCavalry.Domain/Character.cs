@@ -38,6 +38,11 @@ namespace OrchidCavalry.Models
             return Enum.GetValues<Rank>().Where(x => Victories > ((int)x) * (3 + (int)x)).OrderByDescending(x => x).FirstOrDefault().ToString();
         }
 
+        public override string ToString()
+        {
+            return this.GetNameAndRank();
+        }
+
         public void MakeCommander()
         {
             if (Titles.Contains(CommanderTitle))

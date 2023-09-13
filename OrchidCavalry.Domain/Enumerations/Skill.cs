@@ -2,7 +2,7 @@
 
 namespace OrchidCavalry.Domain.Enumerations
 {
-    public enum Trait
+    public enum Skill
     {
         Assist,
         Aura,

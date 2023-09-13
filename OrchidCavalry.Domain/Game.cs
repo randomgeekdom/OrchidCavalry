@@ -22,6 +22,6 @@
             Alerts.Add(new Alert(header, message));
         }
 
-        public Character? ReplaceLeader() => this.Characters.OrderByDescending(x => x.Traits.Sum(y => y.Value.Value)).FirstOrDefault();
+        public Character? ReplaceLeader() => this.Characters.OrderByDescending(x => x.Skills.Sum(y => y.Value.Value)).FirstOrDefault();
     }
 }

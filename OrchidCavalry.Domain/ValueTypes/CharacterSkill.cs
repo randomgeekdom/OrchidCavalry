@@ -2,16 +2,16 @@
 
 namespace OrchidCavalry.Models.ValueTypes
 {
-    public class CharacterTrait : Entity
+    public class CharacterSkill : Entity
     {
-        public CharacterTrait(Trait trait, TraitValue value)
+        public CharacterSkill(Skill Skill, SkillValue value)
         {
-            Trait = trait;
+            Skill = Skill;
             Value = value;
         }
 
-        public Trait Trait { get; set; }
-        public TraitValue Value { get; set; }
+        public Skill Skill { get; set; }
+        public SkillValue Value { get; set; }
 
         public void IncreaseValue(int amount)
         {

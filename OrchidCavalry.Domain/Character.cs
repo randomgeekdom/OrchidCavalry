@@ -17,7 +17,7 @@ namespace OrchidCavalry.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<string> Titles { get; set; } = new List<string>();
-        public List<CharacterTrait> Traits { get; set; } = new List<CharacterTrait>();
+        public List<CharacterSkill> Skills { get; set; } = new List<CharacterSkill>();
         public int Victories { get; set; } = 0;
 
         public int AddDefeat() => ++this.Defeats;
@@ -51,24 +51,24 @@ namespace OrchidCavalry.Models
             return this.GetNameAndRank();
         }
 
-        public TraitValue UpdateCharacterTraitValue(Trait trait, int value)
+        public SkillValue UpdateCharacterSkillValue(Skill Skill, int value)
         {
-            var characterTrait = Traits.FirstOrDefault(x => x.Trait == trait);
-            if (characterTrait == null)
+            var characterSkill = Skills.FirstOrDefault(x => x.Skill == Skill);
+            if (characterSkill == null)
             {
-                characterTrait = new CharacterTrait(trait, 0);
-                Traits.Add(characterTrait);
+                characterSkill = new CharacterSkill(Skill, 0);
+                Skills.Add(characterSkill);
             }
 
-            characterTrait.IncreaseValue(value);
+            characterSkill.IncreaseValue(value);
 
-            // If sum of traits is greater than 35 need to lower a trait
-            if (Traits.Sum(x => x.Value) > 35)
+            // If sum of Skills is greater than 35 need to lower a Skill
+            if (Skills.Sum(x => x.Value) > 35)
             {
-                Traits.OrderBy(x => Guid.NewGuid()).First().IncreaseValue(-1);
+                Skills.OrderBy(x => Guid.NewGuid()).First().IncreaseValue(-1);
             }
 
-            return characterTrait.Value;
+            return characterSkill.Value;
         }
 
         private bool IsCommander()

@@ -1,5 +1,4 @@
 ﻿using OrchidCavalry.Domain;
-using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Models
 {

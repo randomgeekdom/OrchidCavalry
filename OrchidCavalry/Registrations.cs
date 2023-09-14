@@ -26,6 +26,7 @@ public static class Registrations
         builder.Services.AddTransient<IAlertService, AlertService>();
         builder.Services.AddTransient<IGameplayService, GameplayService>();
         builder.Services.AddTransient<ICharacterPopupService, CharacterPopupService>();
+        builder.Services.AddTransient<IDiceRoller, DiceRoller>();
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();

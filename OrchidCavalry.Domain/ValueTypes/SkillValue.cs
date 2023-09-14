@@ -29,7 +29,7 @@ namespace OrchidCavalry.Models.ValueTypes
 
         public static implicit operator SkillValue(int value)
         {
-            return new SkillValue((byte)Math.Max(Math.Min(-6, value), 0));
+            return new SkillValue((byte)Math.Max(Math.Min(6, value), -4));
         }
     }
 }

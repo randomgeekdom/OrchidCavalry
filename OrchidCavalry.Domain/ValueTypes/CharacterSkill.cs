@@ -4,9 +4,9 @@ namespace OrchidCavalry.Models.ValueTypes
 {
     public class CharacterSkill : Entity
     {
-        public CharacterSkill(Skill Skill, SkillValue value)
+        public CharacterSkill(Skill skill, SkillValue value)
         {
-            Skill = Skill;
+            Skill = skill;
             Value = value;
         }
 

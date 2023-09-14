@@ -20,14 +20,7 @@ namespace OrchidCavalry.Models
         public List<Alert> Alerts { get; set; } = new List<Alert>();
         public List<Character> Characters { get; set; } = new List<Character>();
         public Character? Commander { get; set; }
-
-        public Dictionary<Faction, Percent> FactionControl { get; set; } = new Dictionary<Faction, Percent>
-        {
-            { Faction.AngelBlessed, 4 },
-            { Faction.Akaden, 1 },
-            { Faction.Barbarous, 9 },
-            { Faction.Magus, 10 },
-        };
+        public List<Region> Regions { get; set; } = new List<Region>();
 
         public void AddAlert(string header, string message)
         {

@@ -12,16 +12,17 @@ namespace OrchidCavalry.Services
         private readonly ICharacterService characterService;
 
         private readonly IGameSaver gameSaver;
-
+        private readonly IChoicePopupService choicePopupService;
         private readonly Random random = new();
 
-        public GameplayService(ICharacterService characterService, IGameSaver gameSaver)
+        public GameplayService(ICharacterService characterService, IGameSaver gameSaver, IChoicePopupService choicePopupService)
         {
             this.characterService = characterService;
             this.gameSaver = gameSaver;
+            this.choicePopupService = choicePopupService;
         }
 
-        public async Task NextTurnAsync(Game game)
+        public async Task NextTurnAsync(Game game, INavigation navigation)
         {
             RecruitConscriptsIfNecessary(game);
             ReplaceCommanderIfNecessary(game);

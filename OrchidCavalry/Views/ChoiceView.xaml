@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OrchidCavalry.Popups.ChoiceView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
+    BackgroundColor="Wheat"
+    x:DataType="vm:ChoiceViewModel">
+    <VerticalStackLayout
+        Margin="20"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
+
+
+        <Label Grid.Column="1" Text="{Binding Text}" />
+        <!--<Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Age}" />-->
+        <Picker
+                Grid.Row="4"
+                Grid.Column="1"
+                ItemsSource="{Binding Options}"
+                />
+
+        <Button Text="Select"/>
+        <!--<Button Clicked="Button_Clicked" Text="Back" />-->
+    </VerticalStackLayout>
+</ContentPage>

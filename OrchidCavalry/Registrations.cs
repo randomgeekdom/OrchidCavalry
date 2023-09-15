@@ -17,6 +17,7 @@ public static class Registrations
         builder.Services.AddTransient<NewGame>();
         builder.Services.AddTransient<Dashboard>();
         builder.Services.AddTransient<CharacterView>();
+        builder.Services.AddTransient<ChoiceView>();
 
         // View models
         builder.Services.AddTransient<NewGameViewModel>();
@@ -27,6 +28,7 @@ public static class Registrations
         builder.Services.AddTransient<IGameplayService, GameplayService>();
         builder.Services.AddTransient<ICharacterPopupService, CharacterPopupService>();
         builder.Services.AddTransient<IDiceRoller, DiceRoller>();
+        builder.Services.AddTransient<IChoicePopupService, ChoicePopupService>();
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();

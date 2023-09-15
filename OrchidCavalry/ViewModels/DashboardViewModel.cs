@@ -66,7 +66,7 @@ namespace OrchidCavalry.ViewModels
             }
             else
             {
-                await this.gameplayService.NextTurnAsync(game);
+                await this.gameplayService.NextTurnAsync(game, this.navigation);
             }
 
             OnPropertyChanged(string.Empty);

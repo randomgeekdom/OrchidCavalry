@@ -11,8 +11,8 @@ public partial class ChoiceView : ContentPage
         InitializeComponent();
     }
 
-    internal void LoadViewModel(Choice choice)
+    internal void LoadViewModel(Choice choice, Action<int> resultAction)
     {
-        this.BindingContext = new ChoiceViewModel(choice);
+        this.BindingContext = new ChoiceViewModel(choice, resultAction);
     }
 }

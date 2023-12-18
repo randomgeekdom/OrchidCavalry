@@ -1,26 +1,22 @@
 ﻿using OrchidCavalry.Domain;
-using OrchidCavalry.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrchidCavalry.ViewModels
 {
-    public class ChoiceViewModel: ViewModelBase
+    public class ChoiceViewModel : ViewModelBase
     {
-        public Choice Choice { get; }
-
-
-        public ChoiceViewModel(Choice choice)
+        public ChoiceViewModel(Choice choice, Action<int> resultAction)
         {
             this.Choice = choice;
+            this.ResultAction = resultAction;
             this.Options = new ObservableCollection<ChoiceOptionViewModel>(choice.Options.Select(x => new ChoiceOptionViewModel { Id = x.Key, Text = x.Value }));
         }
 
-        public string Text => this.Choice.Value;
+        public Choice Choice { get; }
         public ObservableCollection<ChoiceOptionViewModel> Options { get; }
+        public Action<int> ResultAction { get; }
+        public Microsoft.Maui.Controls.Command SelectCommand => new(() => ResultAction(SelectedOption.Id));
+        public ChoiceOptionViewModel SelectedOption { get; set; }
+        public string Text => this.Choice.Value;
     }
 }

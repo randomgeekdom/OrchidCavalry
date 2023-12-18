@@ -10,17 +10,21 @@ namespace OrchidCavalry.ViewModels
     {
         private readonly IAlertService alertService;
         private readonly ICharacterPopupService characterPopupService;
+        private readonly IChoicePopupService choicePopupService;
         private readonly IGameplayService gameplayService;
         private  INavigation navigation;
         private Game game;
 
-        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService)
+        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IChoicePopupService choicePopupService)
         {
             this.gameplayService = gameplayService;
             this.alertService = alertService;
             this.characterPopupService = characterPopupService;
+            this.choicePopupService = choicePopupService;
             this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
             this.ShowCharacterPopupCommand = new AsyncRelayCommand<Character>(x => this.ShowCharacterPopup(x));
+
+            this.choicePopupService.ChoiceSelected += () => this.NotifyAll();
         }
 
         public Character Commander => this.Game?.Commander;

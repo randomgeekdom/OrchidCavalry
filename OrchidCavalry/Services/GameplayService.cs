@@ -1,4 +1,5 @@
-﻿using OrchidCavalry.Models;
+﻿using OrchidCavalry.Domain;
+using OrchidCavalry.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace OrchidCavalry.Services
         {
             RecruitConscriptsIfNecessary(game);
             ReplaceCommanderIfNecessary(game);
+
+            await this.choicePopupService.ShowAsync(new Domain.Choice("SOmETHING", new Dictionary<int, string> { { 1, "CHOICE A" }, { 2, "B" } }), x => game.AddAlert("Alert", $"You have chosen option {x}"), navigation);
 
             await this.gameSaver.SaveGameAsync(game);
         }

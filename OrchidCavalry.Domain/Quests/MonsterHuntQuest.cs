@@ -1,6 +1,7 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Domain.Interfaces;
 using OrchidCavalry.Models;
+using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Domain.Quests
 {
@@ -16,6 +17,12 @@ namespace OrchidCavalry.Domain.Quests
 
         public string MonsterName { get; set; }
 
+        /// <summary>
+        /// Evaluates the results of the quest
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="diceRoller"></param>
+        /// <returns></returns>
         public override string EvaluateQuest(Game game, IDiceRoller diceRoller)
         {
             var returnText = new List<string>();
@@ -61,19 +68,28 @@ namespace OrchidCavalry.Domain.Quests
                             returnText.Add($"Special kudos to {character.GetNameAndRank()}");
                         }
 
-                        if (result == DieResult.Catastrophe || result <= DieResult.MinorSuccess && character.Skills.All(x => x.IsDebilitated))
+                        if (result == DieResult.Catastrophe || result <= DieResult.Fail && character.Skills.All(x => x.IsDebilitated))
                         {
                             game.KillCharacter(character);
                             deadCharacters.Add(character.GetNameAndRank());
                         }
-                        else if (result <= DieResult.MinorSuccess)
+                        else
                         {
-                            character.DebilitateRandomCharacterSkill();
-                        }
+                            if (result == DieResult.Fail)
+                            {
+                                character.UpdateCharacterSkillValue(highestSkill.Skill, 1);
+                                character.DebilitateRandomCharacterSkill();
+                            }
 
-                        if (result == DieResult.PerfectSuccess)
-                        {
-                            character.EnhanceRandomCharacterSkill();
+                            if (result <= DieResult.MinorSuccess)
+                            {
+                                character.DebilitateRandomCharacterSkill();
+                            }
+
+                            if (result == DieResult.PerfectSuccess)
+                            {
+                                character.EnhanceRandomCharacterSkill();
+                            }
                         }
                     }
                 }

@@ -1,9 +1,6 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OrchidCavalry.Domain.Interfaces;
+
 
 namespace OrchidCavalry.Services
 {
@@ -11,13 +8,13 @@ namespace OrchidCavalry.Services
     {
         private readonly Random random = new();
 
-        public DieResult Roll(int modifier, bool? epicRoll = null)
+        public DieResult Roll(int modifier, bool isDebilitated = false, bool isEnhanced = false)
         {
             var result = this.random.Next(1, 21);
-            if (epicRoll != null)
+            if (isEnhanced ^ isDebilitated)
             {
                 var secondResult = this.random.Next(1, 21);
-                if (epicRoll.Value)
+                if (isEnhanced)
                 {
                     result = Math.Max(result, secondResult);
                 }
@@ -50,11 +47,6 @@ namespace OrchidCavalry.Services
             {
                 return DieResult.Fail;
             }
-        }
-
-        public DieResult Roll(int modifier, bool isDebilitated = false, bool isEnhanced = false)
-        {
-            return this.Roll(modifier, isDebilitated ^ isEnhanced ? isEnhanced : null);
         }
     }
 }

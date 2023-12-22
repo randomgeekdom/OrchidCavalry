@@ -28,6 +28,8 @@ namespace OrchidCavalry.Services
             /*
                 Complete quests
                 Generate quests
+
+                Iterate Through cities and change population
              */
 
 

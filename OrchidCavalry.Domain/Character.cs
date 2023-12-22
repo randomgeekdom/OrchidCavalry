@@ -14,15 +14,48 @@ namespace OrchidCavalry.Models
         }
 
         public int Defeats { get; set; } = 0;
+
         public string FirstName { get; set; }
+
+        public bool IsDeployed { get; set; } = false;
+
         public string LastName { get; set; }
+
         public List<CharacterSkill> Skills { get; set; } = new List<CharacterSkill>();
+
         public List<string> Titles { get; set; } = new List<string>();
+
         public int Victories { get; set; } = 0;
 
         public int AddDefeat() => ++this.Defeats;
 
         public int AddVictory() => ++this.Victories;
+
+        public void DebilitateRandomCharacterSkill()
+        {
+            var randomSkill = Skills.OrderBy(x => Guid.NewGuid()).First();
+            if (randomSkill.IsEnhanced)
+            {
+                randomSkill.IsEnhanced = false;
+            }
+            else
+            {
+                randomSkill.IsDebilitated = true;
+            }
+        }
+
+        public void EnhanceRandomCharacterSkill()
+        {
+            var randomSkill = Skills.OrderBy(x => Guid.NewGuid()).First();
+            if (randomSkill.IsDebilitated)
+            {
+                randomSkill.IsDebilitated = false;
+            }
+            else
+            {
+                randomSkill.IsEnhanced = true;
+            }
+        }
 
         public string GetName() => $"{FirstName} {LastName}";
 
@@ -38,12 +71,17 @@ namespace OrchidCavalry.Models
             return Enum.GetValues<Rank>().Where(x => Victories > ((int)x) * (3 + (int)x)).OrderByDescending(x => x).FirstOrDefault().ToString();
         }
 
+        public bool IsCommander()
+        {
+            return this.Titles.Contains(CommanderTitle);
+        }
+
         public void MakeCommander()
         {
-            if (Titles.Contains(CommanderTitle))
+            if (IsCommander())
                 return;
 
-            Titles.Add("Orchid Cavalry Commander");
+            Titles.Add(CommanderTitle);
         }
 
         public override string ToString()
@@ -71,9 +109,12 @@ namespace OrchidCavalry.Models
             return characterSkill.Value;
         }
 
-        private bool IsCommander()
+        public void AddTitle(string title)
         {
-            return this.Titles.Contains(CommanderTitle);
+            if (!Titles.Contains(title))
+            {
+                Titles.Add(title);
+            }
         }
     }
 }

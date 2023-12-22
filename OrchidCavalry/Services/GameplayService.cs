@@ -25,6 +25,12 @@ namespace OrchidCavalry.Services
 
         public async Task NextTurnAsync(Game game, INavigation navigation)
         {
+            /*
+                Complete quests
+                Generate quests
+             */
+
+
             RecruitConscriptsIfNecessary(game);
             ReplaceCommanderIfNecessary(game);
 

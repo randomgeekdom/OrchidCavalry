@@ -15,6 +15,8 @@ namespace OrchidCavalry.ViewModels
         private  INavigation navigation;
         private Game game;
 
+        public bool EnableNextTurn { get; set; } = true;
+
         public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IChoicePopupService choicePopupService)
         {
             this.gameplayService = gameplayService;
@@ -62,6 +64,9 @@ namespace OrchidCavalry.ViewModels
 
         public async Task NextTurnAsync()
         {
+            this.EnableNextTurn = false;
+            OnPropertyChanged(string.Empty);
+
             if (this.game.Alerts.Any())
             {
                 var alert = this.game.Alerts[0];
@@ -73,6 +78,7 @@ namespace OrchidCavalry.ViewModels
                 await this.gameplayService.NextTurnAsync(game, this.navigation);
             }
 
+            this.EnableNextTurn = true;
             OnPropertyChanged(string.Empty);
         }
 

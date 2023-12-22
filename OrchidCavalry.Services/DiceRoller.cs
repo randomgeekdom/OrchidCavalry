@@ -9,7 +9,7 @@ namespace OrchidCavalry.Services
 {
     public class DiceRoller : IDiceRoller
     {
-        private readonly Random random = new Random();
+        private readonly Random random = new();
 
         public DieResult Roll(int modifier, bool? epicRoll = null)
         {
@@ -50,6 +50,11 @@ namespace OrchidCavalry.Services
             {
                 return DieResult.Fail;
             }
+        }
+
+        public DieResult Roll(int modifier, bool isDebilitated = false, bool isEnhanced = false)
+        {
+            return this.Roll(modifier, isDebilitated ^ isEnhanced ? isEnhanced : null);
         }
     }
 }

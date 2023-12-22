@@ -12,10 +12,8 @@ namespace OrchidCavalry.ViewModels
         private readonly ICharacterPopupService characterPopupService;
         private readonly IChoicePopupService choicePopupService;
         private readonly IGameplayService gameplayService;
-        private  INavigation navigation;
         private Game game;
-
-        public bool EnableNextTurn { get; set; } = true;
+        private INavigation navigation;
 
         public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IChoicePopupService choicePopupService)
         {
@@ -30,11 +28,10 @@ namespace OrchidCavalry.ViewModels
         }
 
         public Character Commander => this.Game?.Commander;
-
         public string CommanderName => $"{this.Game?.Commander?.GetName()}";
-
+        public bool EnableNextTurn { get; set; } = true;
         public ICommand EndTurnCommand { get; set; }
-        public ICommand ShowCharacterPopupCommand { get; }
+
         public string EndTurnText
         {
             get
@@ -56,6 +53,8 @@ namespace OrchidCavalry.ViewModels
                 this.NotifyAll();
             }
         }
+
+        public ICommand ShowCharacterPopupCommand { get; }
 
         public void LoadGame(Game game)
         {
@@ -89,7 +88,7 @@ namespace OrchidCavalry.ViewModels
 
         public async Task ShowCharacterPopup(Character character)
         {
-            await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.navigation});
+            await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.navigation });
         }
     }
 }

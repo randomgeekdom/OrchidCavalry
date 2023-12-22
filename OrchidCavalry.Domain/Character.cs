@@ -1,5 +1,4 @@
-﻿using OrchidCavalry.Domain;
-using OrchidCavalry.Domain.Enumerations;
+﻿using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Models
@@ -15,7 +14,6 @@ namespace OrchidCavalry.Models
         }
 
         public int Defeats { get; set; } = 0;
-        public Dictionary<Faction, Percent> FactionReputation { get; set; } = new Dictionary<Faction, Percent>();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<CharacterSkill> Skills { get; set; } = new List<CharacterSkill>();
@@ -23,18 +21,6 @@ namespace OrchidCavalry.Models
         public int Victories { get; set; } = 0;
 
         public int AddDefeat() => ++this.Defeats;
-
-        public void AddToFactionReputation(Faction faction, int value)
-        {
-            if (FactionReputation.ContainsKey(faction))
-            {
-                FactionReputation[faction] += value;
-            }
-            else
-            {
-                FactionReputation.Add(faction, value);
-            }
-        }
 
         public int AddVictory() => ++this.Victories;
 

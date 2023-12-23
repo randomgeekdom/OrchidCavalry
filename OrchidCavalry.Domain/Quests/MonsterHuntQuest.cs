@@ -1,5 +1,5 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
-using OrchidCavalry.Domain.Interfaces;
+using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
 using OrchidCavalry.Models.ValueTypes;
 

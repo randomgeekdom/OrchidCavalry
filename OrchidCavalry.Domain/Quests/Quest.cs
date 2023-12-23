@@ -1,4 +1,4 @@
-﻿using OrchidCavalry.Domain.Interfaces;
+﻿using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Domain.Quests

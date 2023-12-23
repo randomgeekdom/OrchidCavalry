@@ -1,8 +1,7 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
-using OrchidCavalry.Domain.Interfaces;
 
 
-namespace OrchidCavalry.Services
+namespace OrchidCavalry.Domain.Services
 {
     public class DiceRoller : IDiceRoller
     {
@@ -10,10 +9,10 @@ namespace OrchidCavalry.Services
 
         public DieResult Roll(int modifier, bool isDebilitated = false, bool isEnhanced = false)
         {
-            var result = this.random.Next(1, 21);
+            var result = random.Next(1, 21);
             if (isEnhanced ^ isDebilitated)
             {
-                var secondResult = this.random.Next(1, 21);
+                var secondResult = random.Next(1, 21);
                 if (isEnhanced)
                 {
                     result = Math.Max(result, secondResult);

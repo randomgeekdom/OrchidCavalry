@@ -1,6 +1,6 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
 
-namespace OrchidCavalry.Domain.Interfaces
+namespace OrchidCavalry.Domain.Services
 {
     public interface IDiceRoller
     {

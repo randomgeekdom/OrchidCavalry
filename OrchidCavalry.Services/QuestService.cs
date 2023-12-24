@@ -16,7 +16,6 @@ namespace OrchidCavalry.Services
                 {
                     // Other quest.  Default to monster hunt
 
-
                 }
             });
         }

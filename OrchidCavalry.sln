@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{040CB137
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchidCavalry.Services.Tests", "OrchidCavalry.Services.Tests\OrchidCavalry.Services.Tests.csproj", "{BDADBACB-50C4-4EFF-9920-778D606AD711}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchidCavalry.Domain", "OrchidCavalry.Domain\OrchidCavalry.Domain.csproj", "{C40F3217-3244-4AB2-9ADD-36A6D3A3638C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchidCavalry.Domain", "OrchidCavalry.Domain\OrchidCavalry.Domain.csproj", "{C40F3217-3244-4AB2-9ADD-36A6D3A3638C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

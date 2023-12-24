@@ -34,7 +34,8 @@ public static class Registrations
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();
         builder.Services.AddTransient<ICharacterService, CharacterService>();
-        builder.Services.AddTransient<IGameSaver, GameSaver>();
+        builder.Services.AddTransient<ICityService, CityService>();
+        builder.Services.AddTransient<IQuestService, QuestService>();
 
         foreach (var entry in Rollbard.Library.RegistrationDictionary.Get())
         {

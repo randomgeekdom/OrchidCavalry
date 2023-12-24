@@ -1,6 +1,5 @@
 ﻿using OrchidCavalry.Domain;
 using OrchidCavalry.Domain.Quests;
-using System.Reflection.Metadata.Ecma335;
 
 namespace OrchidCavalry.Models
 {
@@ -60,6 +59,13 @@ namespace OrchidCavalry.Models
             Alerts.Add(new Alert(header, message));
         }
 
+        public City AddNewCity(string name, string rulingFaction)
+        {
+            var city = new City(name, rulingFaction);
+            this.Cities.Add(city);
+            return city;
+        }
+
         public City GetCityByName(string name)
         {
             return this.Cities.Single(x => x.Name == name);
@@ -70,6 +76,16 @@ namespace OrchidCavalry.Models
         /// </summary>
         /// <returns></returns>
         public List<Quest> GetCurrentAvailableQuests() => Quests.Where(x => !x.IsActive).ToList();
+
+        public int GetNumberOfInactiveQuestRequiredCharacterSlots()
+        {
+            return this.Quests.Where(x => !x.IsActive).Sum(x => x.RequiredNumberOfCharacters);
+        }
+
+        public int GetNumberOfUndeployedCharacters()
+        {
+            return this.Characters.Count(x => !x.IsDeployed);
+        }
 
         public void KillCharacter(Character character)
         {

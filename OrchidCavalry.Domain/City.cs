@@ -17,7 +17,7 @@ namespace OrchidCavalry.Domain
         /// <summary>
         /// The Name of the municipality
         /// </summary>
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The current population

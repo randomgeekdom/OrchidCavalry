@@ -60,7 +60,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
 		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-		<PackageReference Include="Rollbard.Library" Version="1.2.45" />
+		<PackageReference Include="Rollbard.Library" Version="1.2.50" />
 	</ItemGroup>
 
 	<ItemGroup>

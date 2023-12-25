@@ -1,4 +1,5 @@
 ﻿using OrchidCavalry.Domain;
+using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
 using System;
 using System.Collections.Generic;
@@ -8,28 +9,26 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Services
 {
-    public class GameplayService : IGameplayService
+    public class GameplayService(ICharacterService characterService, IGameSaver gameSaver, IDiceRoller diceRoller, IQuestService questService) : IGameplayService
     {
-        private readonly ICharacterService characterService;
+        private readonly ICharacterService characterService = characterService;
 
-        private readonly IGameSaver gameSaver;
+        private readonly IGameSaver gameSaver = gameSaver;
+        private readonly IDiceRoller diceRoller = diceRoller;
+        private readonly IQuestService questService = questService;
         private readonly Random random = new();
-
-        public GameplayService(ICharacterService characterService, IGameSaver gameSaver)
-        {
-            this.characterService = characterService;
-            this.gameSaver = gameSaver;
-        }
 
         public async Task NextTurnAsync(Game game, INavigation navigation)
         {
-            /*
-                Complete quests
-                Generate quests
+            await Task.Run(() =>
+            {
+                foreach (var quest in game.Quests.ToList())
+                {
+                    quest.EvaluateQuest(game, this.diceRoller);
+                }
+            });
 
-                Iterate Through cities and change population
-             */
-
+            await this.questService.GenerateQuestsAsync(game);
 
             RecruitConscriptsIfNecessary(game);
             ReplaceCommanderIfNecessary(game);
@@ -37,7 +36,7 @@ namespace OrchidCavalry.Services
             await this.gameSaver.SaveGameAsync(game);
         }
 
-        private static void ReplaceCommanderIfNecessary(Game game)
+        private void ReplaceCommanderIfNecessary(Game game)
         {
             if (!game.Characters.Contains(game.Commander))
             {

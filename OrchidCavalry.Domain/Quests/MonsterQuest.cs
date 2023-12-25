@@ -1,21 +1,26 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
-using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Domain.Quests
 {
     /// <summary>
     /// A quest of 1 to 4 characters to stop a monster from terrorizing a city
     /// </summary>
-    public class MonsterQuest : Quest
+    public class MonsterQuest(string title, string description, string monsterName, string cityName) : Quest(title, description, 5, 1, cityName)
     {
-        public MonsterQuest(string title, string description, string monsterName, string cityName) : base(title, description, 5, 1, cityName)
-        {
-            this.MonsterName = monsterName;
-        }
+        public string MonsterName { get; set; } = monsterName;
 
-        public string MonsterName { get; set; }
+        /// <summary>
+        /// Create a monster quest
+        /// </summary>
+        /// <param name="monsterName">The name of the monster</param>
+        /// <param name="cityName">The city where it's happening</param>
+        /// <returns></returns>
+        public static MonsterQuest Create(string monsterName, string cityName)
+        {
+            return new MonsterQuest($"A Monstrous Threat", $"A {monsterName} has been seen prowling near the city of {cityName}", monsterName, cityName);
+        }
 
         /// <summary>
         /// Evaluates the results of the quest

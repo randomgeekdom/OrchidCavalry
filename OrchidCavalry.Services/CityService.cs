@@ -4,34 +4,46 @@ using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services
 {
-    public class CityService : ICityService
+    public class CityService(IMunicipalityNameRoller nameRoller, IFactionRoller factionRoller) : ICityService
     {
-        public CityService(IMunicipalityNameRoller nameRoller, IFactionRoller factionRoller)
-        {
-            this.nameRoller = nameRoller;
-            this.factionRoller = factionRoller;
-        }
+        private readonly IFactionRoller factionRoller = factionRoller;
+        private readonly IMunicipalityNameRoller nameRoller = nameRoller;
         private readonly Random random = new();
-        private readonly IMunicipalityNameRoller nameRoller;
-        private readonly IFactionRoller factionRoller;
 
-        public City GetRandomCity(Game game)
+        public async Task<City> GetUnthreatenedRandomCityAsync(Game game)
         {
-            var cityCount = game.Cities.Count;
-            var randomIndex = this.random.Next(cityCount + 2);
-            if (randomIndex >= cityCount - 1)
+            return await Task.Run(() =>
             {
-                var factions = game.Cities.Select(x => x.RulingFaction).Distinct().ToList();
-                var factionCount = factions.Count;
-                var factionIndex = this.random.Next(factionCount + 2);
+                // Get a list of cities that are not part of a quest
+                var cities = game.Cities.Where(x => !game.Quests.Select(x => x.CityName).Contains(x.Name));
 
-                var faction = factionIndex >= factionCount - 1 ? factionRoller.Get() : factions[factionIndex];
-                return game.AddNewCity(this.nameRoller.Get(), faction);
-            }
-            else
+                var cityCount = cities.Count();
+                var randomIndex = this.random.Next(cityCount + 2);
+                if (randomIndex >= cityCount - 1)
+                {
+                    var factions = cities.Select(x => x.RulingFaction).Distinct().ToList();
+                    var factionCount = factions.Count;
+                    var factionIndex = this.random.Next(factionCount + 2);
+
+                    var faction = factionIndex >= factionCount - 1 ? factionRoller.Get() : factions[factionIndex];
+                    return game.AddNewCity(this.nameRoller.Get(), faction);
+                }
+                else
+                {
+                    return game.Cities[randomIndex];
+                }
+            });
+        }
+
+        public async Task IncreasePopulationAsync(IEnumerable<City> cities)
+        {
+            await Task.Run(() =>
             {
-                return game.Cities[randomIndex];
-            }
+                foreach (var city in cities)
+                {
+                    city.Population += Math.Max((int)(city.Population * 0.00287671232), 1);
+                }
+            });
         }
     }
 }

@@ -7,11 +7,13 @@ namespace OrchidCavalry.Domain
     /// </summary>
     public class City : Entity
     {
-        public City(string name, string rulingFaction, int population = 500)
+        private readonly Random random = new();
+
+        public City(string name, string rulingFaction)
         {
             this.Name = name;
-            this.Population = population;
             this.RulingFaction = rulingFaction;
+            this.Population = this.random.Next(200, 1000);
         }
 
         /// <summary>

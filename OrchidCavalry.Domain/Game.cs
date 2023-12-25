@@ -27,17 +27,17 @@ namespace OrchidCavalry.Models
         /// <summary>
         /// The Alerts that get displayed after a turn is taken
         /// </summary>
-        public List<Alert> Alerts { get; set; } = new List<Alert>();
+        public List<Alert> Alerts { get; set; } = [];
 
         /// <summary>
         /// The members of the Orchid Cavalry
         /// </summary>
-        public List<Character> Characters { get; set; } = new List<Character>();
+        public List<Character> Characters { get; set; } = [];
 
         /// <summary>
         /// The cities in the world
         /// </summary>
-        public List<City> Cities { get; set; } = new List<City>();
+        public List<City> Cities { get; set; } = [];
 
         /// <summary>
         /// The leader of the Orchid Cavalry
@@ -47,7 +47,7 @@ namespace OrchidCavalry.Models
         /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
-        public List<Quest> Quests { get; set; } = new List<Quest>();
+        public List<Quest> Quests { get; set; } = [];
 
         /// <summary>
         /// Add an alert to display to the user before they take their next turn
@@ -64,6 +64,11 @@ namespace OrchidCavalry.Models
             var city = new City(name, rulingFaction);
             this.Cities.Add(city);
             return city;
+        }
+
+        public void AddQuest(Quest quest)
+        {
+            this.Quests.Add(quest);
         }
 
         public City GetCityByName(string name)

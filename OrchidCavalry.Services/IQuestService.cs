@@ -4,6 +4,6 @@ namespace OrchidCavalry.Services
 {
     public interface IQuestService
     {
-        Task GenerateQuestAsync(Game game);
+        Task GenerateQuestsAsync(Game game);
     }
 }

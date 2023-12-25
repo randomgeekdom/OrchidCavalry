@@ -15,12 +15,12 @@ namespace OrchidCavalry.Domain.Quests
         }
 
         public List<Character> Characters { get; set; } = new List<Character>();
-        public required string Description { get; set; }
+        public string Description { get; set; }
         public int Expiration { get; set; }
         public bool IsActive { get; set; }
         public int RequiredNumberOfCharacters { get; set; }
         public int MaxNumberOfCharacters { get; set; }
-        public required string Title { get; set; }
+        public string Title { get; set; }
         public string CityName { get; set; }
 
         public void AddCharacter(Character character)

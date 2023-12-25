@@ -5,6 +5,7 @@ namespace OrchidCavalry.Services
 {
     public interface ICityService
     {
-        City GetRandomCity(Game game);
+        Task<City> GetUnthreatenedRandomCityAsync(Game game);
+        Task IncreasePopulationAsync(IEnumerable<City> cities);
     }
 }

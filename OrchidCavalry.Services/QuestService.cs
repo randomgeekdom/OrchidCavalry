@@ -1,27 +1,30 @@
 ﻿using OrchidCavalry.Domain.Quests;
 using OrchidCavalry.Models;
+using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services
 {
     /// <summary>
     /// The quest service generates quests for characters to go on
     /// </summary>
-    public class QuestService : IQuestService
+    public class QuestService(IMonsterRoller monsterRoller, ICityService cityService) : IQuestService
     {
-        public async Task GenerateQuestAsync(Game game)
-        {
-            await Task.Run(() =>
-            {
-                while (game.GetNumberOfInactiveQuestRequiredCharacterSlots() < game.GetNumberOfUndeployedCharacters())
-                {
-                    // Other quest.  Default to monster hunt
+        private readonly ICityService cityService = cityService;
+        private readonly IMonsterRoller monsterRoller = monsterRoller;
 
-                }
-            });
+        public async Task GenerateQuestsAsync(Game game)
+        {
+            while (game.GetNumberOfInactiveQuestRequiredCharacterSlots() < game.GetNumberOfUndeployedCharacters())
+            {
+                // Other quest.  Default to monster hunt
+                game.AddQuest(await GenerateMonsterHuntAsync(game));
+            }
         }
 
-        //private MonsterHuntQuest GenerateMonsterHunt() 
-        //{ 
-        //}
+        private async Task<MonsterQuest> GenerateMonsterHuntAsync(Game game)
+        {
+            var city = await this.cityService.GetUnthreatenedRandomCityAsync(game);
+            return MonsterQuest.Create(this.monsterRoller.Get(), city.Name);
+        }
     }
 }

@@ -8,15 +8,21 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Services
 {
-    public class CharacterPopupService : ICharacterPopupService
+    /// <summary>
+    /// Creates a modal that shows the user a Character's attributes
+    /// </summary>
+    public class CharacterPopupService(CharacterView characterView) : ICharacterPopupService
     {
-        private readonly CharacterView characterView;
+        /// <summary>
+        /// The view that shows the character's characteristics
+        /// </summary>
+        private readonly CharacterView characterView = characterView;
 
-        public CharacterPopupService(CharacterView characterView)
-        {
-            this.characterView = characterView;
-        }
-
+        /// <summary>
+        /// The method to show the popup
+        /// </summary>
+        /// <param name="model">The model object that contains the characters</param>
+        /// <returns>an awaitable task</returns>
         public async Task ShowCharacterAsync(CharacterPopupModel model)
         {
             characterView.LoadViewModel(model.Character);

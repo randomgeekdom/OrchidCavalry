@@ -8,9 +8,9 @@ namespace OrchidCavalry.Domain.Quests
     /// <summary>
     /// A quest of 1 to 4 characters to stop a monster from terrorizing a city
     /// </summary>
-    public class MonsterHuntQuest : Quest
+    public class MonsterQuest : Quest
     {
-        public MonsterHuntQuest(string title, string description, string monsterName, string cityName) : base(title, description, 5, 1, 4, cityName)
+        public MonsterQuest(string title, string description, string monsterName, string cityName) : base(title, description, 5, 1, cityName)
         {
             this.MonsterName = monsterName;
         }

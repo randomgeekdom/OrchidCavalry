@@ -5,7 +5,7 @@ namespace OrchidCavalry.Domain.Quests
 {
     public abstract class Quest : Entity
     {
-        public Quest(string title, string description, int expiration, int requiredNumberOfCharacters, int maxNumberOfCharacters, string cityName)
+        public Quest(string title, string description, int expiration, int requiredNumberOfCharacters, string cityName)
         {
             Title = title;
             Description = description;

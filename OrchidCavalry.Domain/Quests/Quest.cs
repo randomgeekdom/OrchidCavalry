@@ -4,14 +4,14 @@ using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Domain.Quests
 {
-    public abstract class Quest(string title, string description, int expiration, int requiredNumberOfCharacters, string cityName) : Entity
+    public abstract class Quest(string title, string description, int expiration, int requiredNumberOfCharacters, int maxNumberOfCharacters, string cityName) : Entity
     {
         public List<Character> Characters { get; set; } = [];
         public string CityName { get; set; } = cityName;
         public string Description { get; set; } = description;
         public int Expiration { get; set; } = expiration;
         public bool IsActive { get; set; }
-        public int MaxNumberOfCharacters { get; set; }
+        public int MaxNumberOfCharacters { get; set; } = maxNumberOfCharacters;
         public int RequiredNumberOfCharacters { get; set; } = requiredNumberOfCharacters;
         public string Title { get; set; } = title;
 
@@ -26,7 +26,7 @@ namespace OrchidCavalry.Domain.Quests
             character.IsDeployed = true;
         }
 
-        public abstract Task<string?> EvaluateFailState(Game game, IDiceRoller diceRoller);
+        public abstract Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller);
 
         public async Task<string?> EvaluateQuestAsync(Game game, IDiceRoller diceRoller)
         {
@@ -44,7 +44,7 @@ namespace OrchidCavalry.Domain.Quests
                 {
                     foreach (var character in this.Characters.OrderBy(x => x.GetRank()).ToArray())
                     {
-                        var questResolutions = this.GetQuestResolutions();
+                        var questResolutions = this.GetQuestResolutions(game);
 
                         var highestSkill = character.Skills
                             .Where(x => questResolutions.Select(x => x.Skill).Contains(x.Skill))
@@ -66,6 +66,8 @@ namespace OrchidCavalry.Domain.Quests
                             var resolution = questResolutions.Single(x => x.Skill == highestSkill.Skill);
                             returnText.Add(resolution.SuccessText);
                             character.AddTitle(resolution.VictoryTitle);
+                            resolution.ExtraAction?.Invoke();
+
                             returnText.Add($"Special kudos to {character.GetNameAndRank()}");
                         }
 
@@ -100,14 +102,18 @@ namespace OrchidCavalry.Domain.Quests
                 // If not resolved, figure out what happens
                 if (!monsterRampageComplete)
                 {
-                    await this.EvaluateQuestAsync(game, diceRoller);
+                    var result = await this.EvaluateFailStateAsync(game, diceRoller);
+                    if(result != null)
+                    {
+                        returnText.Add(result);
+                    }
                 }
             }
             game.RemoveQuest(this);
             return string.Join(" ", returnText);
         }
 
-        public abstract List<QuestResolution> GetQuestResolutions();
+        public abstract List<QuestResolution> GetQuestResolutions(Game game);
 
         public void RemoveCharacter(Character character)
         {

@@ -9,7 +9,7 @@ namespace OrchidCavalry.Domain.Enumerations
         Brawn,
         Deduction,
         Destiny,
-        Diplomacy,
+        Influence,
         Knowledge,
         Melee,
         Movement,

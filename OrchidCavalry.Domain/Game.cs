@@ -61,6 +61,13 @@ namespace OrchidCavalry.Models
             Alerts.Add(new Alert(header, message));
         }
 
+        public void AddNewCharacter(string bandLeaderName)
+        {
+            var splitName = bandLeaderName.Split(" ");
+            var character = new Character(splitName[0], splitName[1]);
+            this.Characters.Add(character);
+        }
+
         public City AddNewCity(string name, string rulingFaction)
         {
             var city = new City(name, rulingFaction);

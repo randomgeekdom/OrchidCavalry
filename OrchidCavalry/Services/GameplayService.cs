@@ -23,9 +23,10 @@ namespace OrchidCavalry.Services
         /// What occurs when the player hits the "Next Turn" button.
         /// </summary>
         /// <param name="game">The game state</param>
-        /// <returns></returns>
+        /// <returns>awaitable task</returns>
         public async Task NextTurnAsync(Game game)
         {
+            // Loop through quests and evaluate them
             foreach (var quest in game.Quests.ToList())
             {
                 var alert = await quest.EvaluateQuestAsync(game, this.diceRoller);
@@ -35,6 +36,7 @@ namespace OrchidCavalry.Services
                 }
             }
 
+            // Generate quests to be taken
             await this.questService.GenerateQuestsAsync(game);
 
             await RecruitConscriptsIfNecessaryAsync(game);
@@ -43,6 +45,11 @@ namespace OrchidCavalry.Services
             await this.gameSaver.SaveGameAsync(game);
         }
 
+        /// <summary>
+        /// If there are less than 8 characters, conscript from the "Island"
+        /// </summary>
+        /// <param name="game">The game state</param>
+        /// <returns>awaitable task</returns>
         private async Task RecruitConscriptsIfNecessaryAsync(Game game)
         {
             await Task.Run(() =>

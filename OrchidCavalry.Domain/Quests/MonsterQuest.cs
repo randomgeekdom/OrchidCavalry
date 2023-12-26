@@ -7,7 +7,7 @@ namespace OrchidCavalry.Domain.Quests
     /// <summary>
     /// A quest of 1 to 4 characters to stop a monster from terrorizing a city
     /// </summary>
-    public class MonsterQuest(string title, string description, string monsterName, string cityName) : Quest(title, description, 5, 1, cityName)
+    public class MonsterQuest(string title, string description, string monsterName, string cityName) : Quest(title, description, 5, 1, 3, cityName)
     {
         public string MonsterName { get; set; } = monsterName;
 
@@ -22,7 +22,7 @@ namespace OrchidCavalry.Domain.Quests
             return new MonsterQuest($"A Monstrous Threat", $"A {monsterName} has been seen prowling near the city of {cityName}", monsterName, cityName);
         }
 
-        public override async Task<string?> EvaluateFailState(Game game, IDiceRoller diceRoller)
+        public override async Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller)
         {
             return await Task.Run(() =>
             {
@@ -61,7 +61,7 @@ namespace OrchidCavalry.Domain.Quests
                 }
                 else
                 {
-                    var populationKilled = currentPopulation = newPopulation;
+                    var populationKilled = currentPopulation - newPopulation;
                     if (populationKilled > 0)
                     {
                         returnText.Add($"The {MonsterName} did manage to kill {populationKilled} of the population.");
@@ -72,7 +72,7 @@ namespace OrchidCavalry.Domain.Quests
             });
         }
 
-        public override List<QuestResolution> GetQuestResolutions()
+        public override List<QuestResolution> GetQuestResolutions(Game game)
         {
             return
             [

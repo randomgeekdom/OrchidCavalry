@@ -15,7 +15,7 @@ namespace OrchidCavalry.Domain.Enumerations
         Movement,
         Resilience,
         Sense,
-        Shoot,
+        Target,
         Tinker,
         Wealth,
         Willpower

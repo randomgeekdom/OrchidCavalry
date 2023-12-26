@@ -89,7 +89,7 @@ namespace OrchidCavalry.Models
             return this.GetNameAndRank();
         }
 
-        public SkillValue UpdateCharacterSkillValue(Skill Skill, int value)
+        public CharacterSkill UpdateCharacterSkillValue(Skill Skill, int value)
         {
             var characterSkill = Skills.FirstOrDefault(x => x.Skill == Skill);
             if (characterSkill == null)
@@ -106,7 +106,7 @@ namespace OrchidCavalry.Models
                 Skills.OrderBy(x => Guid.NewGuid()).First().IncreaseValue(-1);
             }
 
-            return characterSkill.Value;
+            return characterSkill;
         }
 
         public void AddTitle(string title)

@@ -2,3 +2,6 @@
 
 # CA1822: Mark members as static
 dotnet_diagnostic.CA1822.severity = none
+
+# CA1860: Avoid using 'Enumerable.Any()' extension method
+dotnet_diagnostic.CA1860.severity = none

@@ -3,25 +3,16 @@ using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Domain.Quests
 {
-    public abstract class Quest : Entity
+    public abstract class Quest(string title, string description, int expiration, int requiredNumberOfCharacters, string cityName) : Entity
     {
-        public Quest(string title, string description, int expiration, int requiredNumberOfCharacters, string cityName)
-        {
-            Title = title;
-            Description = description;
-            Expiration = expiration;
-            RequiredNumberOfCharacters = requiredNumberOfCharacters;
-            this.CityName = cityName;
-        }
-
         public List<Character> Characters { get; set; } = new List<Character>();
-        public string Description { get; set; }
-        public int Expiration { get; set; }
+        public string Description { get; set; } = description;
+        public int Expiration { get; set; } = expiration;
         public bool IsActive { get; set; }
-        public int RequiredNumberOfCharacters { get; set; }
+        public int RequiredNumberOfCharacters { get; set; } = requiredNumberOfCharacters;
         public int MaxNumberOfCharacters { get; set; }
-        public string Title { get; set; }
-        public string CityName { get; set; }
+        public string Title { get; set; } = title;
+        public string CityName { get; set; } = cityName;
 
         public void AddCharacter(Character character)
         {
@@ -34,7 +25,7 @@ namespace OrchidCavalry.Domain.Quests
             character.IsDeployed = true;
         }
 
-        public abstract string EvaluateQuest(Game game, IDiceRoller diceRoller);
+        public abstract Task<string?> EvaluateQuestAsync(Game game, IDiceRoller diceRoller);
 
         public void RemoveCharacter(Character character)
         {

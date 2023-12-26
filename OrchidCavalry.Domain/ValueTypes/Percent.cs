@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace OrchidCavalry.Models.ValueTypes
 {
-    public class Percent : ValueObject<byte>
+    public class Percent(byte value) : ValueObject<byte>(value)
     {
-        public Percent(byte value):base(value)
-        {
-        }
-
         public static implicit operator byte(Percent value)
         {
             return value?.Value ?? 0;

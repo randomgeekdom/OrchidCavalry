@@ -44,6 +44,8 @@ namespace OrchidCavalry.Models
         /// </summary>
         public Character? Commander { get; set; }
 
+        public List<Guid> CompletedQuestIds { get; set; } = [];
+
         /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
@@ -103,6 +105,12 @@ namespace OrchidCavalry.Models
         public void RemoveCityByName(string cityName)
         {
             this.Cities.Remove(GetCityByName(cityName));
+        }
+
+        public void RemoveQuest(Quest quest)
+        {
+            this.CompletedQuestIds.Add(quest.Id);
+            this.Quests.Remove(quest);
         }
 
         /// <summary>

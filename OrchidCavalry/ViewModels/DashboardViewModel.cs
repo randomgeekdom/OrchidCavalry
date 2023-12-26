@@ -74,7 +74,7 @@ namespace OrchidCavalry.ViewModels
             }
             else
             {
-                await this.gameplayService.NextTurnAsync(game, this.navigation);
+                await this.gameplayService.NextTurnAsync(game);
             }
 
             this.EnableNextTurn = true;

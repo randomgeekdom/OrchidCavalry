@@ -68,7 +68,7 @@ namespace OrchidCavalry.Domain.Quests
                             returnText.Add(resolution.SuccessText);
                             character.AddTitle(resolution.VictoryTitle);
                             resolution.ExtraAction?.Invoke();
-                            city.OrchidCavalryReputation += resolution.CityReputationModifier;
+                            game.AddToFactionReputation(city.RulingFaction, resolution.CityReputationModifier);
 
                             returnText.Add($"Special kudos to {character.GetNameAndRank()}");
                         }
@@ -105,7 +105,7 @@ namespace OrchidCavalry.Domain.Quests
                 if (!monsterRampageComplete)
                 {
                     var result = await this.EvaluateFailStateAsync(game, diceRoller);
-                    if(result != null)
+                    if (result != null)
                     {
                         returnText.Add(result);
                     }

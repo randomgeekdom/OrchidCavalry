@@ -101,7 +101,7 @@ namespace OrchidCavalry.Models
             characterSkill.IncreaseValue(value);
 
             // If sum of Skills is greater than 35 need to lower a Skill
-            if (Skills.Sum(x => x.Value) > 35)
+            while (Skills.Sum(x => x.Value) > 35)
             {
                 Skills.OrderBy(x => Guid.NewGuid()).First().IncreaseValue(-1);
             }

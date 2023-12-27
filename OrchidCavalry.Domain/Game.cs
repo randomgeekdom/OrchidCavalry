@@ -46,6 +46,8 @@ namespace OrchidCavalry.Models
 
         public List<Guid> CompletedQuestIds { get; set; } = [];
 
+        public Dictionary<string, int> FactionReputation { get; set; } = [];
+
         /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
@@ -61,15 +63,15 @@ namespace OrchidCavalry.Models
             Alerts.Add(new Alert(header, message));
         }
 
+        public void AddCharacter(Character character)
+        {
+            this.Characters.Add(character);
+        }
+
         public void AddNewCharacter(string fullName)
         {
             var splitName = fullName.Split(" ");
             var character = new Character(splitName[0], splitName[1]);
-            this.Characters.Add(character);
-        }
-
-        public void AddCharacter(Character character)
-        {
             this.Characters.Add(character);
         }
 
@@ -130,5 +132,13 @@ namespace OrchidCavalry.Models
         /// </summary>
         /// <returns></returns>
         public Character? ReplaceLeader() => this.Characters.OrderByDescending(x => x.GetRank()).ThenByDescending(x => x.Skills.Sum(y => y.Value.Value)).FirstOrDefault();
+
+        public void AddToFactionReputation(string factionName, int amount)
+        {
+            if (!this.FactionReputation.TryAdd(factionName, amount))
+            {
+                this.FactionReputation[factionName] = amount;
+            }
+        }
     }
 }

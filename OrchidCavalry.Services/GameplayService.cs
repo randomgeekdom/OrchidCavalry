@@ -7,15 +7,13 @@ namespace OrchidCavalry.Services
     /// The Gameplay service is the primary driver of Orchid Cavalary.  It determines all the steps that occur when a turn is taken.
     /// </summary>
     /// <param name="characterService">The character service for generating new characters</param>
-    /// <param name="gameSaver">The service that saves and loads the game from the disk</param>
     /// <param name="diceRoller">Dice roller for skill checks</param>
     /// <param name="questService">The service for generating quests</param>
-    public class GameplayService(ICharacterService characterService, IGameSaver gameSaver, IDiceRoller diceRoller, IQuestService questService) : IGameplayService
+    public class GameplayService(ICharacterService characterService, IDiceRoller diceRoller, IQuestService questService) : IGameplayService
     {
         private readonly ICharacterService characterService = characterService;
 
         private readonly IDiceRoller diceRoller = diceRoller;
-        private readonly IGameSaver gameSaver = gameSaver;
         private readonly IQuestService questService = questService;
         private readonly Random random = new();
 
@@ -41,8 +39,6 @@ namespace OrchidCavalry.Services
 
             await RecruitConscriptsIfNecessaryAsync(game);
             await ReplaceCommanderIfNecessaryAsync(game);
-
-            await this.gameSaver.SaveGameAsync(game);
         }
 
         /// <summary>

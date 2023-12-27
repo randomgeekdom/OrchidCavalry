@@ -4,7 +4,7 @@ namespace OrchidCavalry.Services
 {
     public interface IGameSaver
     {
-        Game LoadGame();
+        Task<Game> LoadGameAsync();
         Task SaveGameAsync(Game obj);
     }
 }

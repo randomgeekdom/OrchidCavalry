@@ -26,7 +26,7 @@ public partial class MainPage : ContentPage
 
     private async void StartButton_Clicked(object sender, EventArgs e)
     {
-        var game = this.gameSaver.LoadGame();
+        var game = await this.gameSaver.LoadGameAsync();
         if (game == null)
         {
             newGame.Closed += () =>

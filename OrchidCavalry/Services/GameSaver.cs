@@ -15,7 +15,7 @@ namespace OrchidCavalry.Services
             };
         }
 
-        public Game LoadGame()
+        public async Task<Game> LoadGameAsync()
         {
             const string fileName = "orchid.sav";
             var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -27,7 +27,7 @@ namespace OrchidCavalry.Services
 
             using (var stream = new StreamReader(filePath))
             {
-                var serializedData = stream.ReadToEndAsync().Result;
+                var serializedData = await stream.ReadToEndAsync();
                 return JsonConvert.DeserializeObject<Game>(serializedData, this.serializerSettings);
             }
         }

@@ -61,10 +61,15 @@ namespace OrchidCavalry.Models
             Alerts.Add(new Alert(header, message));
         }
 
-        public void AddNewCharacter(string bandLeaderName)
+        public void AddNewCharacter(string fullName)
         {
-            var splitName = bandLeaderName.Split(" ");
+            var splitName = fullName.Split(" ");
             var character = new Character(splitName[0], splitName[1]);
+            this.Characters.Add(character);
+        }
+
+        public void AddCharacter(Character character)
+        {
             this.Characters.Add(character);
         }
 

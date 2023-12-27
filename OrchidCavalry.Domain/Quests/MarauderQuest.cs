@@ -73,7 +73,7 @@ namespace OrchidCavalry.Domain.Quests
             [
                 new QuestResolution(Skill.Melee, $"The group of marauders called {BandName} was routed from the city of {CityName} thanks to the Orchid Cavalry.", $"Defender of {CityName}"),
                 new QuestResolution(Skill.Target, $"The group of marauders called {BandName} was routed from the city of {CityName} thanks to the Orchid Cavalry.", $"Defender of {CityName}"),
-                new QuestResolution(Skill.Influence, $"The group of marauders called {BandName} was thwarted.  Their leader, {BandLeaderName} has agreed to join the Orchid Cavalry.", $"Defender of {CityName}", ()=>game.AddNewCharacter(this.BandLeaderName))
+                new QuestResolution(Skill.Influence, $"The group of marauders called {BandName} was thwarted.  Their leader, {BandLeaderName} has agreed to join the Orchid Cavalry.", $"Defender of {CityName}", extraAction:()=>game.AddNewCharacter(this.BandLeaderName))
             ];
         }
     }

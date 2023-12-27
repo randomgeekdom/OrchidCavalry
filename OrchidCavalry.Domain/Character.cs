@@ -111,7 +111,7 @@ namespace OrchidCavalry.Models
 
         public void AddTitle(string title)
         {
-            if (!Titles.Contains(title))
+            if (!string.IsNullOrWhiteSpace(title) && !Titles.Contains(title))
             {
                 Titles.Add(title);
             }

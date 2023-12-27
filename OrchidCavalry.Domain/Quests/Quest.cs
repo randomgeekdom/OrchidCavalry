@@ -30,6 +30,7 @@ namespace OrchidCavalry.Domain.Quests
 
         public async Task<string?> EvaluateQuestAsync(Game game, IDiceRoller diceRoller)
         {
+            var city = game.GetCityByName(CityName);
             var returnText = new List<string>();
             if (Expiration > 0)
             {
@@ -67,6 +68,7 @@ namespace OrchidCavalry.Domain.Quests
                             returnText.Add(resolution.SuccessText);
                             character.AddTitle(resolution.VictoryTitle);
                             resolution.ExtraAction?.Invoke();
+                            city.OrchidCavalryReputation += resolution.CityReputationModifier;
 
                             returnText.Add($"Special kudos to {character.GetNameAndRank()}");
                         }

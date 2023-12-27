@@ -21,6 +21,8 @@ namespace OrchidCavalry.Domain
         /// </summary>
         public string Name { get; set; }
 
+        public int OrchidCavalryReputation { get; set; }
+
         /// <summary>
         /// The current population
         /// </summary>

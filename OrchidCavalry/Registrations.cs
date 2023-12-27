@@ -28,7 +28,6 @@ public static class Registrations
         builder.Services.AddTransient<IAlertService, AlertService>();
         builder.Services.AddTransient<IGameplayService, GameplayService>();
         builder.Services.AddTransient<ICharacterPopupService, CharacterPopupService>();
-        builder.Services.AddTransient<IDiceRoller, DiceRoller>();
         builder.Services.AddTransient<IChoicePopupService, ChoicePopupService>();
 
         // Services
@@ -36,6 +35,10 @@ public static class Registrations
         builder.Services.AddTransient<ICharacterService, CharacterService>();
         builder.Services.AddTransient<ICityService, CityService>();
         builder.Services.AddTransient<IQuestService, QuestService>();
+
+        // Model Services
+        builder.Services.AddTransient<IDiceRoller, DiceRoller>();
+        builder.Services.AddTransient<IUniqueQuestRetriever, UniqueQuestRetriever>();
 
         foreach (var entry in Rollbard.Library.RegistrationDictionary.Get())
         {

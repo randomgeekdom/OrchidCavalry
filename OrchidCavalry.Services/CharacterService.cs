@@ -3,14 +3,9 @@ using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services
 {
-    public class CharacterService : ICharacterService
+    public class CharacterService(INameRoller nameRoller) : ICharacterService
     {
-        private readonly INameRoller nameRoller;
-
-        public CharacterService(INameRoller nameRoller)
-        {
-            this.nameRoller = nameRoller;
-        }
+        private readonly INameRoller nameRoller = nameRoller;
 
         public Character GenerateCharacter()
         {

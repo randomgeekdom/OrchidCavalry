@@ -35,6 +35,11 @@
                             Command="{Binding ShowCharacterPopupCommand}"
                             CommandParameter="{Binding Commander}">
                     </Button>
+                    <Button Text="{Binding QuestButtonText}"
+                            IsEnabled="{Binding AreQuestsAvailable}"
+                         HorizontalOptions="CenterAndExpand"
+                            Command="{Binding ShowQuestPopupCommand}">
+                    </Button>
                 </VerticalStackLayout>
             </Border>
 

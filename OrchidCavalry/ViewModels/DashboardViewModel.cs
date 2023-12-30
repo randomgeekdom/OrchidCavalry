@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using OrchidCavalry.Services;
 using CommunityToolkit.Mvvm.Input;
+using OrchidCavalry.Domain.Quests;
+using System.Runtime.CompilerServices;
 using MvvmHelpers.Commands;
 
 namespace OrchidCavalry.ViewModels
@@ -11,27 +13,35 @@ namespace OrchidCavalry.ViewModels
         private readonly IAlertService alertService;
         private readonly ICharacterPopupService characterPopupService;
         private readonly IChoicePopupService choicePopupService;
-        private readonly IGameSaver gameSaver;
         private readonly IGameplayService gameplayService;
+        private readonly IGameSaver gameSaver;
+        private readonly IQuestPopupService questPopupService;
         private Game game;
         private INavigation navigation;
 
-        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IChoicePopupService choicePopupService, IGameSaver gameSaver)
+        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IQuestPopupService questPopupService, IChoicePopupService choicePopupService, IGameSaver gameSaver)
         {
             this.gameplayService = gameplayService;
             this.alertService = alertService;
             this.characterPopupService = characterPopupService;
+            this.questPopupService = questPopupService;
             this.choicePopupService = choicePopupService;
             this.gameSaver = gameSaver;
             this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
-            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Character>(x => this.ShowCharacterPopup(x));
+            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopup(x));
+            this.ShowQuestPopupCommand = new AsyncRelayCommand(this.ShowQuestPopupAsync);
 
             this.choicePopupService.ChoiceSelected += () => this.NotifyAll();
         }
 
+        public bool AreQuestsAvailable => (game?.Quests?.Count ?? 0) > 0;
+
         public Character Commander => this.Game?.Commander;
+
         public string CommanderName => $"{this.Game?.Commander?.GetName()}";
+
         public bool EnableNextTurn { get; set; } = true;
+
         public ICommand EndTurnCommand { get; set; }
 
         public string EndTurnText
@@ -56,7 +66,11 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
+        public string QuestButtonText => $"Quest Available: {GetAvailableQuests()?.Count()}";
+
         public ICommand ShowCharacterPopupCommand { get; }
+
+        public AsyncRelayCommand ShowQuestPopupCommand { get; }
 
         public void LoadGame(Game game)
         {
@@ -93,6 +107,14 @@ namespace OrchidCavalry.ViewModels
         public async Task ShowCharacterPopup(Character character)
         {
             await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.navigation });
+        }
+
+        private IEnumerable<Quest> GetAvailableQuests() => this.game?.Quests;
+
+        private async Task ShowQuestPopupAsync()
+        {
+            await this.questPopupService.ShowPopupAsync(this.game, GetAvailableQuests().First(), this.navigation);
+            OnPropertyChanged(string.Empty);
         }
     }
 }

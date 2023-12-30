@@ -21,9 +21,9 @@ namespace OrchidCavalry.Models
 
         public string LastName { get; set; }
 
-        public List<CharacterSkill> Skills { get; set; } = new List<CharacterSkill>();
+        public List<CharacterSkill> Skills { get; set; } = [];
 
-        public List<string> Titles { get; set; } = new List<string>();
+        public List<string> Titles { get; set; } = [];
 
         public int Victories { get; set; } = 0;
 

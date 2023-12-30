@@ -10,7 +10,6 @@ namespace OrchidCavalry.Domain.Quests
         public string CityName { get; set; } = cityName;
         public string Description { get; set; } = description;
         public int Expiration { get; set; } = expiration;
-        public bool IsActive { get; set; }
         public int MaxNumberOfCharacters { get; set; } = maxNumberOfCharacters;
         public int RequiredNumberOfCharacters { get; set; } = requiredNumberOfCharacters;
         public string Title { get; set; } = title;

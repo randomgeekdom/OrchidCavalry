@@ -92,15 +92,9 @@ namespace OrchidCavalry.Models
             return this.Cities.Single(x => x.Name == name);
         }
 
-        /// <summary>
-        /// The available quests are the ones that aren't currently being undertaken
-        /// </summary>
-        /// <returns></returns>
-        public List<Quest> GetCurrentAvailableQuests() => Quests.Where(x => !x.IsActive).ToList();
-
-        public int GetNumberOfInactiveQuestRequiredCharacterSlots()
+        public int GetNumberOfAvailableQuestSlots()
         {
-            return this.Quests.Where(x => !x.IsActive).Sum(x => x.RequiredNumberOfCharacters);
+            return this.Quests.Sum(x => x.RequiredNumberOfCharacters);
         }
 
         public int GetNumberOfUndeployedCharacters()

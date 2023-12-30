@@ -19,11 +19,11 @@ namespace OrchidCavalry.Services
 
         public async Task GenerateQuestsAsync(Game game)
         {
-            while (game.GetNumberOfInactiveQuestRequiredCharacterSlots() < game.GetNumberOfUndeployedCharacters())
+            while (game.GetNumberOfAvailableQuestSlots() < game.GetNumberOfUndeployedCharacters())
             {
                 var city = await this.cityService.GetUnthreatenedRandomCityAsync(game);
 
-                if (diceRoller.Roll() > Domain.Enumerations.DieResult.Success)
+                if (diceRoller.Roll() >= Domain.Enumerations.DieResult.Success)
                 {
                     var uniqueQuest = await this.uniqueQuestRetriever.GetUniqueQuestAsync(game, city);
                     if (uniqueQuest != null)
@@ -32,12 +32,12 @@ namespace OrchidCavalry.Services
                     }
                 }
 
-                if (diceRoller.Roll() > Domain.Enumerations.DieResult.Success)
+                if (diceRoller.Roll() >= Domain.Enumerations.DieResult.Success)
                 {
                     game.AddQuest(MonsterQuest.Create(this.monsterRoller.Get(), city.Name));
                 }
 
-                if (diceRoller.Roll() > Domain.Enumerations.DieResult.Success)
+                if (diceRoller.Roll() >= Domain.Enumerations.DieResult.Success)
                 {
                     game.AddQuest(MarauderQuest.Create(this.factionRoller.Get(), this.nameRoller.Get(), city.Name));
                 }

@@ -105,9 +105,6 @@ namespace OrchidCavalry.Models
         public void KillCharacter(Character character)
         {
             this.Characters.Remove(character);
-
-            var activeQuest = this.Quests.FirstOrDefault(x => x.Characters.Contains(character));
-            activeQuest?.RemoveCharacter(character);
         }
 
         public void RemoveCityByName(string cityName)

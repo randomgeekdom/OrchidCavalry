@@ -4,26 +4,37 @@ using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Domain.Quests
 {
-    public abstract class Quest(string title, string description, int expiration, int requiredNumberOfCharacters, int maxNumberOfCharacters, string cityName) : Entity
+    public abstract class Quest : Entity
     {
-        public List<Character> Characters { get; set; } = [];
-        public string CityName { get; set; } = cityName;
-        public string Description { get; set; } = description;
-        public int Expiration { get; set; } = expiration;
-        public int MaxNumberOfCharacters { get; set; } = maxNumberOfCharacters;
-        public int RequiredNumberOfCharacters { get; set; } = requiredNumberOfCharacters;
-        public string Title { get; set; } = title;
-
-        public void AddCharacter(Character character)
+        public Quest(string title, string description, int expiration, int requiredNumberOfCharacters, int maxNumberOfCharacters, string cityName)
         {
-            if (Characters.Count >= RequiredNumberOfCharacters)
+            this.CityName = cityName;
+            this.Description = description;
+            this.Expiration = expiration;
+
+            var optionalCharacters = maxNumberOfCharacters - requiredNumberOfCharacters;
+
+            for (int i = 0; i < requiredNumberOfCharacters; i++)
             {
-                return;
+                this.CharacterSlots.Add(new QuestCharacterSlot(true));
             }
 
-            Characters.Add(character);
-            character.IsDeployed = true;
+            for (int i = 0; i < optionalCharacters; i++)
+            {
+                this.CharacterSlots.Add(new QuestCharacterSlot(false));
+            }
+
+            this.Title = title;
         }
+
+        public List<QuestCharacterSlot> CharacterSlots { get; set; } = [];
+        public string CityName { get; set; }
+        public string Description { get; set; }
+        public int Expiration { get; set; }
+        public IEnumerable<QuestCharacterSlot> FilledCharacterSlots => CharacterSlots.Where(x => x.Character != null);
+        public int MaxNumberOfCharacters => this.CharacterSlots.Count;
+        public int RequiredNumberOfCharacters => this.CharacterSlots.Where(x => x.IsMandatory).Count();
+        public string Title { get; set; }
 
         public abstract Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller);
 
@@ -40,10 +51,12 @@ namespace OrchidCavalry.Domain.Quests
             {
                 var monsterRampageComplete = false;
 
-                while (!monsterRampageComplete && this.Characters.Any())
+                while (!monsterRampageComplete && this.FilledCharacterSlots.Any())
                 {
-                    foreach (var character in this.Characters.OrderBy(x => x.GetRank()).ToArray())
+                    foreach (var characterSlot in this.FilledCharacterSlots.OrderBy(x => x.Character?.GetRank()).ToArray())
                     {
+                        var character = characterSlot.Character!;
+
                         var questResolutions = this.GetQuestResolutions(game);
 
                         var highestSkill = character.Skills
@@ -77,7 +90,7 @@ namespace OrchidCavalry.Domain.Quests
                             game.KillCharacter(character);
 
                             returnText.Add($"{character.GetNameAndRank()} has been killed in action.");
-                            this.Characters.Remove(character);
+                            characterSlot.UnassignCharacter();
                         }
                         else
                         {
@@ -115,11 +128,5 @@ namespace OrchidCavalry.Domain.Quests
         }
 
         public abstract List<QuestResolution> GetQuestResolutions(Game game);
-
-        public void RemoveCharacter(Character character)
-        {
-            Characters.Remove(character);
-            character.IsDeployed = false;
-        }
     }
 }

@@ -91,6 +91,9 @@
 	  <MauiXaml Update="Views\CharacterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\FactionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\NewGame.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

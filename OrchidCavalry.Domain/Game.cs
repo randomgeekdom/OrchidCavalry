@@ -94,7 +94,7 @@ namespace OrchidCavalry.Models
 
         public int GetNumberOfAvailableQuestSlots()
         {
-            return this.Quests.Sum(x => x.RequiredNumberOfCharacters);
+            return this.Quests.Sum(x => x.GetRequiredNumberOfCharacters());
         }
 
         public int GetNumberOfUndeployedCharacters()

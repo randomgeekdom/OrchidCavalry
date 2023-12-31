@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using OrchidCavalry.Domain.Quests;
 using System.Runtime.CompilerServices;
 using MvvmHelpers.Commands;
+using OrchidCavalry.Views;
 
 namespace OrchidCavalry.ViewModels
 {
@@ -15,11 +16,12 @@ namespace OrchidCavalry.ViewModels
         private readonly IChoicePopupService choicePopupService;
         private readonly IGameplayService gameplayService;
         private readonly IGameSaver gameSaver;
+        private readonly IGameViewPopupService gameViewPopupService;
         private readonly IQuestPopupService questPopupService;
         private Game game;
         private INavigation navigation;
 
-        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IQuestPopupService questPopupService, IChoicePopupService choicePopupService, IGameSaver gameSaver)
+        public DashboardViewModel(IGameplayService gameplayService, IAlertService alertService, ICharacterPopupService characterPopupService, IQuestPopupService questPopupService, IChoicePopupService choicePopupService, IGameSaver gameSaver, IGameViewPopupService gameViewPopupService)
         {
             this.gameplayService = gameplayService;
             this.alertService = alertService;
@@ -27,9 +29,11 @@ namespace OrchidCavalry.ViewModels
             this.questPopupService = questPopupService;
             this.choicePopupService = choicePopupService;
             this.gameSaver = gameSaver;
+            this.gameViewPopupService = gameViewPopupService;
             this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
-            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopup(x));
+            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopupAsync(x));
             this.ShowQuestPopupCommand = new AsyncRelayCommand(this.ShowQuestPopupAsync);
+            this.ShowFactionPopupCommand = new AsyncRelayCommand(()=>gameViewPopupService.ShowPopupAsync<FactionView>(this.game, this.navigation));
 
             this.choicePopupService.ChoiceSelected += () => this.NotifyAll();
         }
@@ -71,6 +75,7 @@ namespace OrchidCavalry.ViewModels
         public ICommand ShowCharacterPopupCommand { get; }
 
         public AsyncRelayCommand ShowQuestPopupCommand { get; }
+        public AsyncRelayCommand ShowFactionPopupCommand { get; }
 
         public void LoadGame(Game game)
         {
@@ -104,7 +109,7 @@ namespace OrchidCavalry.ViewModels
             this.navigation = navigation;
         }
 
-        public async Task ShowCharacterPopup(Character character)
+        public async Task ShowCharacterPopupAsync(Character character)
         {
             await this.characterPopupService.ShowCharacterAsync(new CharacterPopupModel { Character = character, Navigation = this.navigation });
         }

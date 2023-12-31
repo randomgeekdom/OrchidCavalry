@@ -31,9 +31,7 @@ namespace OrchidCavalry.Domain.Quests
         public string CityName { get; set; }
         public string Description { get; set; }
         public int Expiration { get; set; }
-        public IEnumerable<QuestCharacterSlot> FilledCharacterSlots => CharacterSlots.Where(x => x.Character != null);
-        public int MaxNumberOfCharacters => this.CharacterSlots.Count;
-        public int RequiredNumberOfCharacters => this.CharacterSlots.Where(x => x.IsMandatory).Count();
+
         public string Title { get; set; }
 
         public abstract Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller);
@@ -51,9 +49,9 @@ namespace OrchidCavalry.Domain.Quests
             {
                 var monsterRampageComplete = false;
 
-                while (!monsterRampageComplete && this.FilledCharacterSlots.Any())
+                while (!monsterRampageComplete && this.GetFilledCharacterSlots().Any())
                 {
-                    foreach (var characterSlot in this.FilledCharacterSlots.OrderBy(x => x.Character?.GetRank()).ToArray())
+                    foreach (var characterSlot in this.GetFilledCharacterSlots().OrderBy(x => x.Character?.GetRank()).ToArray())
                     {
                         var character = characterSlot.Character!;
 
@@ -127,7 +125,12 @@ namespace OrchidCavalry.Domain.Quests
             return string.Join(" ", returnText);
         }
 
+        public IEnumerable<QuestCharacterSlot> GetFilledCharacterSlots() => CharacterSlots.Where(x => x.Character != null);
+
+        public int GetMaxNumberOfCharacters() => this.CharacterSlots.Count;
+
         public abstract List<QuestResolution> GetQuestResolutions(Game game);
 
+        public int GetRequiredNumberOfCharacters() => this.CharacterSlots.Where(x => x.IsMandatory).Count();
     }
 }

@@ -40,6 +40,10 @@
                          HorizontalOptions="CenterAndExpand"
                             Command="{Binding ShowQuestPopupCommand}">
                     </Button>
+                    <Button Text="Factions"
+                         HorizontalOptions="CenterAndExpand"
+                            Command="{Binding ShowFactionPopupCommand}">
+                    </Button>
                 </VerticalStackLayout>
             </Border>
 

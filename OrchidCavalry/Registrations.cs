@@ -31,6 +31,8 @@ public static class Registrations
         builder.Services.AddTransient<ICharacterPopupService, CharacterPopupService>();
         builder.Services.AddTransient<IChoicePopupService, ChoicePopupService>();
         builder.Services.AddTransient<IQuestPopupService, QuestPopupService>();
+        builder.Services.AddTransient<IGameViewPopupService, GameViewPopupService>();
+
 
         // Services
         builder.Services.AddTransient<IGameSaver, GameSaver>();

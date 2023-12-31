@@ -15,7 +15,7 @@ namespace OrchidCavalry.Services
 
         public Action ChoiceSelected { get => choiceSelected; set => choiceSelected = value; }
 
-        public async Task ShowAsync(Choice choice, Action<int> resultAction, INavigation navigation)
+        public async Task ShowAsync(Choice choice, Action<Guid> resultAction, INavigation navigation)
         {
             choiceView.LoadViewModel(choice, async (x) =>
             {

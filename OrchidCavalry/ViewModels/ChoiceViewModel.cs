@@ -5,7 +5,7 @@ namespace OrchidCavalry.ViewModels
 {
     public class ChoiceViewModel : ViewModelBase
     {
-        public ChoiceViewModel(Choice choice, Action<int> resultAction)
+        public ChoiceViewModel(Choice choice, Action<Guid> resultAction)
         {
             this.Choice = choice;
             this.ResultAction = resultAction;
@@ -14,7 +14,7 @@ namespace OrchidCavalry.ViewModels
 
         public Choice Choice { get; }
         public ObservableCollection<ChoiceOptionViewModel> Options { get; }
-        public Action<int> ResultAction { get; }
+        public Action<Guid> ResultAction { get; }
         public Microsoft.Maui.Controls.Command SelectCommand => new(() => ResultAction(SelectedOption.Id));
         public ChoiceOptionViewModel SelectedOption { get; set; }
         public string Text => this.Choice.Value;

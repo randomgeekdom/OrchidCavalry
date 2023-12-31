@@ -28,8 +28,11 @@ namespace OrchidCavalry.Domain.Quests
         }
 
         public List<QuestCharacterSlot> CharacterSlots { get; set; } = [];
+
         public string CityName { get; set; }
+
         public string Description { get; set; }
+
         public int Expiration { get; set; }
 
         public string Title { get; set; }
@@ -132,5 +135,10 @@ namespace OrchidCavalry.Domain.Quests
         public abstract List<QuestResolution> GetQuestResolutions(Game game);
 
         public int GetRequiredNumberOfCharacters() => this.CharacterSlots.Where(x => x.IsMandatory).Count();
+
+        public override string ToString()
+        {
+            return this.Title;
+        }
     }
 }

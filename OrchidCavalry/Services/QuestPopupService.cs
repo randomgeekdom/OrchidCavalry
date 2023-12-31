@@ -13,12 +13,13 @@ namespace OrchidCavalry.Services
     /// <summary>
     /// Creates a modal that shows the user a Character's attributes
     /// </summary>
-    public class QuestPopupService(QuestView questView) : IQuestPopupService
+    public class QuestPopupService(QuestView questView, IChoicePopupService choicePopupService) : IQuestPopupService
     {
         /// <summary>
         /// The view that shows the character's characteristics
         /// </summary>
         private readonly QuestView questView = questView;
+        private readonly IChoicePopupService choicePopupService = choicePopupService;
 
         /// <summary>
         /// The method to show the popup
@@ -27,7 +28,7 @@ namespace OrchidCavalry.Services
         /// <returns>an awaitable task</returns>
         public async Task ShowPopupAsync(Game game, Quest quest, INavigation navigation)
         {
-            questView.LoadViewModel(quest, game, null);
+            questView.LoadViewModel(quest, game, this.choicePopupService);
             await navigation.PushAsync(questView, true);
         }
     }

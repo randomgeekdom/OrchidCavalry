@@ -14,6 +14,11 @@ namespace OrchidCavalry.Domain.Quests
             character.IsDeployed = true;
         }
 
+        public override string ToString()
+        {
+            return this.Character?.ToString() ?? "None Selected";
+        }
+
         public void UnassignCharacter()
         {
             if (this.Character != null)

@@ -3,7 +3,6 @@ using OrchidCavalry.Domain.Quests;
 
 namespace OrchidCavalry.Models
 {
-    // All the code in this file is included in all platforms.
     public class Game : Entity
     {
         /// <summary>
@@ -15,7 +14,7 @@ namespace OrchidCavalry.Models
         /// <summary>
         /// Constructor used for beginning of the game
         /// </summary>
-        /// <param name="commander"></param>
+        /// <param name="commander">Who the orchid commander is</param>
         public Game(Character commander)
         {
             Commander = commander;

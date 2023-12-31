@@ -9,11 +9,11 @@ namespace OrchidCavalry.Domain
 {
     public class Choice : ValueObject<string>
     {
-        public Choice(string value, Dictionary<int, string> options): base(value)
+        public Choice(string value, Dictionary<Guid, string> options): base(value)
         {
             this.Options = options;
         }
 
-        public Dictionary<int, string> Options { get; } = new Dictionary<int, string>();
+        public Dictionary<Guid, string> Options { get; } = [];
     }
 }

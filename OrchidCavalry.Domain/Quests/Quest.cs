@@ -128,5 +128,6 @@ namespace OrchidCavalry.Domain.Quests
         }
 
         public abstract List<QuestResolution> GetQuestResolutions(Game game);
+
     }
 }

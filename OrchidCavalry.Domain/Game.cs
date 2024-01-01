@@ -45,12 +45,12 @@ namespace OrchidCavalry.Models
 
         public List<Guid> CompletedQuestIds { get; set; } = [];
 
-        public Dictionary<string, int> FactionReputation { get; set; } = [];
-
         /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
         public List<Quest> Quests { get; set; } = [];
+
+        public List<Faction> Factions { get; set; } = [];
 
         /// <summary>
         /// Add an alert to display to the user before they take their next turn
@@ -74,9 +74,9 @@ namespace OrchidCavalry.Models
             this.Characters.Add(character);
         }
 
-        public City AddNewCity(string name, string rulingFaction)
+        public City AddNewCity(string name, Guid rulingFactionId)
         {
-            var city = new City(name, rulingFaction);
+            var city = new City(name, rulingFactionId);
             this.Cities.Add(city);
             return city;
         }
@@ -123,12 +123,20 @@ namespace OrchidCavalry.Models
         /// <returns></returns>
         public Character? ReplaceLeader() => this.Characters.OrderByDescending(x => x.GetRank()).ThenByDescending(x => x.Skills.Sum(y => y.Value.Value)).FirstOrDefault();
 
-        public void AddToFactionReputation(string factionName, int amount)
+        public void AddToFactionReputation(Faction faction, int amount)
         {
-            if (!this.FactionReputation.TryAdd(factionName, amount))
-            {
-                this.FactionReputation[factionName] = amount;
-            }
+            faction.OrchidCavalryReputation += amount;
+        }
+
+        public void AddToFactionReputation(Guid factionId, int amount)
+        {
+            var faction = this.Factions.First(x=>x.Id == factionId);
+            this.AddToFactionReputation(faction, amount);
+        }
+
+        public Guid GetFactionByName(string bandName)
+        {
+            return this.Factions.First(x => x.Name == bandName).Id;
         }
     }
 }

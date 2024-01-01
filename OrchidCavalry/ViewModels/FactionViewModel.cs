@@ -1,20 +1,16 @@
-﻿using OrchidCavalry.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OrchidCavalry.Domain;
+using OrchidCavalry.Models;
 
 namespace OrchidCavalry.ViewModels
 {
     public class FactionViewModel(Game game) : ViewModelBase
     {
         private readonly Game game = game;
-        private string selectedFaction;
+        private Faction selectedFaction;
 
-        public List<string> Factions => game.Cities.Select(x => x.RulingFaction).OrderBy(x => x).Distinct().ToList();
+        public List<Faction> Factions => [.. game.Factions];
 
-        public string SelectedFaction
+        public Faction SelectedFaction
         {
             get => selectedFaction;
             set
@@ -24,13 +20,6 @@ namespace OrchidCavalry.ViewModels
             }
         }
 
-        public int SelectedFactionReputation
-        {
-            get
-            {
-                game.FactionReputation.TryGetValue(SelectedFaction ?? "", out var reputation);
-                return reputation;
-            }
-        }
+        public int SelectedFactionReputation => this.SelectedFaction?.OrchidCavalryReputation ?? 0;
     }
 }

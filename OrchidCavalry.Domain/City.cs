@@ -9,10 +9,10 @@ namespace OrchidCavalry.Domain
     {
         private readonly Random random = new();
 
-        public City(string name, string rulingFaction)
+        public City(string name, Guid rulingFactionId)
         {
             this.Name = name;
-            this.RulingFaction = rulingFaction;
+            this.RulingFactionId = rulingFactionId;
             this.Population = this.random.Next(200, 1000);
         }
 
@@ -29,6 +29,6 @@ namespace OrchidCavalry.Domain
         /// <summary>
         /// The Ruling
         /// </summary>
-        public string RulingFaction { get; set; }
+        public Guid RulingFactionId { get; set; }
     }
 }

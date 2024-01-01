@@ -46,7 +46,7 @@ namespace OrchidCavalry.Domain.Quests
                     if (result == DieResult.Catastrophe)
                     {
                         returnText.Add($"The band of marauders known as {BandName} have taken control of the city of {CityName}.");
-                        game.GetCityByName(CityName).RulingFaction = BandName;
+                        game.GetCityByName(CityName).RulingFactionId = game.GetFactionByName(BandName);
                         break;
                     }
 

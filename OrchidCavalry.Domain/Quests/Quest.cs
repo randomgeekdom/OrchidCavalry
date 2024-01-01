@@ -81,7 +81,7 @@ namespace OrchidCavalry.Domain.Quests
                             returnText.Add(resolution.SuccessText);
                             character.AddTitle(resolution.VictoryTitle);
                             resolution.ExtraAction?.Invoke();
-                            game.AddToFactionReputation(city.RulingFaction, resolution.CityReputationModifier);
+                            game.AddToFactionReputation(city.RulingFactionId, resolution.CityReputationModifier);
 
                             returnText.Add($"Special kudos to {character.GetNameAndRank()}");
                         }

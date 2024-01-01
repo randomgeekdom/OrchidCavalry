@@ -21,12 +21,13 @@ namespace OrchidCavalry.Services
                 var randomIndex = this.random.Next(cityCount + 2);
                 if (randomIndex >= cityCount - 1)
                 {
-                    var factions = cities.Select(x => x.RulingFaction).Distinct().ToList();
+                    var factions = game.Factions;
                     var factionCount = factions.Count;
                     var factionIndex = this.random.Next(factionCount + 2);
 
-                    var faction = factionIndex >= factionCount - 1 ? factionRoller.Get() : factions[factionIndex];
-                    return game.AddNewCity(this.nameRoller.Get(), faction);
+                    var faction = factionIndex >= factionCount - 1 ? new Faction(factionRoller.Get(), 0) : factions[factionIndex];
+
+                    return game.AddNewCity(this.nameRoller.Get(), faction.Id);
                 }
                 else
                 {

@@ -20,11 +20,18 @@
             <Button Text="Units" MinimumWidthRequest="100" />
         </FlexLayout>-->
 
-            <Button
-                    Command="{Binding EndTurnCommand}"
-                    BorderWidth="0"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="{Binding EndTurnText}"/>
+            <FlexLayout Wrap="Wrap">
+
+                <Button Text="{Binding QuestButtonText}"
+                            IsEnabled="{Binding AreQuestsAvailable}"
+                         HorizontalOptions="CenterAndExpand"
+                            Command="{Binding ShowQuestPopupCommand}">
+                </Button>
+                <Button Text="Factions"
+                         HorizontalOptions="CenterAndExpand"
+                            Command="{Binding ShowFactionPopupCommand}">
+                </Button>
+            </FlexLayout>
 
             <Border Padding="10">
                 <VerticalStackLayout Grid.Column="1" Grid.Row="1">
@@ -35,42 +42,15 @@
                             Command="{Binding ShowCharacterPopupCommand}"
                             CommandParameter="{Binding Commander}">
                     </Button>
-                    <Button Text="{Binding QuestButtonText}"
-                            IsEnabled="{Binding AreQuestsAvailable}"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowQuestPopupCommand}">
-                    </Button>
-                    <Button Text="Factions"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowFactionPopupCommand}">
-                    </Button>
                 </VerticalStackLayout>
             </Border>
 
-            <!--<Button
-    BorderWidth="0"
-    Clicked="Button_Clicked"
-    HorizontalOptions="Start"
-    Text="Check Units" Grid.Row="2" />-->
-
-            <!--<ListView HorizontalOptions="StartAndExpand" Grid.Row="1" ItemsSource="{Binding Council}" VerticalScrollBarVisibility="Always" VerticalOptions="StartAndExpand" Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <VerticalStackLayout x:DataType="vm:CouncilMemberViewModel">
-                            <Label Text="{Binding Title}" />
-                            <Button
-                                BackgroundColor="FloralWhite"
-                                BorderColor="DarkGrey"
-                                HeightRequest="150"
-                                Text="{Binding Name}"
-                                TextColor="Firebrick"
-                                WidthRequest="150" />
-                        </VerticalStackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
+            <Button
+                    Command="{Binding EndTurnCommand}"
+                    BorderWidth="0"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding EndTurnText}"/>
+         
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

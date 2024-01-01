@@ -4,8 +4,12 @@
              x:Class="OrchidCavalry.Views.QuestView"
              xmlns:vm ="clr-namespace:OrchidCavalry.ViewModels"
              xmlns:quests="clr-namespace:OrchidCavalry.Domain.Quests;assembly=OrchidCavalry.Domain"
-             Title="{Binding Quest}">
+    BackgroundColor="Wheat"
+             Title="Current Quests">
     <VerticalStackLayout>
+        
+        <!--<Label Text="{Binding Quest.Title}"/>-->
+        <Picker ItemsSource="{Binding Quests}" SelectedItem="{Binding Quest}"/>
         <Label
             Text="{Binding Quest.Description}"
             VerticalOptions="Center"

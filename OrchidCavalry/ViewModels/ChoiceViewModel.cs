@@ -13,6 +13,7 @@ namespace OrchidCavalry.ViewModels
         }
 
         public Choice Choice { get; }
+        public bool EnableSelect => this.Choice != null;
         public ObservableCollection<ChoiceOptionViewModel> Options { get; }
         public Action<Guid> ResultAction { get; }
         public Microsoft.Maui.Controls.Command SelectCommand => new(() => ResultAction(SelectedOption.Id));

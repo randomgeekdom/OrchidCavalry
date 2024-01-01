@@ -12,6 +12,7 @@ namespace OrchidCavalry.ViewModels
     {
         private readonly IChoicePopupService choicePopupService;
         private readonly INavigation navigation;
+        private Quest quest;
 
         public QuestViewModel(Quest quest, Game game, IChoicePopupService choicePopupService, INavigation navigation)
         {
@@ -23,16 +24,22 @@ namespace OrchidCavalry.ViewModels
             this.ChooseCharacterCommand = new AsyncRelayCommand<QuestCharacterSlot>(this.ChooseCharacterAsync);
         }
 
-        public ObservableCollection<QuestCharacterSlot> CharacterSlots => new(this.Quest?.CharacterSlots ?? []);
+        public IEnumerable<QuestCharacterSlot> CharacterSlots => this.Quest?.CharacterSlots ?? [];
 
         public ICommand ChooseCharacterCommand { get; }
 
         public Game Game { get; }
 
-        public ObservableCollection<ChoiceOptionViewModel> Options { get; }
+        public Quest Quest
+        {
+            get => quest; set
+            {
+                quest = value;
+                this.OnPropertyChanged(string.Empty);
+            }
+        }
 
-        public Quest Quest { get; }
-
+        public IEnumerable<Quest> Quests => this.Game?.Quests?.OrderBy(x => x.Title).ToList() ?? [];
         public ChoiceOptionViewModel SelectedOption { get; set; }
 
         public string Text => this.Quest.Description;

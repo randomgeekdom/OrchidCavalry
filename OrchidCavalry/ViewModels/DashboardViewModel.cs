@@ -34,8 +34,6 @@ namespace OrchidCavalry.ViewModels
             this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopupAsync(x));
             this.ShowQuestPopupCommand = new AsyncRelayCommand(this.ShowQuestPopupAsync);
             this.ShowFactionPopupCommand = new AsyncRelayCommand(()=>gameViewPopupService.ShowPopupAsync<FactionView>(this.game, this.navigation));
-
-            this.choicePopupService.ChoiceSelected += () => this.NotifyAll();
         }
 
         public bool AreQuestsAvailable => (game?.Quests?.Count ?? 0) > 0;
@@ -118,7 +116,7 @@ namespace OrchidCavalry.ViewModels
 
         private async Task ShowQuestPopupAsync()
         {
-            await this.questPopupService.ShowPopupAsync(this.game, GetAvailableQuests().First(), this.navigation);
+            await this.questPopupService.ShowPopupAsync(this.game, this.navigation);
             OnPropertyChanged(string.Empty);
         }
     }

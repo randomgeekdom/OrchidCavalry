@@ -26,9 +26,9 @@ namespace OrchidCavalry.Services
         /// </summary>
         /// <param name="model">The model object that contains the characters</param>
         /// <returns>an awaitable task</returns>
-        public async Task ShowPopupAsync(Game game, Quest quest, INavigation navigation)
+        public async Task ShowPopupAsync(Game game, INavigation navigation)
         {
-            questView.LoadViewModel(quest, game, this.choicePopupService);
+            questView.LoadViewModel(game, this.choicePopupService);
             await navigation.PushAsync(questView, true);
         }
     }

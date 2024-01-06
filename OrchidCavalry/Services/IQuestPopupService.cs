@@ -5,6 +5,6 @@ namespace OrchidCavalry.Services
 {
     public interface IQuestPopupService
     {
-        Task ShowPopupAsync(Game game, Quest quest, INavigation navigation);
+        Task ShowPopupAsync(Game game, INavigation navigation);
     }
 }

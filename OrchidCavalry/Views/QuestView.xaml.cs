@@ -12,8 +12,8 @@ public partial class QuestView : ContentPage
 		InitializeComponent();
     }
 
-    internal void LoadViewModel(Quest choice, Game game, IChoicePopupService choicePopupService)
+    internal void LoadViewModel(Game game, IChoicePopupService choicePopupService)
     {
-        this.BindingContext = new QuestViewModel(choice, game, choicePopupService, this.Navigation);
+        this.BindingContext = new QuestViewModel(game, choicePopupService, this.Navigation);
     }
 }

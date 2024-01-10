@@ -8,7 +8,7 @@ namespace OrchidCavalry.ViewModels
         private readonly Game game = game;
         private Faction selectedFaction;
 
-        public List<Faction> Factions => [.. game.Factions];
+        public List<Faction> Factions => [.. game.Factions.OrderBy(x => x.Name)];
 
         public Faction SelectedFaction
         {

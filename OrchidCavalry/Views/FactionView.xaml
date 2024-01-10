@@ -4,11 +4,21 @@
              x:Class="OrchidCavalry.Views.FactionView"
     BackgroundColor="Wheat"
              Title="Factions">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-    </VerticalStackLayout>
+    <Grid>
+        <ListView Margin="20" ItemsSource="{Binding Factions}" VerticalScrollBarVisibility="Always">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontSize="Large"/>
+                            <HorizontalStackLayout>
+                                <Label Text="Reputation with Orchid Cavalry:"/>
+                                <Label Text="{Binding OrchidCavalryReputation}"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

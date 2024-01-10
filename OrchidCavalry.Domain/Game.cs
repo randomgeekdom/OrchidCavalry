@@ -45,12 +45,12 @@ namespace OrchidCavalry.Models
 
         public List<Guid> CompletedQuestIds { get; set; } = [];
 
+        public List<Faction> Factions { get; set; } = [];
+
         /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
         public List<Quest> Quests { get; set; } = [];
-
-        public List<Faction> Factions { get; set; } = [];
 
         /// <summary>
         /// Add an alert to display to the user before they take their next turn
@@ -65,6 +65,13 @@ namespace OrchidCavalry.Models
         public void AddCharacter(Character character)
         {
             this.Characters.Add(character);
+        }
+
+        public Faction AddFaction(string factionName)
+        {
+            var faction = new Faction(factionName, 0);
+            this.Factions.Add(faction);
+            return faction;
         }
 
         public void AddNewCharacter(string fullName)
@@ -86,9 +93,25 @@ namespace OrchidCavalry.Models
             this.Quests.Add(quest);
         }
 
+        public void AddToFactionReputation(Faction faction, int amount)
+        {
+            faction.OrchidCavalryReputation += amount;
+        }
+
+        public void AddToFactionReputation(Guid factionId, int amount)
+        {
+            var faction = this.Factions.First(x => x.Id == factionId);
+            this.AddToFactionReputation(faction, amount);
+        }
+
         public City GetCityByName(string name)
         {
             return this.Cities.Single(x => x.Name == name);
+        }
+
+        public Guid GetFactionByName(string bandName)
+        {
+            return this.Factions.First(x => x.Name == bandName).Id;
         }
 
         public int GetNumberOfAvailableQuestSlots()
@@ -122,21 +145,5 @@ namespace OrchidCavalry.Models
         /// </summary>
         /// <returns></returns>
         public Character? ReplaceLeader() => this.Characters.OrderByDescending(x => x.GetRank()).ThenByDescending(x => x.Skills.Sum(y => y.Value.Value)).FirstOrDefault();
-
-        public void AddToFactionReputation(Faction faction, int amount)
-        {
-            faction.OrchidCavalryReputation += amount;
-        }
-
-        public void AddToFactionReputation(Guid factionId, int amount)
-        {
-            var faction = this.Factions.First(x=>x.Id == factionId);
-            this.AddToFactionReputation(faction, amount);
-        }
-
-        public Guid GetFactionByName(string bandName)
-        {
-            return this.Factions.First(x => x.Name == bandName).Id;
-        }
     }
 }

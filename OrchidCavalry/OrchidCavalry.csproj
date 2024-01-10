@@ -76,6 +76,9 @@
 	  <Compile Update="Views\ChoiceView.xaml.cs">
 	    <DependentUpon>ChoiceView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\CitiesView.xaml.cs">
+	    <DependentUpon>CitiesView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -92,6 +95,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\FactionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CitiesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NewGame.xaml">

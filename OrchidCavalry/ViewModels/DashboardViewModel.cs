@@ -33,7 +33,9 @@ namespace OrchidCavalry.ViewModels
             this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
             this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopupAsync(x));
             this.ShowQuestPopupCommand = new AsyncRelayCommand(this.ShowQuestPopupAsync);
-            this.ShowFactionPopupCommand = new AsyncRelayCommand(()=>gameViewPopupService.ShowPopupAsync<FactionView>(this.game, this.navigation));
+            this.ShowFactionPopupCommand = new AsyncRelayCommand(() => gameViewPopupService.ShowPopupAsync<FactionView>(this.game, this.navigation));
+            this.ShowCitiesPopupCommand = new AsyncRelayCommand(() => gameViewPopupService.ShowPopupAsync<CitiesView>(this.game, this.navigation));
+
         }
 
         public bool AreQuestsAvailable => (game?.Quests?.Count ?? 0) > 0;
@@ -74,6 +76,7 @@ namespace OrchidCavalry.ViewModels
 
         public AsyncRelayCommand ShowQuestPopupCommand { get; }
         public AsyncRelayCommand ShowFactionPopupCommand { get; }
+        public AsyncRelayCommand ShowCitiesPopupCommand { get; }
 
         public void LoadGame(Game game)
         {

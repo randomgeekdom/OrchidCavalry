@@ -77,7 +77,7 @@ namespace OrchidCavalry.Models
         public void AddNewCharacter(string fullName)
         {
             var splitName = fullName.Split(" ");
-            var character = new Character(splitName[0], splitName[1]);
+            var character = new Character(splitName[0], splitName.Length > 1 ? splitName[1] : "");
             this.Characters.Add(character);
         }
 

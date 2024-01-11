@@ -39,7 +39,8 @@ namespace OrchidCavalry.Services
 
                 if (diceRoller.Roll() >= Domain.Enumerations.DieResult.Success)
                 {
-                    game.AddQuest(MarauderQuest.Create(this.factionRoller.Get(), this.nameRoller.Get(), city.Name));
+                    game.AddQuest(MarauderQuest.Create(this.factionRoller.Get(),
+                        $"{this.nameRoller.GetFirstName()} {this.nameRoller.GetLastName()}", city.Name));
                 }
             }
         }

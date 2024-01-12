@@ -28,13 +28,10 @@ namespace OrchidCavalry.Domain.Quests
         }
 
         public List<QuestCharacterSlot> CharacterSlots { get; set; } = [];
-
         public string CityName { get; set; }
-
         public string Description { get; set; }
-
         public int Expiration { get; set; }
-
+        public List<Loot> Loot { get; set; } = [];
         public string Title { get; set; }
 
         public abstract Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller);

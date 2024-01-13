@@ -9,12 +9,15 @@ namespace OrchidCavalry.Domain
     {
         private readonly Random random = new();
 
-        public City(string name, Guid rulingFactionId)
+        public City(string name, Guid rulingFactionId, string biome)
         {
             this.Name = name;
             this.RulingFactionId = rulingFactionId;
             this.Population = this.random.Next(200, 1000);
+            this.Biome = biome;
         }
+
+        public string Biome { get; set; }
 
         /// <summary>
         /// The Name of the municipality

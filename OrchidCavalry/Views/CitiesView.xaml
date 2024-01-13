@@ -10,10 +10,14 @@
                 <DataTemplate>
                     <ViewCell>
                         <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontSize="Large"/>
+                            <Label Text="{Binding Name}" FontSize="Large" />
                             <HorizontalStackLayout>
-                                <Label Text="Population:"/>
-                                <Label Text="{Binding Population}"/>
+                                <Label Text="Population:" />
+                                <Label Text="{Binding Population}" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Label Text="Biome:" />
+                                <Label Text="{Binding Biome}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </ViewCell>

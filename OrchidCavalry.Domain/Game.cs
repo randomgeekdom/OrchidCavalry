@@ -81,9 +81,9 @@ namespace OrchidCavalry.Models
             this.Characters.Add(character);
         }
 
-        public City AddNewCity(string name, Guid rulingFactionId)
+        public City AddNewCity(string name, Guid rulingFactionId, string biome)
         {
-            var city = new City(name, rulingFactionId);
+            var city = new City(name, rulingFactionId, biome);
             this.Cities.Add(city);
             return city;
         }

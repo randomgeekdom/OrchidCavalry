@@ -4,8 +4,9 @@ using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services
 {
-    public class CityService(IMunicipalityNameRoller nameRoller, IFactionRoller factionRoller) : ICityService
+    public class CityService(IMunicipalityNameRoller nameRoller, IFactionRoller factionRoller, IBiomeRoller biomeRoller) : ICityService
     {
+        private readonly IBiomeRoller biomeRoller = biomeRoller;
         private readonly IFactionRoller factionRoller = factionRoller;
         private readonly IMunicipalityNameRoller nameRoller = nameRoller;
         private readonly Random random = new();
@@ -27,7 +28,7 @@ namespace OrchidCavalry.Services
 
                     var faction = factionIndex >= factionCount - 1 ? game.AddFaction(factionRoller.Get()) : factions[factionIndex];
 
-                    return game.AddNewCity(this.nameRoller.Get(), faction.Id);
+                    return game.AddNewCity(this.nameRoller.Get(), faction.Id, this.biomeRoller.Get());
                 }
                 else
                 {

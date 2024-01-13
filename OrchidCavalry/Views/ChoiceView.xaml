@@ -22,7 +22,7 @@
                 ItemsSource="{Binding Options}"
             SelectedItem="{Binding SelectedOption}" />
 
-        <Button Text="Select" Command="{Binding SelectCommand}" IsEnabled="{Binding EnableSelect}"/>
-        <!--<Button Clicked="Button_Clicked" Text="Back" />-->
+        <Button Text="Select" Command="{Binding SelectCommand}" IsEnabled="{Binding EnableSelect, Mode=TwoWay}" />
+        <Button Text="Cancel" Command="{Binding CancelCommand}" />
     </VerticalStackLayout>
 </ContentPage>

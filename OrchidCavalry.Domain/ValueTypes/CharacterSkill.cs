@@ -21,5 +21,10 @@ namespace OrchidCavalry.Models.ValueTypes
         {
             Value += amount;
         }
+
+        public override string ToString()
+        {
+            return $"{Skill}: {Value}";
+        }
     }
 }

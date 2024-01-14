@@ -3,23 +3,17 @@ using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Models
 {
-    public class Character : Entity
+    public class Character(string firstName, string lastName) : Entity
     {
         private const string CommanderTitle = "Orchid Cavalry Commander";
 
-        public Character(string firstName, string lastName)
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-        }
-
         public int Defeats { get; set; } = 0;
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = firstName;
 
         public bool IsDeployed { get; set; } = false;
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = lastName;
 
         public List<CharacterSkill> Skills { get; set; } = [];
 
@@ -28,6 +22,14 @@ namespace OrchidCavalry.Models
         public int Victories { get; set; } = 0;
 
         public int AddDefeat() => ++this.Defeats;
+
+        public void AddTitle(string title)
+        {
+            if (!string.IsNullOrWhiteSpace(title) && !Titles.Contains(title))
+            {
+                Titles.Add(title);
+            }
+        }
 
         public int AddVictory() => ++this.Victories;
 
@@ -107,14 +109,6 @@ namespace OrchidCavalry.Models
             }
 
             return characterSkill;
-        }
-
-        public void AddTitle(string title)
-        {
-            if (!string.IsNullOrWhiteSpace(title) && !Titles.Contains(title))
-            {
-                Titles.Add(title);
-            }
         }
     }
 }

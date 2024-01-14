@@ -10,39 +10,36 @@
         Margin="20"
         HorizontalOptions="CenterAndExpand"
         VerticalOptions="CenterAndExpand">
-        <Grid VerticalOptions="StartAndExpand">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
+        <HorizontalStackLayout>
             <Label Margin="5,0" Text="Name:" />
-            <!--<Label
-                Grid.Row="1"
+            <Label Grid.Column="1" Text="{Binding Name}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Margin="5,0" Text="Quest Assigned?:" />
+            <Label Grid.Column="1" Text="{Binding IsDeployed}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout IsVisible="{Binding HasSkills}">
+
+            <Label
+                Grid.Row="4"
                 Margin="5,0"
-                Text="Age:" />-->
+                Text="Skills:" />
+            <ListView
+                Grid.Row="4"
+                Grid.Column="1"
+                ItemsSource="{Binding Skills}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+
             <Label
                 Grid.Row="4"
                 Margin="5,0"
                 Text="Titles:" />
-
-            <Label Grid.Column="1" Text="{Binding Name}" />
-            <!--<Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding Age}" />-->
             <ListView
                 Grid.Row="4"
                 Grid.Column="1"
                 ItemsSource="{Binding Titles}" />
-        </Grid>
+        </HorizontalStackLayout>
 
         <!--<Button Clicked="Button_Clicked" Text="Back" />-->
     </VerticalStackLayout>

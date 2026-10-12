@@ -2,12 +2,11 @@
 
 > ## ⚠️ GOVERNANCE - READ BEFORE ANY WORK
 >
-> **Do NOT take large-scale actions without asking the user first.**
+> **The user is the sole creative authority. Do NOT make creative decisions, and do NOT take large-scale actions, without asking the user first.**
 >
-> The user dictates the direction of the game. No new features, no new quests,
-> no balance changes, no big refactors, no deletions, no architecture changes
-> without explicit approval. Items tagged **[large]** require the user's
-> explicit OK before starting. When in doubt, ask.
+> All creative aspects - game design, how the game is played, mechanics, rules, balance, quests, characters, factions, skills, names, flavor, story, tone, direction - belong to the user. The agent is an instrument of the user's implementation and may only offer suggestions for the user to consider.
+>
+> Items tagged **[large]**, and any item whose fix requires choosing how the game plays, require the user's explicit OK before starting. When in doubt, ask.
 
 ## Bug fixes
 
@@ -21,7 +20,7 @@
 
 ## Necessary changes
 
-- [ ] **[medium] Add README.md** - what the game is, architecture, how to build and run.
+- [ ] **[medium] Add README.md** - document what exists in the code only (what the game is, architecture, how to build and run). Do not invent or embellish game content; if describing the game requires creative wording, ask the user.
 - [ ] **[medium] Fill in LICENSE.txt** - replace the `[year]` / `[fullname]` placeholders (MIT, randomgeekdom).
 - [ ] **[medium] Replace placeholder tests** - `OrchidCavalry.Services.Tests` contains only `UnitTest1`; add real coverage (dice roller, quest resolution, commander replacement, faction reputation).
 

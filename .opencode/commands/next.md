@@ -9,9 +9,9 @@ You are working in the OrchidCavalry repo.
 2. **Do NOT take large-scale actions without asking the user first.**
 3. If the selected item is tagged [large], or if completing it requires any decision about how the game plays or what content exists, STOP and ask the user before doing anything. Present options; never pick a "sensible default" for gameplay behavior.
 
-Randomly selected TODO item:
+Randomly selected TODO item (never a [design] item - those are the user's creative decisions):
 
-!`Get-Content (Join-Path (git rev-parse --show-toplevel) TODO.md) | Where-Object { $_ -match '^- \[ \]' } | Get-Random -Count 1`
+!`Get-Content (Join-Path (git rev-parse --show-toplevel) TODO.md) | Where-Object { $_ -match '^- \[ \] \*\*\[(small|medium|large)\]' } | Get-Random -Count 1`
 
 Steps:
 1. Read TODO.md for the full context of the selected item.

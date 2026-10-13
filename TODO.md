@@ -28,5 +28,15 @@
 
 - [ ] **[large] Delete the dead `OrchidCavalry.Models` project** - nothing in the app, Domain, or Services references it (only its own test project does); every type it contains is re-declared in `OrchidCavalry.Domain`. Deleting a whole project needs the user's OK.
 - [ ] **[large] Fix namespaces repo-wide** - the Domain project declares its types in `namespace OrchidCavalry.Models`. Rename to `OrchidCavalry.Domain` across all files. Mechanical, but touches everything.
-- [ ] **[large] Define a game-over condition** - nothing ends the game today: if all characters die or all cities fall, turns keep running. This is a design decision - the user decides what "game over" means before it is implemented.
+- [ ] **[large] Define a game-over condition** - nothing ends the game today: if all characters die or all cities fall, turns keep running. This is a design decision - the user decides what "game over" means before it is implemented. Options suggested: commander dies with no successor / all cities fall / endless sandbox with a score.
 - [ ] **[large] New quests, skills, factions, or balance changes** - the user designs the game; these come from the user, not from `/next`.
+
+## 💡 Agent suggestions - awaiting the user's creative decision
+
+These are suggestions from the agent, not decisions. The user owns all of them. `/next` must never pick these.
+
+- [ ] **[design]** City population growth is dead code - `CityService.IncreasePopulationAsync` is never called. User to decide: wire it in as end-of-turn growth, or remove it.
+- [ ] **[design]** Loot system is a blank canvas - `Quest.Loot` is never populated, so quests award nothing. User to design what loot is and how it is earned.
+- [ ] **[design]** 9 of 15 skills are unused - only Aura, Melee, Target, Influence, Deduction, and Movement appear in quest resolutions. User to decide what Brawn, Assist, Destiny, Knowledge, Resilience, Sense, Tinker, Wealth, and Willpower do.
+- [ ] **[design]** Post-victory behavior - when a quest is won, should the remaining assigned characters keep acting (and risk death), or should the fight end immediately?
+- [ ] **[design]** Faction reputation effects - factions only track reputation; should reputation thresholds trigger effects (e.g., allied factions send aid)?

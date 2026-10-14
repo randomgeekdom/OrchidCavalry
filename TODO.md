@@ -23,6 +23,7 @@
 - [ ] **[medium] Add README.md** - document what exists in the code only (what the game is, architecture, how to build and run). Do not invent or embellish game content; if describing the game requires creative wording, ask the user.
 - [ ] **[medium] Fill in LICENSE.txt** - replace the `[year]` / `[fullname]` placeholders (MIT, randomgeekdom).
 - [x] **[medium] Replace placeholder tests** - Replaced `UnitTest1` with real xunit coverage: dice roller output, quest resolution (success & death), commander replacement via `GameplayService.NextTurnAsync`, and faction reputation. Added project references to Domain/Services and retargeted test project to net8.0; smoke-tested 13 passing tests.
+- [ ] **[medium] Retarget projects to .NET 10** - move Domain, Services, Services.Tests (and app if workloads permit) from net8.0 to net10.0 and verify build/test.
 
 ## Large-scale - REQUIRES USER APPROVAL
 

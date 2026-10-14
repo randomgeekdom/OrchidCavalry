@@ -10,7 +10,7 @@
 
 ## Bug fixes
 
-- [ ] **[small] Commander is never replaced** - `GameplayService.ReplaceCommanderIfNecessaryAsync` calls `game.ReplaceLeader()` but throws away the result. `game.Commander` still points at the dead character, and the "A New Commander" alert names the corpse. Assign the return value (and handle the case where no members remain).
+- [x] **[small] Commander is never replaced** - `ReplaceCommanderIfNecessaryAsync` now assigns `game.Commander = game.ReplaceLeader()` (handling no members remaining with a distinct alert). Added test coverage in `GameplayServiceTests`.
 - [ ] **[small] Marauder quest can crash the game** - `MarauderQuest.EvaluateFailStateAsync` catastrophe branch calls `game.GetFactionByName(BandName)`, which throws if that band's faction was never added to `game.Factions` (factions are only added when cities are created). Look it up safely or add the faction on demand.
 - [ ] **[small] Quests can target already-threatened cities** - `CityService.GetUnthreatenedRandomCityAsync` filters for unthreatened cities but then indexes the full `game.Cities` list, so the filter does nothing; also, with exactly one unthreatened city it always invents a new city instead of using it. Index into the filtered list.
 - [ ] **[small] Characters can die after a quest is already won** - `Quest.EvaluateQuestAsync` keeps rolling for every remaining character slot after a success, because the `while` loop only re-checks after the `foreach` finishes. Lower-ranked characters can be killed in a fight that was already won. Exit the loop once the quest is resolved.
@@ -22,7 +22,7 @@
 
 - [ ] **[medium] Add README.md** - document what exists in the code only (what the game is, architecture, how to build and run). Do not invent or embellish game content; if describing the game requires creative wording, ask the user.
 - [ ] **[medium] Fill in LICENSE.txt** - replace the `[year]` / `[fullname]` placeholders (MIT, randomgeekdom).
-- [ ] **[medium] Replace placeholder tests** - `OrchidCavalry.Services.Tests` contains only `UnitTest1`; add real coverage (dice roller, quest resolution, commander replacement, faction reputation).
+- [x] **[medium] Replace placeholder tests** - Replaced `UnitTest1` with real xunit coverage: dice roller output, quest resolution (success & death), commander replacement via `GameplayService.NextTurnAsync`, and faction reputation. Added project references to Domain/Services and retargeted test project to net8.0; smoke-tested 13 passing tests.
 
 ## Large-scale - REQUIRES USER APPROVAL
 

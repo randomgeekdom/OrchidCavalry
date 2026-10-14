@@ -71,11 +71,18 @@ namespace OrchidCavalry.Services
         {
             await Task.Run(() =>
             {
-                if (!game.Characters.Contains(game.Commander!))
+                if (game.Commander == null || !game.Characters.Contains(game.Commander))
                 {
                     var previousCommander = game.Commander;
-                    game.ReplaceLeader();
-                    game.Alerts.Add(new Alert("A New Commander", $"Having lost Commander {previousCommander?.GetName()}, a new commander has taking leadership of the Orchid Cavalry: {game.Commander?.GetNameAndRank()}"));
+                    game.Commander = game.ReplaceLeader();
+                    if (game.Commander == null)
+                    {
+                        game.Alerts.Add(new Alert("A New Commander", $"Having lost Commander {previousCommander?.GetName()}, no members remain to lead the Orchid Cavalry."));
+                    }
+                    else
+                    {
+                        game.Alerts.Add(new Alert("A New Commander", $"Having lost Commander {previousCommander?.GetName()}, a new commander has taking leadership of the Orchid Cavalry: {game.Commander.GetNameAndRank()}"));
+                    }
                 }
             });
         }

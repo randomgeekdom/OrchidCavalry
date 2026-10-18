@@ -40,6 +40,7 @@ namespace OrchidCavalry.Domain.Quests
         {
             var city = game.GetCityByName(CityName);
             var returnText = new List<string>();
+            var questSucceeded = false;
             if (Expiration > 0)
             {
                 Expiration--;
@@ -73,10 +74,12 @@ namespace OrchidCavalry.Domain.Quests
                         if (result >= DieResult.MinorSuccess)
                         {
                             monsterRampageComplete = true;
+                            questSucceeded = true;
 
                             var resolution = questResolutions.Single(x => x.Skill == highestSkill.Skill);
                             returnText.Add(resolution.SuccessText);
                             character.AddTitle(resolution.VictoryTitle);
+                            character.AddVictory();
                             resolution.ExtraAction?.Invoke();
                             game.AddToFactionReputation(city.RulingFactionId, resolution.CityReputationModifier);
 
@@ -121,7 +124,7 @@ namespace OrchidCavalry.Domain.Quests
                     }
                 }
             }
-            game.RemoveQuest(this);
+            game.RemoveQuest(this, questSucceeded);
             return string.Join(" ", returnText);
         }
 

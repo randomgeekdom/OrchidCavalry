@@ -49,6 +49,8 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Label Text="{Binding ScoreBreakdownText}" HorizontalOptions="CenterAndExpand" />
+
             <Button
                     Command="{Binding EndTurnCommand}"
                     BorderWidth="0"

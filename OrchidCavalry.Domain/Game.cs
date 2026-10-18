@@ -48,6 +48,16 @@ namespace OrchidCavalry.Models
         public List<Faction> Factions { get; set; } = [];
 
         /// <summary>
+        /// The quests the cavalry has successfully completed
+        /// </summary>
+        public List<Guid> SuccessfulQuestIds { get; set; } = [];
+
+        /// <summary>
+        /// How many turns have been taken.  The sandbox is endless, so this is only used for scoring
+        /// </summary>
+        public int TurnCount { get; set; } = 0;
+
+        /// <summary>
         /// The quests that the cavalry can undertake or are currently undertaking
         /// </summary>
         public List<Quest> Quests { get; set; } = [];
@@ -124,6 +134,26 @@ namespace OrchidCavalry.Models
             return this.Characters.Count(x => !x.IsDeployed);
         }
 
+        /// <summary>
+        /// The number of quests the Orchid Cavalry has successfully completed
+        /// </summary>
+        public int GetSuccessfulQuestCount() => this.SuccessfulQuestIds.Count;
+
+        /// <summary>
+        /// The total reputation the Orchid Cavalry has earned across all factions
+        /// </summary>
+        public int GetTotalFactionReputation() => this.Factions.Sum(x => x.OrchidCavalryReputation);
+
+        /// <summary>
+        /// The total victories earned by the current members of the Orchid Cavalry
+        /// </summary>
+        public int GetTotalVictories() => this.Characters.Sum(x => x.Victories);
+
+        /// <summary>
+        /// The sandbox score: won quests, faction reputation, character victories, and turns survived
+        /// </summary>
+        public int GetScore() => this.GetSuccessfulQuestCount() + this.GetTotalFactionReputation() + this.GetTotalVictories() + this.TurnCount;
+
         public void KillCharacter(Character character)
         {
             this.Characters.Remove(character);
@@ -134,9 +164,14 @@ namespace OrchidCavalry.Models
             this.Cities.Remove(GetCityByName(cityName));
         }
 
-        public void RemoveQuest(Quest quest)
+        public void RemoveQuest(Quest quest, bool wasSuccessful = false)
         {
             this.CompletedQuestIds.Add(quest.Id);
+            if (wasSuccessful)
+            {
+                this.SuccessfulQuestIds.Add(quest.Id);
+            }
+
             this.Quests.Remove(quest);
         }
 

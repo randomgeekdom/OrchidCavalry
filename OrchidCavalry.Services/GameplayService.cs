@@ -24,6 +24,9 @@ namespace OrchidCavalry.Services
         /// <returns>awaitable task</returns>
         public async Task NextTurnAsync(Game game)
         {
+            // The sandbox never ends, so a turn simply advances the clock
+            game.TurnCount++;
+
             // Loop through quests and evaluate them
             foreach (var quest in game.Quests.ToList())
             {

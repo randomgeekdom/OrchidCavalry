@@ -7,8 +7,9 @@ This document describes only what exists in the code. It does not invent or desc
 ## What exists in the code
 
 **Game state** (`OrchidCavalry.Domain.Game`)
-- Characters, cities, factions, quests, the current commander, completed quest IDs, and alerts displayed between turns.
+- Characters, cities, factions, quests, the current commander, completed/successfully-completed quest IDs, the number of turns taken, and alerts displayed between turns.
 - Helpers to add/remove characters, cities, factions, and quests; to look up cities and factions by name; to adjust faction reputation; and to replace the leader with the highest-ranked, highest-skilled remaining member.
+- A derived `GetScore()` (plus per-component accessors) sums successfully-completed quests, total faction reputation, character victories, and turns survived.
 
 **Characters** (`Character`)
 - First/last name, titles (including "Orchid Cavalry Commander"), skills with values plus enhanced/debilitated state, victories/defeats, and a rank derived from victories (Recruit through General).
@@ -22,21 +23,21 @@ This document describes only what exists in the code. It does not invent or desc
 
 **Quests** (`Quest` abstract base; `MarauderQuest`, `MonsterQuest`, and unique quests)
 - Title, description, city, mandatory/optional character slots, expiration in turns, a loot list, and skill-based resolutions.
-- Resolving a quest rolls dice against character skills. Results can add titles, modify city faction reputation, injure or kill characters, debilitate/enhance skills, or trigger a quest fail state.
+- Resolving a quest rolls dice against character skills. Results can add titles, award a victory, modify city faction reputation, injure or kill characters, debilitate/enhance skills, or trigger a quest fail state.
 - Unresolved quests expire one turn at a time.
 
 **Dice** (`IDiceRoller` / `DiceRoller`)
 - d20-based roll with enhanced/debilitated advantage/disadvantage, mapping results to Catastrophe, Fail, MinorSuccess, Success, or PerfectSuccess.
 
 **Turn flow** (`GameplayService.NextTurnAsync`)
-- Evaluates every active quest, generates new quests for undeployed characters, conscripts new members when the cavalry falls below 8, and replaces the commander if the current one is gone. Each turn ends by saving the game.
+- Advances the turn counter, evaluates every active quest, generates new quests for undeployed characters, conscripts new members when the cavalry falls below 8, and replaces the commander if the current one is gone. Each turn ends by saving the game.
 
 **Saving** (`GameSaver`, `IGameSaver`)
 - Serializes the game to `orchid.sav` in the app data directory using Newtonsoft.Json (`TypeNameHandling.Auto`), keeping a `.backup` of the previous save.
 
 **UI** (.NET MAUI)
 - `MainPage`: start/exit.
-- `Dashboard`: commander, available quests, alerts, and the end-turn action.
+- `Dashboard`: commander, available quests, alerts, the current score breakdown, and the end-turn action.
 - `CharacterView`, `QuestView`, `CitiesView`, `FactionView`, `ChoiceView`.
 - Popup and view-model layer (`ViewModels/*`, `Services/*PopupService.cs`), wired up in `Registrations.cs` and `MauiProgram.cs`.
 
@@ -82,7 +83,7 @@ dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net8.0-windows
 
 ## Known state (from the code)
 
-- There is no game-over condition: turns continue even if all characters die or all cities fall.
+- There is no game-over condition by design: the game is an endless sandbox, and turns continue even if all characters die or all cities fall.
 - Quest `Loot` lists are never populated, so quests award no loot today.
 - 9 of the 15 defined skills are unused in quest resolution.
-- Turns keep running indefinitely; nothing ends the game.
+- Progress is expressed as a score (successfully-completed quests, faction reputation, character victories, and turns survived) rather than a win/loss state.

@@ -72,6 +72,29 @@ namespace OrchidCavalry.ViewModels
 
         public string QuestButtonText => $"Quest Available: {GetAvailableQuests()?.Count()}";
 
+        public int QuestsCompletedScore => this.Game?.GetSuccessfulQuestCount() ?? 0;
+
+        public int ReputationScore => this.Game?.GetTotalFactionReputation() ?? 0;
+
+        public int Score => this.Game?.GetScore() ?? 0;
+
+        public string ScoreBreakdownText
+        {
+            get
+            {
+                if (this.Game == null)
+                {
+                    return string.Empty;
+                }
+
+                return $"Score: {this.Score}  (Quests: {this.QuestsCompletedScore} · Reputation: {this.ReputationScore} · Victories: {this.VictoriesScore} · Turns: {this.TurnsSurvived})";
+            }
+        }
+
+        public int TurnsSurvived => this.Game?.TurnCount ?? 0;
+
+        public int VictoriesScore => this.Game?.GetTotalVictories() ?? 0;
+
         public ICommand ShowCharacterPopupCommand { get; }
 
         public AsyncRelayCommand ShowQuestPopupCommand { get; }

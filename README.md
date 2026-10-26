@@ -45,10 +45,10 @@ This document describes only what exists in the code. It does not invent or desc
 
 | Project | Purpose | Target framework |
 |---|---|---|
-| `OrchidCavalry.Domain` | Domain models (game, character, city, faction, quest) and domain services (dice roller, unique-quest retrieval) | net8.0 |
-| `OrchidCavalry.Services` | Application services (gameplay, character generation, city service, quest generation) | net8.0 |
-| `OrchidCavalry` | MAUI app: views, view models, popups, service registration | net8.0-android, net8.0-ios, net8.0-maccatalyst, net8.0-windows10.0.19041.0 |
-| `OrchidCavalry.Services.Tests` | xUnit tests covering Domain and Services | net8.0 |
+| `OrchidCavalry.Domain` | Domain models (game, character, city, faction, quest) and domain services (dice roller, unique-quest retrieval) | net10.0 |
+| `OrchidCavalry.Services` | Application services (gameplay, character generation, city service, quest generation) | net10.0 |
+| `OrchidCavalry` | MAUI app: views, view models, popups, service registration | net10.0-android, net10.0-ios, net10.0-maccatalyst, net10.0-windows10.0.19041.0 |
+| `OrchidCavalry.Services.Tests` | xUnit tests covering Domain and Services | net10.0 |
 
 Dependency direction: App → Services → Domain.
 
@@ -78,7 +78,7 @@ dotnet test OrchidCavalry.sln
 
 Run the app on Windows:
 ```
-dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net8.0-windows
+dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0
 ```
 
 ## Known state (from the code)

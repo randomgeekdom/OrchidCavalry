@@ -26,7 +26,7 @@ namespace OrchidCavalry.Services
                     var factionCount = factions.Count;
                     var factionIndex = this.random.Next(factionCount + 2);
 
-                    var faction = factionIndex >= factionCount - 1 ? game.AddFaction(factionRoller.Get()) : factions[factionIndex];
+                    var faction = factionIndex >= factionCount ? game.AddFaction(factionRoller.Get()) : factions[factionIndex];
 
                     return game.AddNewCity(this.nameRoller.Get(), faction.Id, this.biomeRoller.Get());
                 }

@@ -45,6 +45,25 @@ namespace OrchidCavalry.Services.Tests
             Assert.Contains(city.Name, returnedCityNames);
         }
 
+        [Fact]
+        public async Task GetUnthreatenedRandomCityAsync_ReusesTheOnlyFactionWhenInventingCities()
+        {
+            var game = new Game();
+            game.AddFaction("OnlyFaction");
+
+            var service = CreateCityService();
+
+            // No cities exist, so every call invents one and rolls for its faction.
+            for (var i = 0; i < 50; i++)
+            {
+                var city = await service.GetUnthreatenedRandomCityAsync(game);
+
+                Assert.Contains(game.Factions, x => x.Id == city.RulingFactionId);
+            }
+
+            Assert.True(game.Factions.Count < 51, $"A new faction was added for every city ({game.Factions.Count} factions).");
+        }
+
         private static CityService CreateCityService()
         {
             return new CityService(new FakeMunicipalityNameRoller(), new FakeFactionRoller(), new FakeBiomeRoller());

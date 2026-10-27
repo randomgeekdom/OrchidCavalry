@@ -2,6 +2,7 @@ using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
 using OrchidCavalry.Services;
+using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services.Tests
 {
@@ -32,5 +33,24 @@ namespace OrchidCavalry.Services.Tests
     internal class StubCharacterService : ICharacterService
     {
         public Character GenerateCharacter() => new Character("Conscript", "Test");
+    }
+
+    internal class FakeMunicipalityNameRoller : IMunicipalityNameRoller
+    {
+        private int count;
+
+        public string Get() => $"NewCity{++count}";
+    }
+
+    internal class FakeFactionRoller : IFactionRoller
+    {
+        private int count;
+
+        public string Get() => $"NewFaction{++count}";
+    }
+
+    internal class FakeBiomeRoller : IBiomeRoller
+    {
+        public string Get() => "Plain";
     }
 }

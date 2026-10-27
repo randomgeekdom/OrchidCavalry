@@ -16,11 +16,11 @@ namespace OrchidCavalry.Services
             return await Task.Run(() =>
             {
                 // Get a list of cities that are not part of a quest
-                var cities = game.Cities.Where(x => !game.Quests.Select(x => x.CityName).Contains(x.Name));
+                var cities = game.Cities.Where(x => !game.Quests.Select(x => x.CityName).Contains(x.Name)).ToList();
 
-                var cityCount = cities.Count();
+                var cityCount = cities.Count;
                 var randomIndex = this.random.Next(cityCount + 2);
-                if (randomIndex >= cityCount - 1)
+                if (randomIndex >= cityCount)
                 {
                     var factions = game.Factions;
                     var factionCount = factions.Count;
@@ -32,7 +32,7 @@ namespace OrchidCavalry.Services
                 }
                 else
                 {
-                    return game.Cities[randomIndex];
+                    return cities[randomIndex];
                 }
             });
         }

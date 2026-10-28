@@ -18,6 +18,10 @@
 - [ ] **[small] Dead `Play.xaml` reference** - `OrchidCavalry.csproj` contains `<MauiXaml Update="Views\Play.xaml">` for a file that does not exist. Remove the leftover.
 - [ ] **[small] Copy-pasted doc comment** - `MarauderQuest`'s summary says "stop a monster from terrorizing a city". It should say marauders.
 - [ ] **[small] Sloppy save-backup path** - `GameSaver.SaveGameAsync` builds the backup with `Path.Combine(FileSystem.AppDataDirectory, filePath + ".backup")` even though `filePath` is already absolute. Simplify to `filePath + ".backup"`.
+- [ ] **[small] Windows title bar does not match the dark theme** - MAUI draws its own title bar in the WinUI dark indigo rather than `Night` (`#0C0910`), so there is a seam above the sidebar, and Shell's back arrow sits in that bar. Setting `AppWindow.TitleBar` colours (tried in `MauiProgram`) has no effect because MAUI owns the bar; matching it means replacing or recolouring the Shell title bar.
+- [ ] **[small] Line endings warn on every commit** - files written with LF trigger `LF will be replaced by CRLF` warnings for each `.xaml`/`.md` during `git add`, because `.gitattributes` normalises to CRLF. Normalise the working tree or adjust the attributes so commits stay quiet.
+- [ ] **[small] Character-choice picker looked empty** - opening the quest page, clicking an assigned-character slot, then inspecting the modal showed a `Picker` with no visible options; it should list every undeployed character (`Game.Characters.Where(x => !x.IsDeployed)`). Confirm whether it is a rendering problem or genuinely empty.
+- [ ] **[small] README omits the /play and /run commands** - both commands build and launch the Windows app (with `WindowsAppSDKSelfContained=true`); mention them in the build/run section.
 
 ## Necessary changes
 
@@ -42,3 +46,4 @@ These are suggestions from the agent, not decisions. The user owns all of them. 
 - [ ] **[design]** 9 of 15 skills are unused - only Aura, Melee, Target, Influence, Deduction, and Movement appear in quest resolutions. User to decide what Brawn, Assist, Destiny, Knowledge, Resilience, Sense, Tinker, Wealth, and Willpower do.
 - [ ] **[design]** Post-victory behavior - when a quest is won, should the remaining assigned characters keep acting (and risk death), or should the fight end immediately?
 - [ ] **[design]** Faction reputation effects - factions only track reputation; should reputation thresholds trigger effects (e.g., allied factions send aid)?
+- [ ] **[design]** Characters are generated with no skills - `CharacterService.GenerateCharacter()` returns a `Character` whose `Skills` list is empty, so the character sheet's SKILLS card never appears and quest skill checks have no values to roll against. User to decide what skills (and values, within the 35-point cap) a new character starts with.

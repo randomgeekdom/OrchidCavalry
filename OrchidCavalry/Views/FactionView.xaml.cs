@@ -14,4 +14,9 @@ public partial class FactionView : ContentPage, IGameView
 	{
 		this.BindingContext = new FactionViewModel(game);
 	}
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

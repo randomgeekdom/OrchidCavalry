@@ -16,4 +16,9 @@ public partial class QuestView : ContentPage
     {
         this.BindingContext = new QuestViewModel(game, choicePopupService, this.Navigation);
     }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

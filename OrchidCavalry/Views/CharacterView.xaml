@@ -1,46 +1,68 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="OrchidCavalry.Popups.CharacterView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
-    BackgroundColor="Wheat"
-    x:DataType="vm:CharacterViewModel">
-    <VerticalStackLayout
-        Margin="20"
-        HorizontalOptions="CenterAndExpand"
-        VerticalOptions="CenterAndExpand">
-        <HorizontalStackLayout>
-            <Label Margin="5,0" Text="Name:" />
-            <Label Grid.Column="1" Text="{Binding Name}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Margin="5,0" Text="Quest Assigned?:" />
-            <Label Grid.Column="1" Text="{Binding IsDeployed}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout IsVisible="{Binding HasSkills}">
+    BackgroundColor="{StaticResource Night}"
+    Shell.NavBarIsVisible="False">
 
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid
+            Padding="28,22,28,10"
+            ColumnDefinitions="Auto,*"
+            ColumnSpacing="18">
+            <Button
+                Clicked="OnBackClicked"
+                Style="{StaticResource GhostButton}"
+                Text="‹  Back"
+                VerticalOptions="Center" />
             <Label
-                Grid.Row="4"
-                Margin="5,0"
-                Text="Skills:" />
-            <ListView
-                Grid.Row="4"
                 Grid.Column="1"
-                ItemsSource="{Binding Skills}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
+                Style="{StaticResource PageTitle}"
+                Text="{Binding Name}"
+                VerticalOptions="Center" />
+        </Grid>
 
-            <Label
-                Grid.Row="4"
-                Margin="5,0"
-                Text="Titles:" />
-            <ListView
-                Grid.Row="4"
-                Grid.Column="1"
-                ItemsSource="{Binding Titles}" />
-        </HorizontalStackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="28,10,28,40" Spacing="16">
 
-        <!--<Button Clicked="Button_Clicked" Text="Back" />-->
-    </VerticalStackLayout>
+                <Border>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SectionTitle}" Text="STATUS" />
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Label Style="{StaticResource MutedLabel}" Text="Quest assigned" />
+                            <Label Grid.Column="1" Text="{Binding IsDeployed}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border IsVisible="{Binding HasSkills}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SectionTitle}" Text="SKILLS" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Skills}" Spacing="6">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding .}" TextColor="{StaticResource GoldBright}" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SectionTitle}" Text="TITLES" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Titles}" Spacing="6">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding .}" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

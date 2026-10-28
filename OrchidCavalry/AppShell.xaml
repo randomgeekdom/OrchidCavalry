@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="OrchidCavalry.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:OrchidCavalry"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.BackgroundColor="#0C0910"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.ForegroundColor="#C8A559"
+    Shell.NavBarIsVisible="False"
+    Shell.TitleColor="#C8A559">
 
     <ShellContent
-        Title="Home"
+        Title="Orchid Cavalry"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

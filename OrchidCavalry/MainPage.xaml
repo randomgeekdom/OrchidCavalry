@@ -3,42 +3,48 @@
     x:Class="OrchidCavalry.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title=""
-    BackgroundColor="Wheat">
+    BackgroundColor="{StaticResource Night}"
+    Shell.NavBarIsVisible="False"
+    Title="Orchid Cavalry">
 
-    <ScrollView>
+    <Grid>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25"
+            Padding="30"
+            HorizontalOptions="Center"
+            Spacing="30"
             VerticalOptions="Center">
-
-            <!--<Image
-            Aspect="AspectFit"
-            MaximumWidthRequest="1000"
-            Source="logo.png" />-->
 
             <Label
                 FontFamily="GreatVibes"
-                FontSize="100"
-                
-                HorizontalOptions="CenterAndExpand"
-                Text="Orchid Cavalry" />
+                FontSize="96"
+                HorizontalTextAlignment="Center"
+                Text="Orchid Cavalry"
+                TextColor="{StaticResource GoldBright}" />
 
-            <FlexLayout 
-                Wrap="Wrap"
-                HorizontalOptions="Center">
-                <Button
-                x:Name="StartButton"
-                Clicked="StartButton_Clicked"
-                Text="PLAY"
-                WidthRequest="200" />
-                <Button
-                x:Name="ExitButton"
-                    Clicked="ExitButton_Clicked"
+            <BoxView
+                Color="{StaticResource GoldHairline}"
+                HeightRequest="1"
                 HorizontalOptions="Center"
-                Text="EXIT"
-                WidthRequest="200" />
-            </FlexLayout>
+                WidthRequest="260" />
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="18">
+                <Button
+                    x:Name="StartButton"
+                    Clicked="StartButton_Clicked"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="PLAY"
+                    WidthRequest="200" />
+                <Button
+                    x:Name="ExitButton"
+                    Clicked="ExitButton_Clicked"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource GhostButton}"
+                    Text="EXIT"
+                    WidthRequest="200" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>

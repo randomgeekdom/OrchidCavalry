@@ -36,9 +36,11 @@ This document describes only what exists in the code. It does not invent or desc
 - Serializes the game to `orchid.sav` in the app data directory using Newtonsoft.Json (`TypeNameHandling.Auto`), keeping a `.backup` of the previous save.
 
 **UI** (.NET MAUI)
-- `MainPage`: start/exit.
-- `Dashboard`: commander, available quests, alerts, the current score breakdown, and the end-turn action.
-- `CharacterView`, `QuestView`, `CitiesView`, `FactionView`, `ChoiceView`.
+- A dark-fantasy skin defined in `Resources/Styles/Theme.xaml` (merged after `Colors.xaml`/`Styles.xaml`): night panel colours, gold accents, GreatVibes for page titles, OpenSans for body text. `Colors.xaml` holds the palette (`Night`, `Gold`, `Parchment`, ...); `Theme.xaml` holds the implicit `Label`/`Button`/`Border`/`Entry`/`Picker`/`ListView` styles plus keyed styles (`PageTitle`, `SectionTitle`, `StatValue`, `NavButton`, `PrimaryButton`, `GhostButton`).
+- The Shell navigation bar is hidden (`Shell.NavBarIsVisible="False"`), so each pushed page carries its own `‹ Back` button; the WinUI title bar is forced to the dark theme in `Platforms/Windows/App.xaml.cs`.
+- `MainPage`: title and start/exit.
+- `Dashboard`: fixed sidebar (quests, cities, factions, commander, and the end-turn/alert button with the score line) plus a main panel with the commander card and score tiles (score, quests won, reputation, victories, turns).
+- `CharacterView`, `QuestView`, `CitiesView`, `FactionView`, `ChoiceView`: full pages (ChoiceView is modal) with headings, card layouts, and back navigation.
 - Popup and view-model layer (`ViewModels/*`, `Services/*PopupService.cs`), wired up in `Registrations.cs` and `MauiProgram.cs`.
 
 ## Solution structure
@@ -80,6 +82,8 @@ Run the app on Windows:
 ```
 dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0
 ```
+
+Unpackaged Windows runs resolve the custom fonts from the output directory, and `MauiFont` items are only copied there by `dotnet publish`, so the project has a `CopyMauiFontsToOutputDirectory` target that copies them after every Windows build.
 
 ## Known state (from the code)
 

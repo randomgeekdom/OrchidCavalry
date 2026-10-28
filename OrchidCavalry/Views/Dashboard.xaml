@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="OrchidCavalry.Views.Dashboard"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,56 +7,124 @@
     xmlns:m="clr-namespace:OrchidCavalry.Domain;assembly=OrchidCavalry.Domain"
     xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
     x:DataType="vm:DashboardViewModel"
-    BackgroundColor="Wheat"
-                            IsEnabled="{Binding EnableNextTurn}" >
-    <ScrollView VerticalOptions="CenterAndExpand" VerticalScrollBarVisibility="Default">
-        <VerticalStackLayout Margin="10" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+    BackgroundColor="{StaticResource Night}"
+    IsEnabled="{Binding EnableNextTurn}"
+    Shell.NavBarIsVisible="False">
 
-            <!--
-        This section we can use to create a navbar of sorts
-        <FlexLayout HorizontalOptions="CenterAndExpand" BackgroundColor="AliceBlue">
-            <Button Text="Units" MinimumWidthRequest="100" />
-            <Button Text="Units" MinimumWidthRequest="100" />
-            <Button Text="Units" MinimumWidthRequest="100" />
-        </FlexLayout>-->
+    <Grid BackgroundColor="{StaticResource Night}" ColumnDefinitions="250,*">
 
-            <FlexLayout Wrap="Wrap">
+        <!--  Sidebar navigation  -->
+        <Grid
+            Grid.Column="0"
+            BackgroundColor="{StaticResource NightPanel}"
+            Padding="18,24"
+            RowDefinitions="Auto,*,Auto">
 
-                <Button Text="{Binding QuestButtonText}"
-                            IsEnabled="{Binding AreQuestsAvailable}"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowQuestPopupCommand}">
-                </Button>
-                <Button Text="Factions"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowFactionPopupCommand}">
-                </Button>
-                <Button Text="Cities"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowCitiesPopupCommand}">
-                </Button>
-            </FlexLayout>
+            <VerticalStackLayout Grid.Row="0" Spacing="8">
+                <Label Style="{StaticResource BrandTitle}" Text="Orchid Cavalry" />
+                <BoxView Margin="0,2,0,12" Style="{StaticResource Rule}" />
 
-            <Border Padding="10">
-                <VerticalStackLayout Grid.Column="1" Grid.Row="1">
-                    <Label Text="Orchid Commander" FontSize="Subtitle" HorizontalOptions="CenterAndExpand" />
-                    <!--<Label Text="{Binding CommanderName}" HorizontalOptions="CenterAndExpand" />-->
-                    <Button Text="{Binding Commander}"
-                         HorizontalOptions="CenterAndExpand"
-                            Command="{Binding ShowCharacterPopupCommand}"
-                            CommandParameter="{Binding Commander}">
-                    </Button>
-                </VerticalStackLayout>
-            </Border>
+                <Label
+                    Margin="4,0,0,2"
+                    Style="{StaticResource SectionTitle}"
+                    Text="CAMPAIGN" />
 
-            <Label Text="{Binding ScoreBreakdownText}" HorizontalOptions="CenterAndExpand" />
+                <Button
+                    Command="{Binding ShowQuestPopupCommand}"
+                    IsEnabled="{Binding AreQuestsAvailable}"
+                    Style="{StaticResource NavButton}"
+                    Text="{Binding QuestButtonText}" />
+                <Button
+                    Command="{Binding ShowCitiesPopupCommand}"
+                    Style="{StaticResource NavButton}"
+                    Text="Cities" />
+                <Button
+                    Command="{Binding ShowFactionPopupCommand}"
+                    Style="{StaticResource NavButton}"
+                    Text="Factions" />
+                <Button
+                    Command="{Binding ShowCharacterPopupCommand}"
+                    CommandParameter="{Binding Commander}"
+                    Style="{StaticResource NavButton}"
+                    Text="Commander" />
+            </VerticalStackLayout>
 
-            <Button
+            <VerticalStackLayout Grid.Row="2" Spacing="12">
+                <BoxView Style="{StaticResource Rule}" />
+                <Label Style="{StaticResource MutedLabel}" Text="{Binding ScoreBreakdownText}" />
+                <Button
                     Command="{Binding EndTurnCommand}"
-                    BorderWidth="0"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="{Binding EndTurnText}"/>
-         
-        </VerticalStackLayout>
-    </ScrollView>
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{Binding EndTurnText}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  Main panel  -->
+        <ScrollView Grid.Column="1" VerticalScrollBarVisibility="Default">
+            <VerticalStackLayout
+                Padding="36,28,36,40"
+                HorizontalOptions="Center"
+                MaximumWidthRequest="1000"
+                Spacing="22">
+
+                <Label Style="{StaticResource PageTitle}" Text="Campaign Overview" />
+
+                <Border>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SectionTitle}" Text="ORCHID COMMANDER" />
+                        <Button
+                            Command="{Binding ShowCharacterPopupCommand}"
+                            CommandParameter="{Binding Commander}"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource GhostButton}"
+                            Text="{Binding Commander}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label
+                    Margin="0,6,0,0"
+                    Style="{StaticResource SectionTitle}"
+                    Text="STANDINGS" />
+
+                <FlexLayout Wrap="Wrap">
+
+                    <Border Margin="0,0,12,12" MinimumWidthRequest="184">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource StatValue}" Text="{Binding Score}" />
+                            <Label Style="{StaticResource SectionTitle}" Text="SCORE" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Margin="0,0,12,12" MinimumWidthRequest="184">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource StatValue}" Text="{Binding QuestsCompletedScore}" />
+                            <Label Style="{StaticResource SectionTitle}" Text="QUESTS WON" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Margin="0,0,12,12" MinimumWidthRequest="184">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource StatValue}" Text="{Binding ReputationScore}" />
+                            <Label Style="{StaticResource SectionTitle}" Text="REPUTATION" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Margin="0,0,12,12" MinimumWidthRequest="184">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource StatValue}" Text="{Binding VictoriesScore}" />
+                            <Label Style="{StaticResource SectionTitle}" Text="VICTORIES" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Margin="0,0,12,12" MinimumWidthRequest="184">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource StatValue}" Text="{Binding TurnsSurvived}" />
+                            <Label Style="{StaticResource SectionTitle}" Text="TURNS" />
+                        </VerticalStackLayout>
+                    </Border>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

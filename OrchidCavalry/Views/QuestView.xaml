@@ -1,30 +1,75 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrchidCavalry.Views.QuestView"
-             xmlns:vm ="clr-namespace:OrchidCavalry.ViewModels"
-             xmlns:quests="clr-namespace:OrchidCavalry.Domain.Quests;assembly=OrchidCavalry.Domain"
-    BackgroundColor="Wheat"
-             Title="Current Quests">
-    <VerticalStackLayout>
-        
-        <!--<Label Text="{Binding Quest.Title}"/>-->
-        <Picker ItemsSource="{Binding Quests}" SelectedItem="{Binding Quest}"/>
-        <Label
-            Text="{Binding Quest.Description}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center" />
-        <ListView ItemsSource="{Binding CharacterSlots}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Button 
-                            Text="{Binding Source={RelativeSource AncestorType={x:Type quests:QuestCharacterSlot}}}"      
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:QuestViewModel}}, Path=ChooseCharacterCommand}"    
-                            CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type quests:QuestCharacterSlot}}}" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OrchidCavalry.Views.QuestView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:quests="clr-namespace:OrchidCavalry.Domain.Quests;assembly=OrchidCavalry.Domain"
+    xmlns:vm="clr-namespace:OrchidCavalry.ViewModels"
+    BackgroundColor="{StaticResource Night}"
+    Shell.NavBarIsVisible="False"
+    Title="Current Quests">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid
+            Padding="28,22,28,10"
+            ColumnDefinitions="Auto,*"
+            ColumnSpacing="18">
+            <Button
+                Clicked="OnBackClicked"
+                Style="{StaticResource GhostButton}"
+                Text="‹  Back"
+                VerticalOptions="Center" />
+            <Label
+                Grid.Column="1"
+                Style="{StaticResource PageTitle}"
+                Text="Quests"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Padding="28,10,28,30"
+            RowDefinitions="Auto,Auto,Auto,*"
+            RowSpacing="18">
+
+            <Border Grid.Row="0">
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource SectionTitle}" Text="SELECT QUEST" />
+                    <Picker ItemsSource="{Binding Quests}" SelectedItem="{Binding Quest}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Grid.Row="1"
+                Style="{StaticResource MutedLabel}"
+                Text="{Binding Quest.Description}" />
+
+            <Label
+                Grid.Row="2"
+                Style="{StaticResource SectionTitle}"
+                Text="ASSIGNED CHARACTERS" />
+
+            <Border Grid.Row="3" Padding="10">
+                <ListView
+                    BackgroundColor="Transparent"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding CharacterSlots}"
+                    SeparatorColor="{StaticResource NightStroke}"
+                    VerticalScrollBarVisibility="Always">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Button
+                                    Margin="0,4"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:QuestViewModel}}, Path=ChooseCharacterCommand}"
+                                    CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type quests:QuestCharacterSlot}}}"
+                                    Text="{Binding Source={RelativeSource AncestorType={x:Type quests:QuestCharacterSlot}}}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </Grid>
+    </Grid>
 </ContentPage>

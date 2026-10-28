@@ -111,4 +111,13 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<!--
+		Unpackaged Windows runs resolve MauiFont files from the output directory, but only
+		`dotnet publish` copies the resizetized fonts there. Copy them after every build so
+		`dotnet run` shows the custom typefaces instead of falling back to system fonts.
+	-->
+	<Target Name="CopyMauiFontsToOutputDirectory" AfterTargets="Build" Condition="'$(OutDir)' != '' AND '@(MauiFont)' != '' AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<Copy DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" SourceFiles="@(MauiFont)" />
+	</Target>
+
 </Project>

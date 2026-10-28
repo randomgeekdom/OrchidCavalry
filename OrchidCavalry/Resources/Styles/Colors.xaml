@@ -39,4 +39,23 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <!-- Dark fantasy theme -->
+    <Color x:Key="Night">#0C0910</Color>
+    <Color x:Key="NightPanel">#15101F</Color>
+    <Color x:Key="NightRaised">#1D1630</Color>
+    <Color x:Key="NightStroke">#332648</Color>
+    <Color x:Key="Gold">#C8A559</Color>
+    <Color x:Key="GoldBright">#E9CE8C</Color>
+    <Color x:Key="GoldHairline">#4E3E24</Color>
+    <Color x:Key="Arcane">#9A6BFF</Color>
+    <Color x:Key="ArcaneDim">#3B2A61</Color>
+    <Color x:Key="Parchment">#EFE9F7</Color>
+    <Color x:Key="Muted">#9B8FAE</Color>
+    <Color x:Key="Danger">#C4485C</Color>
+
+    <SolidColorBrush x:Key="NightBrush" Color="{StaticResource Night}" />
+    <SolidColorBrush x:Key="NightPanelBrush" Color="{StaticResource NightPanel}" />
+    <SolidColorBrush x:Key="GoldBrush" Color="{StaticResource Gold}" />
+    <SolidColorBrush x:Key="GoldBrightBrush" Color="{StaticResource GoldBright}" />
+
 </ResourceDictionary>

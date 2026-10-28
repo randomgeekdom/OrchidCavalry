@@ -14,4 +14,9 @@ public partial class CharacterView : ContentPage
     {
         this.BindingContext = new CharacterViewModel(character);
     }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

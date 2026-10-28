@@ -1,24 +1,57 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrchidCavalry.Views.FactionView"
-    BackgroundColor="Wheat"
-             Title="Factions">
-    <Grid>
-        <ListView Margin="20" ItemsSource="{Binding Factions}" VerticalScrollBarVisibility="Always">
-            <ListView.ItemTemplate>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OrchidCavalry.Views.FactionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource Night}"
+    Shell.NavBarIsVisible="False"
+    Title="Factions">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid
+            Padding="28,22,28,10"
+            ColumnDefinitions="Auto,*"
+            ColumnSpacing="18">
+            <Button
+                Clicked="OnBackClicked"
+                Style="{StaticResource GhostButton}"
+                Text="‹  Back"
+                VerticalOptions="Center" />
+            <Label
+                Grid.Column="1"
+                Style="{StaticResource PageTitle}"
+                Text="Factions"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <CollectionView
+            Grid.Row="1"
+            Margin="28,10,28,30"
+            ItemsSource="{Binding Factions}"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontSize="Large"/>
-                            <HorizontalStackLayout>
-                                <Label Text="Reputation with Orchid Cavalry:"/>
-                                <Label Text="{Binding OrchidCavalryReputation}"/>
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </ViewCell>
+                    <Border Margin="0,0,0,10">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="24">
+                            <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" VerticalOptions="Center" />
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                Spacing="2">
+                                <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{StaticResource StatValue}"
+                                    Text="{Binding OrchidCavalryReputation}" />
+                                <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{StaticResource SectionTitle}"
+                                    Text="REPUTATION" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

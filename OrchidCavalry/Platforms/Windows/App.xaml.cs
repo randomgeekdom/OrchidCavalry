@@ -17,6 +17,9 @@ public partial class App : MauiWinUIApplication
 	public App()
 	{
 		this.InitializeComponent();
+
+		// Match the WinUI chrome (title bar) to the app's dark theme instead of the system theme.
+		this.RequestedTheme = ApplicationTheme.Dark;
 	}
 
 	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();

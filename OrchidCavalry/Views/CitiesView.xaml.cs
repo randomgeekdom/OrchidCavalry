@@ -14,4 +14,9 @@ public partial class CitiesView : ContentPage, IGameView
     {
 		this.BindingContext = new CitiesViewModel(game);
     }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

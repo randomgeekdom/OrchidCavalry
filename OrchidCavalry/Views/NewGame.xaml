@@ -1,38 +1,43 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="OrchidCavalry.Popups.NewGame"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="New Game"
-    BackgroundColor="Wheat"
-    BindingContext="OrchidCavalry.Popups.NewGame">
+    BackgroundColor="{StaticResource Night}"
+    BindingContext="OrchidCavalry.Popups.NewGame"
+    Shell.NavBarIsVisible="False"
+    Title="New Game">
 
-    <ScrollView  VerticalOptions="CenterAndExpand" VerticalScrollBarVisibility="Default">
+    <ScrollView VerticalScrollBarVisibility="Default">
         <VerticalStackLayout
-    Margin="10"
-    Padding="5"
-    VerticalOptions="CenterAndExpand">
+            HorizontalOptions="Center"
+            MaximumWidthRequest="720"
+            Padding="30"
+            Spacing="18"
+            VerticalOptions="Center">
 
-            <Label MaximumWidthRequest="400" FlowDirection="MatchParent" Text="{Binding OpeningText}" Margin="0, 25" />
+            <Label Style="{StaticResource PageTitle}" Text="A New Command" />
 
-            <Label HorizontalOptions="Center" FontSize="Caption" Text="Choose your starting character's name:"/>
-            <Entry
-        HorizontalTextAlignment="Center"
-        MaxLength="35"
-        Placeholder="Character first name?"
-        PlaceholderColor="DarkSlateGrey"
-        Text="{Binding Path=CharacterName, Mode=TwoWay}"
-        Keyboard="Text"
-        Completed="StartGameAsync"
-        WidthRequest="400" />
+            <Label LineHeight="1.45" Text="{Binding OpeningText}" />
+
+            <Border>
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="YOUR NAME" />
+                    <Entry
+                        Completed="StartGameAsync"
+                        HorizontalTextAlignment="Start"
+                        Keyboard="Text"
+                        MaxLength="35"
+                        Placeholder="Character first name?"
+                        Text="{Binding Path=CharacterName, Mode=TwoWay}" />
+                </VerticalStackLayout>
+            </Border>
 
             <Button
-        Clicked="StartGameAsync"
-        IsEnabled="{Binding CanStart}"
-        Text="Start Game"
-        WidthRequest="200" />
-
-            <!--</Frame>-->
+                Clicked="StartGameAsync"
+                IsEnabled="{Binding CanStart}"
+                Style="{StaticResource PrimaryButton}"
+                Text="Start Game" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

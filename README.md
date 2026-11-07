@@ -54,8 +54,6 @@ This document describes only what exists in the code. It does not invent or desc
 
 Dependency direction: App → Services → Domain.
 
-Also present on disk but not referenced by the solution: `OrchidCavalry.Models` and `OrchidCavalry.Models.Tests`.
-
 Domain model types are declared primarily under the `OrchidCavalry.Models` namespace, with some types under `OrchidCavalry.Domain.*` namespaces.
 
 ## How to build and run

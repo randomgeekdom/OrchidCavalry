@@ -111,6 +111,11 @@ namespace OrchidCavalry.Domain.Quests
                                 character.EnhanceRandomCharacterSkill();
                             }
                         }
+
+                        if (monsterRampageComplete)
+                        {
+                            break;
+                        }
                     }
                 }
 

@@ -55,6 +55,26 @@ namespace OrchidCavalry.Services.Tests
         }
 
         [Fact]
+        public async Task EvaluateQuest_AfterSuccess_RemainingCharactersDoNotRoll()
+        {
+            var (game, faction, city, character, quest) = Arrange();
+            var second = new Character("Hero", "Two");
+            second.UpdateCharacterSkillValue(Skill.Melee, 4);
+            game.AddCharacter(second);
+            quest.CharacterSlots[1].AssignCharacter(second);
+
+            // First roller succeeds; a second roll would be a Catastrophe.
+            var dice = new FakeDiceRoller(DieResult.Success, DieResult.Catastrophe);
+
+            await quest.EvaluateQuestAsync(game, dice);
+
+            Assert.Single(dice.Rolled);
+            Assert.Contains(character, game.Characters);
+            Assert.Contains(second, game.Characters);
+            Assert.DoesNotContain(quest, game.Quests);
+        }
+
+        [Fact]
         public async Task EvaluateQuest_WithExpiredTimer_RunsFailState()
         {
             var (game, faction, city, character, quest) = Arrange();

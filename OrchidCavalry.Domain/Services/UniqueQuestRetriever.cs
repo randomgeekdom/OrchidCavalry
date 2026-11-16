@@ -15,7 +15,10 @@ namespace OrchidCavalry.Domain.Services
                     new BitzDenniganQuest(city.Name)
                 };
 
-                return list.Where(x => !game.CompletedQuestIds.Contains(x.Id)).OrderBy(x => Guid.NewGuid().ToString()).FirstOrDefault();
+                return list
+                    .Where(x => !game.CompletedQuestIds.Contains(x.Id))
+                    .Where(x => !game.Quests.Any(y => y.Id == x.Id))
+                    .OrderBy(x => Guid.NewGuid().ToString()).FirstOrDefault();
             });
         }
     }

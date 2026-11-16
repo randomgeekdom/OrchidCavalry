@@ -5,8 +5,15 @@ namespace OrchidCavalry.Domain.Quests.Unique
 {
     public class BitzDenniganQuest : Quest
     {
+        /// <summary>
+        /// Fixed so the quest is recognized as the same unique quest across instances
+        /// </summary>
+        public static readonly Guid QuestId = new("1cee8450-d640-45b9-9db5-78a4437b7a68");
+
         public BitzDenniganQuest(string cityName) : base("The Trial of Bitz Dennigan", $"Bitz Dennigan, an ex-priestess, has been charged with murder in the city of {cityName}.", 6, 1, 1, cityName)
         {
+            this.Id = QuestId;
+
             this.BitzDenniganCharacter = new Character("Bitz", "Dennigan")
             {
                 Id = new Guid("907e6e6e-9115-4cee-8198-71751c9b0aa2")

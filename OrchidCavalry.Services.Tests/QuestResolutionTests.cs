@@ -90,5 +90,23 @@ namespace OrchidCavalry.Services.Tests
             Assert.NotNull(result);
             Assert.DoesNotContain(quest, game.Quests);
         }
+
+        [Fact]
+        public async Task MarauderFailState_OnCatastrophe_WithUnknownBand_AddsBandFactionAsRuler()
+        {
+            var game = new Game();
+            var cityFaction = game.AddFaction("CityFaction");
+            var city = game.AddNewCity("TestCity", cityFaction.Id, "Plain");
+            city.Population = 500;
+
+            var quest = MarauderQuest.Create("Red Riders", "Bold Leader", "TestCity");
+            var dice = new FakeDiceRoller(DieResult.Catastrophe);
+
+            var result = await quest.EvaluateFailStateAsync(game, dice);
+
+            Assert.Contains("taken control", result);
+            var bandFaction = Assert.Single(game.Factions, x => x.Name == "Red Riders");
+            Assert.Equal(bandFaction.Id, city.RulingFactionId);
+        }
     }
 }

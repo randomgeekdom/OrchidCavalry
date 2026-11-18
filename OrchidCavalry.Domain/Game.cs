@@ -124,6 +124,16 @@ namespace OrchidCavalry.Models
             return this.Factions.First(x => x.Name == bandName).Id;
         }
 
+        /// <summary>
+        /// Get the faction with the given name, adding it if it doesn't exist yet
+        /// </summary>
+        /// <param name="factionName">The name of the faction</param>
+        /// <returns>The faction's Id</returns>
+        public Guid GetOrAddFactionByName(string factionName)
+        {
+            return (this.Factions.FirstOrDefault(x => x.Name == factionName) ?? this.AddFaction(factionName)).Id;
+        }
+
         public int GetNumberOfAvailableQuestSlots()
         {
             return this.Quests.Sum(x => x.GetRequiredNumberOfCharacters());

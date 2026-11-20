@@ -1,4 +1,5 @@
 using OrchidCavalry.Domain;
+using OrchidCavalry.Domain.Quests;
 using OrchidCavalry.Domain.Quests.Unique;
 using OrchidCavalry.Domain.Services;
 using OrchidCavalry.Models;
@@ -22,31 +23,49 @@ namespace OrchidCavalry.Services.Tests
         }
 
         [Fact]
-        public async Task GetUniqueQuestAsync_ReturnsBitzDenniganQuest_WhenAvailable()
+        public void FungalsaurQuest_HasTheSameIdOnEveryInstance()
+        {
+            Assert.Equal(new FungalsaurQuest("A").Id, new FungalsaurQuest("B").Id);
+        }
+
+        [Fact]
+        public async Task GetUniqueQuestAsync_ReturnsAUniqueQuest_WhenAvailable()
         {
             var (game, city) = CreateGame();
 
             var quest = await new UniqueQuestRetriever().GetUniqueQuestAsync(game, city);
 
-            Assert.IsType<BitzDenniganQuest>(quest);
+            Assert.True(quest is BitzDenniganQuest or FungalsaurQuest);
         }
 
         [Fact]
         public async Task GetUniqueQuestAsync_SkipsCompletedQuest()
         {
             var (game, city) = CreateGame();
-            var quest = new BitzDenniganQuest(city.Name);
-            game.AddQuest(quest);
-            game.RemoveQuest(quest);
+            var bitz = new BitzDenniganQuest(city.Name);
+            game.AddQuest(bitz);
+            game.RemoveQuest(bitz);
 
-            Assert.Null(await new UniqueQuestRetriever().GetUniqueQuestAsync(game, city));
+            Assert.IsType<FungalsaurQuest>(await new UniqueQuestRetriever().GetUniqueQuestAsync(game, city));
         }
 
         [Fact]
         public async Task GetUniqueQuestAsync_SkipsQuestAlreadyOnTheBoard()
         {
             var (game, city) = CreateGame();
-            game.AddQuest(new BitzDenniganQuest(city.Name));
+            game.AddQuest(new FungalsaurQuest(city.Name));
+
+            Assert.IsType<BitzDenniganQuest>(await new UniqueQuestRetriever().GetUniqueQuestAsync(game, city));
+        }
+
+        [Fact]
+        public async Task GetUniqueQuestAsync_ReturnsNull_WhenAllUniqueQuestsAreUsed()
+        {
+            var (game, city) = CreateGame();
+            var bitz = new BitzDenniganQuest(city.Name);
+            game.AddQuest(bitz);
+            game.RemoveQuest(bitz);
+            game.AddQuest(new FungalsaurQuest(city.Name));
 
             Assert.Null(await new UniqueQuestRetriever().GetUniqueQuestAsync(game, city));
         }

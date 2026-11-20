@@ -12,7 +12,8 @@ namespace OrchidCavalry.Domain.Services
             {
                 var list = new List<Quest>
                 {
-                    new BitzDenniganQuest(city.Name)
+                    new BitzDenniganQuest(city.Name),
+                    new FungalsaurQuest(city.Name)
                 };
 
                 return list

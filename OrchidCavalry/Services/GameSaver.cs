@@ -39,7 +39,7 @@ namespace OrchidCavalry.Services
 
             if (File.Exists(filePath))
             {
-                File.Move(filePath, Path.Combine(FileSystem.AppDataDirectory, filePath + ".backup"), true);
+                File.Move(filePath, filePath + ".backup", true);
             }
 
             var serializedData = JsonConvert.SerializeObject(obj, this.serializerSettings);

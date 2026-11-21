@@ -7,6 +7,8 @@ namespace OrchidCavalry.Domain.Services
     {
         private readonly Random random = new();
 
+        public bool FlipCoin() => random.Next(2) == 0;
+
         public DieResult Roll(int modifier, bool isDebilitated = false, bool isEnhanced = false)
         {
             var result = random.Next(1, 21);

@@ -1,4 +1,5 @@
-﻿using OrchidCavalry.Domain.Enumerations;
+﻿using OrchidCavalry.Domain;
+using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Models.ValueTypes;
 
 namespace OrchidCavalry.Models
@@ -6,6 +7,8 @@ namespace OrchidCavalry.Models
     public class Character(string firstName, string lastName) : Entity
     {
         private const string CommanderTitle = "Orchid Cavalry Commander";
+
+        public List<Artifact> Artifacts { get; set; } = [];
 
         public int Defeats { get; set; } = 0;
 
@@ -20,6 +23,14 @@ namespace OrchidCavalry.Models
         public List<string> Titles { get; set; } = [];
 
         public int Victories { get; set; } = 0;
+
+        public void AddArtifact(Artifact artifact)
+        {
+            if (!Artifacts.Contains(artifact))
+            {
+                Artifacts.Add(artifact);
+            }
+        }
 
         public int AddDefeat() => ++this.Defeats;
 
@@ -60,6 +71,23 @@ namespace OrchidCavalry.Models
         }
 
         public string GetName() => $"{FirstName} {LastName}";
+
+        public bool HasArtifacts() => this.Artifacts.Count > 0;
+
+        /// <summary>
+        /// Remove a random artifact from the character
+        /// </summary>
+        /// <returns>The lost artifact, or null if the character had none</returns>
+        public Artifact? LoseRandomArtifact()
+        {
+            var artifact = Artifacts.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+            if (artifact != null)
+            {
+                Artifacts.Remove(artifact);
+            }
+
+            return artifact;
+        }
 
         public string GetNameAndRank() => $"{this.GetRank()} {this.GetName()}";
 

@@ -7,13 +7,18 @@ This document describes only what exists in the code. It does not invent or desc
 ## What exists in the code
 
 **Game state** (`OrchidCavalry.Domain.Game`)
-- Characters, cities, factions, quests, the current commander, completed/successfully-completed quest IDs, the number of turns taken, and alerts displayed between turns.
+- Characters, cities, factions, quests, lost artifacts, the current commander, completed/successfully-completed quest IDs, the number of turns taken, and alerts displayed between turns.
 - Helpers to add/remove characters, cities, factions, and quests; to look up cities and factions by name; to adjust faction reputation; and to replace the leader with the highest-ranked, highest-skilled remaining member.
 - A derived `GetScore()` (plus per-component accessors) sums successfully-completed quests, total faction reputation, character victories, and turns survived.
 
 **Characters** (`Character`)
-- First/last name, titles (including "Orchid Cavalry Commander"), skills with values plus enhanced/debilitated state, victories/defeats, and a rank derived from victories (Recruit through General).
+- First/last name, titles (including "Orchid Cavalry Commander"), skills with values plus enhanced/debilitated state, victories/defeats, collected artifacts, and a rank derived from victories (Recruit through General).
 - Skills can be enhanced, debilitated, or have their values adjusted (total skill value is capped at 35).
+
+**Artifacts** (`Artifact`)
+- A named item a character can collect. Artifacts have no other effect yet.
+- When a character carrying artifacts suffers a fatal result in a quest, they lose a random artifact instead of dying. A coin flip decides whether they withdraw from the quest or fight on. The lost artifact goes into `Game.LostArtifacts`, out in the world.
+- Artifacts come only from specific quests: a quest's `Artifacts` list is awarded to the winning character, with award text each such quest supplies by overriding `GetArtifactAwardText`.
 
 **Cities** (`City`)
 - Name, biome, population, and the ID of the ruling faction.
@@ -22,7 +27,7 @@ This document describes only what exists in the code. It does not invent or desc
 - Name and an Orchid Cavalry reputation value.
 
 **Quests** (`Quest` abstract base; `MarauderQuest`, `MonsterQuest`, and unique quests)
-- Title, description, city, mandatory/optional character slots, expiration in turns, a loot list, and skill-based resolutions.
+- Title, description, city, mandatory/optional character slots, expiration in turns, an artifact reward list, and skill-based resolutions.
 - Resolving a quest rolls dice against character skills. Results can add titles, award a victory, modify city faction reputation, injure or kill characters, debilitate/enhance skills, or trigger a quest fail state.
 - Unresolved quests expire one turn at a time.
 
@@ -86,6 +91,6 @@ Unpackaged Windows runs resolve the custom fonts from the output directory, and 
 ## Known state (from the code)
 
 - There is no game-over condition by design: the game is an endless sandbox, and turns continue even if all characters die or all cities fall.
-- Quest `Loot` lists are never populated, so quests award no loot today.
+- No quest awards artifacts yet, so characters cannot currently obtain one.
 - 9 of the 15 defined skills are unused in quest resolution.
 - Progress is expressed as a score (successfully-completed quests, faction reputation, character victories, and turns survived) rather than a win/loss state.

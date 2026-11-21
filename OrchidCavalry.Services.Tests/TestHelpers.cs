@@ -17,6 +17,13 @@ namespace OrchidCavalry.Services.Tests
 
         public List<DieResult> Rolled { get; } = [];
 
+        /// <summary>
+        /// Results for FlipCoin, in order.  Defaults to true once exhausted.
+        /// </summary>
+        public Queue<bool> CoinFlips { get; } = new();
+
+        public bool FlipCoin() => CoinFlips.Count > 0 ? CoinFlips.Dequeue() : true;
+
         public DieResult Roll(int modifier = 0, bool isDebilitated = false, bool isEnhanced = false)
         {
             var result = results.Count > 0 ? results.Dequeue() : DieResult.Fail;

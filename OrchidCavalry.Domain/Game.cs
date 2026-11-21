@@ -48,6 +48,11 @@ namespace OrchidCavalry.Models
         public List<Faction> Factions { get; set; } = [];
 
         /// <summary>
+        /// Artifacts characters have lost.  They are out in the world and can turn up again
+        /// </summary>
+        public List<Artifact> LostArtifacts { get; set; } = [];
+
+        /// <summary>
         /// The quests the cavalry has successfully completed
         /// </summary>
         public List<Guid> SuccessfulQuestIds { get; set; } = [];
@@ -167,6 +172,21 @@ namespace OrchidCavalry.Models
         public void KillCharacter(Character character)
         {
             this.Characters.Remove(character);
+        }
+
+        /// <summary>
+        /// The character loses a random artifact, which goes back out into the world
+        /// </summary>
+        /// <returns>The lost artifact, or null if the character had none</returns>
+        public Artifact? LoseRandomArtifact(Character character)
+        {
+            var artifact = character.LoseRandomArtifact();
+            if (artifact != null)
+            {
+                this.LostArtifacts.Add(artifact);
+            }
+
+            return artifact;
         }
 
         public void RemoveCityByName(string cityName)

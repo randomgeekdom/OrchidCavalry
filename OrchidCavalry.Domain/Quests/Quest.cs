@@ -31,7 +31,10 @@ namespace OrchidCavalry.Domain.Quests
         public string CityName { get; set; }
         public string Description { get; set; }
         public int Expiration { get; set; }
-        public List<Loot> Loot { get; set; } = [];
+        /// <summary>
+        /// Artifacts awarded to the character who wins the quest
+        /// </summary>
+        public List<Artifact> Artifacts { get; set; } = [];
         public string Title { get; set; }
 
         public abstract Task<string?> EvaluateFailStateAsync(Game game, IDiceRoller diceRoller);
@@ -68,6 +71,13 @@ namespace OrchidCavalry.Domain.Quests
                         game.AddToFactionReputation(city.RulingFactionId, resolution.CityReputationModifier);
 
                         returnText.Add($"Special kudos to {character.GetNameAndRank()}");
+
+                        foreach (var artifact in this.Artifacts)
+                        {
+                            game.LostArtifacts.Remove(artifact);
+                            character.AddArtifact(artifact);
+                            returnText.Add(this.GetArtifactAwardText(character, artifact));
+                        }
                     }
                 }
 
@@ -89,6 +99,12 @@ namespace OrchidCavalry.Domain.Quests
         /// Stages that must succeed before the quest's resolutions are rolled.  Returns false if the quest failed during them.
         /// </summary>
         protected virtual bool EvaluatePreliminaryStages(Game game, IDiceRoller diceRoller, List<string> returnText) => true;
+
+        /// <summary>
+        /// The text shown when the winning character is awarded one of this quest's artifacts.  Each quest that awards artifacts must supply its own.
+        /// </summary>
+        protected virtual string GetArtifactAwardText(Character character, Artifact artifact) =>
+            throw new InvalidOperationException($"Quest '{this.Title}' awards artifacts but does not override {nameof(GetArtifactAwardText)}.");
 
         /// <summary>
         /// Assigned characters roll, lowest rank first, until one succeeds or none remain.  Applies death, debilitation and enhancement.
@@ -117,7 +133,24 @@ namespace OrchidCavalry.Domain.Quests
 
                     var result = diceRoller.Roll(highestSkill.Value, highestSkill.IsDebilitated, highestSkill.IsEnhanced);
 
-                    if (result == DieResult.Catastrophe || result <= DieResult.Fail && character.Skills.All(x => x.IsDebilitated))
+                    var isFatal = result == DieResult.Catastrophe || result <= DieResult.Fail && character.Skills.All(x => x.IsDebilitated);
+
+                    if (isFatal && character.HasArtifacts())
+                    {
+                        // An artifact is lost instead of the character's life
+                        var artifact = game.LoseRandomArtifact(character)!;
+
+                        if (diceRoller.FlipCoin())
+                        {
+                            returnText.Add($"{character.GetNameAndRank()} lost the {artifact.Name} but survived, and has withdrawn from the quest.");
+                            characterSlot.UnassignCharacter();
+                        }
+                        else
+                        {
+                            returnText.Add($"{character.GetNameAndRank()} lost the {artifact.Name} but survived, and fights on.");
+                        }
+                    }
+                    else if (isFatal)
                     {
                         game.KillCharacter(character);
 

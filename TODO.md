@@ -39,6 +39,22 @@
 - [ ] **[large] Fix namespaces repo-wide** - the Domain project declares its types in `namespace OrchidCavalry.Models`. Rename to `OrchidCavalry.Domain` across all files. Mechanical, but touches everything.
 - [x] **[large] Define a game-over condition** - User decided: **endless sandbox, no game-over**. Instead of a loss state, the game now tracks a derived score shown on the dashboard: successfully-completed quests + total faction reputation + character victories + turns survived. Implemented `Game.TurnCount` and `Game.SuccessfulQuestIds` (only won quests), `Game.GetScore()`/per-component accessors; `Quest.EvaluateQuestAsync` now awards a victory via `Character.AddVictory()` on each successful check and records the quest as successful; `GameplayService.NextTurnAsync` advances `TurnCount`. Added `ScoreTests` (win/loss/sum/turn-count). Domain + Services build and all 17 tests pass; MAUI app still cannot restore (pre-existing net8.0 workload/`MauiVersion` issue), so the Dashboard label change is unbuilt here.
 - [ ] **[large] New quests, skills, factions, or balance changes** - the user designs the game; these come from the user, not from `/next`.
+- [ ] **[large] Psycharium Outpost (premade location) - design IN PROGRESS, paused 2026-11-21** - When `/next` picks this, resume the design Q&A with the user (one question at a time) before writing any code. Nothing is implemented yet.
+  - **User's concept:** "The outpost where the Blast Legion resides and protects us from the Unreals."
+  - **Decided so far:**
+    - Premade location that exists from the start of every new game. The user wants premade locations in general, so build it so more can be added the same way.
+    - It is a normal `City` with exceptions. Quests can target it, but **marauders can never take it over**: the Blast Legion always rules it.
+    - Name: **Psycharium Outpost**. Biome: **Jungle** (rolled once with the game's `IBiomeRoller` at the user's request, then fixed). Population: **fixed 25** to start ("very small").
+    - Ruling faction: **Blast Legion**, starting reputation **100** ("the best of the best"). Reputation counts toward the score, so this gives every game +100 score. The user was told this and didn't ask to exclude it.
+    - **Failed quests there do not destroy it** (normal cities are removed below 10 population). Instead it loses population and the Blast Legion loses reputation. If its population reaches 0, it regains recruits.
+    - Population loss uses the **existing fail-state dice rolls**, and unlike normal cities the loss is **saved** to `City.Population`.
+  - **Still open (ask in this order):**
+    1. How much reputation the Blast Legion loses when a quest at the outpost fails: a fixed amount, one per death, or something else.
+    2. When population hits 0, how many recruits it regains (back to 25, or another number), and whether this happens immediately.
+    3. What happens on a marauder Catastrophe roll there, since a takeover isn't allowed. Currently that roll hands the city to the marauders and ends the attack.
+    4. Whether the Unreals and the outpost's description should appear in the game (cities have no description field today), or stay lore for now.
+    5. Alert wording for the outpost's failed-quest outcome: use the user's text, or draft it for approval.
+  - **Noticed during design (not yet raised as a change):** in `MonsterQuest`/`MarauderQuest.EvaluateFailStateAsync`, population losses are computed in a local `newPopulation` and never written back to `city.Population`.
 - [x] **[large] Fungalsaur unique quest ("Seeking the Mushroom Monster")** - Implemented the user's agreed design: `FungalsaurQuest` (fixed Id, expiration 7, 2-7 characters) registered in `UniqueQuestRetriever`. Stage 1 is a Sense/Aura investigation roll (usual death/debilitation, silent on success per the user, no title/victory/reputation); stage 2 rolls in the same turn: Melee/Target kill ("Fungalsaur Slayer") or Aura tame ("Fungalsaur Whisperer", Selena Pancoast "The Antenna" joins), +1 reputation either way. Any failure abandons it with no city effect. `Quest.EvaluateQuestAsync` now uses an extracted `RollUntilSuccess` loop plus an overridable `EvaluatePreliminaryStages` hook; existing quests behave the same. Added `FungalsaurQuestTests` and updated `UniqueQuestRetrieverTests` for two unique quests.
 
 ## 💡 Agent suggestions - awaiting the user's creative decision

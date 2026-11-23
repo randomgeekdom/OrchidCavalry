@@ -5,7 +5,7 @@ using OrchidCavalry.Models;
 namespace OrchidCavalry.Domain.Quests
 {
     /// <summary>
-    /// A quest of 1 to 4 characters to stop a monster from terrorizing a city
+    /// A quest of 1 to 3 characters to stop a monster from terrorizing a city
     /// </summary>
     public class MonsterQuest(string title, string description, string monsterName, string cityName) : Quest(title, description, 5, 1, 3, cityName)
     {

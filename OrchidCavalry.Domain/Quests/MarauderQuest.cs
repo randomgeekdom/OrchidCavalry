@@ -5,7 +5,7 @@ using OrchidCavalry.Models;
 namespace OrchidCavalry.Domain.Quests
 {
     /// <summary>
-    /// A quest of 1 to 4 characters to stop a band of marauders from terrorizing a city
+    /// A quest of 1 to 3 characters to stop a band of marauders from terrorizing a city
     /// </summary>
     public class MarauderQuest(string title, string description, string bandName, string bandLeaderName, string cityName) : Quest(title, description, 5, 1, 3, cityName)
     {

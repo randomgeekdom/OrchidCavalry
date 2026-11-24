@@ -86,6 +86,13 @@ Run the app on Windows:
 dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0
 ```
 
+The agent commands `/play` and `/run` (`.opencode/commands/play.md`, `.opencode/commands/run.md`) both build the Windows target with the Windows App SDK bundled and launch the built executable detached, then check that the process stayed up:
+```
+dotnet build OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0 -p:WindowsAppSDKSelfContained=true
+Start-Process "OrchidCavalry\bin\Debug\net10.0-windows10.0.19041.0\win-x64\OrchidCavalry.exe"
+```
+`WindowsAppSDKSelfContained=true` is required for this: a framework-dependent build exits on startup with `COMException 0x80040154 (REGDB_E_CLASSNOTREG)` while auto-initializing the Windows App SDK.
+
 Unpackaged Windows runs resolve the custom fonts from the output directory, and `MauiFont` items are only copied there by `dotnet publish`, so the project has a `CopyMauiFontsToOutputDirectory` target that copies them after every Windows build.
 
 ## Known state (from the code)

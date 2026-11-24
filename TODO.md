@@ -24,7 +24,7 @@
   - Done: it is neither. I ran the Windows app and drove it with UI Automation. Once expanded, the picker listed all 4 undeployed characters (the Commander and 3 Recruits), and they were readable on the dark dropdown. The WinUI ComboBox creates its items only when it opens, so inspecting it while closed shows none. A closed picker with no `Title` and nothing selected is also a blank box. No code change was needed.
 - [x] **[small] Bitz Dennigan's unique quest can repeat** - `BitzDenniganQuest` never sets a fixed quest `Id` (only her character has one), so `Entity` gives each new instance a random Guid. `UniqueQuestRetriever` excludes quests whose Id is in `game.CompletedQuestIds`, which therefore never matches. Give the quest a fixed Id so it appears once per game. Also consider skipping a unique quest that is already on the board.
   - Done: `BitzDenniganQuest` now sets a fixed `Id` (`BitzDenniganQuest.QuestId`). Once it leaves the board, the completed-quest check excludes it. `UniqueQuestRetriever` also skips any unique quest already on the board, so it appears at most once per game. Added `UniqueQuestRetrieverTests`.
-- [ ] **[small] README omits the /play and /run commands** - both commands build and launch the Windows app (with `WindowsAppSDKSelfContained=true`); mention them in the build/run section.
+- [x] **[small] README omits the /play and /run commands** - both commands build and launch the Windows app (with `WindowsAppSDKSelfContained=true`); mention them in the build/run section. Done: added a paragraph to the README build/run section describing both commands, their build/launch steps, and why the self-contained flag is required.
 
 ## Necessary changes
 

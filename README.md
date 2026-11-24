@@ -83,7 +83,7 @@ dotnet test OrchidCavalry.sln
 
 Run the app on Windows:
 ```
-dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0
+dotnet run --project OrchidCavalry\OrchidCavalry.csproj -f net10.0-windows10.0.19041.0 -p:WindowsAppSDKSelfContained=true
 ```
 
 The agent commands `/play` and `/run` (`.opencode/commands/play.md`, `.opencode/commands/run.md`) both build the Windows target with the Windows App SDK bundled and launch the built executable detached, then check that the process stayed up:

@@ -24,6 +24,7 @@ This document describes only what exists in the code. It does not invent or desc
 - Name, biome, population, and the ID of the ruling faction.
 
 **Factions** (`Faction`)
+- Fixed factions (`FixedFactions`) exist at the start of every new game: the Order of Fire, with 4 reputation and no cities. Father Samson joins once per game when its reputation reaches 26.
 - Name and an Orchid Cavalry reputation value.
 
 **Quests** (`Quest` abstract base; `MarauderQuest`, `MonsterQuest`, and unique quests)

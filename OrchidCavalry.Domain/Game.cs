@@ -19,6 +19,7 @@ namespace OrchidCavalry.Domain
         {
             Commander = commander;
             this.Characters.Add(commander);
+            this.Factions.AddRange(FixedFactions.Create());
 
             commander.MakeCommander();
         }
@@ -46,6 +47,11 @@ namespace OrchidCavalry.Domain
         public List<Guid> CompletedQuestIds { get; set; } = [];
 
         public List<Faction> Factions { get; set; } = [];
+
+        /// <summary>
+        /// Whether Father Samson has ever joined.  They can only join once per game
+        /// </summary>
+        public bool HasFatherSamsonJoined { get; set; } = false;
 
         /// <summary>
         /// Artifacts characters have lost.  They are out in the world and can turn up again

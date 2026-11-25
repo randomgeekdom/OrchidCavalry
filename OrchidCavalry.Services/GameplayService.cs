@@ -37,6 +37,8 @@ namespace OrchidCavalry.Services
                 }
             }
 
+            FatherSamson.JoinIfReady(game);
+
             // Generate quests to be taken
             await this.questService.GenerateQuestsAsync(game);
 

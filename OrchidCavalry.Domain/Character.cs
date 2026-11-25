@@ -1,8 +1,8 @@
 ﻿using OrchidCavalry.Domain;
 using OrchidCavalry.Domain.Enumerations;
-using OrchidCavalry.Models.ValueTypes;
+using OrchidCavalry.Domain.ValueTypes;
 
-namespace OrchidCavalry.Models
+namespace OrchidCavalry.Domain
 {
     public class Character(string firstName, string lastName) : Entity
     {

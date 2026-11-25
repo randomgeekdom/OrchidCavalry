@@ -1,6 +1,6 @@
 using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Domain.Services;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 using OrchidCavalry.Services;
 using Rollbard.Library.Rollers.Interfaces;
 

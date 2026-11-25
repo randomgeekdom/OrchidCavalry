@@ -1,5 +1,5 @@
 ﻿using OrchidCavalry.Domain.Quests;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 using OrchidCavalry.Popups;
 using OrchidCavalry.Views;
 using System;

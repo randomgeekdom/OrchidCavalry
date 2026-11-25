@@ -1,7 +1,7 @@
 ﻿using OrchidCavalry.Domain;
 using OrchidCavalry.Domain.Quests;
 
-namespace OrchidCavalry.Models
+namespace OrchidCavalry.Domain
 {
     public class Game : Entity
     {

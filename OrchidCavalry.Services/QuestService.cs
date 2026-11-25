@@ -1,6 +1,6 @@
 ﻿using OrchidCavalry.Domain.Quests;
 using OrchidCavalry.Domain.Services;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services

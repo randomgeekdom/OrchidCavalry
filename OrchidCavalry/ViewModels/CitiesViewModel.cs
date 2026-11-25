@@ -1,5 +1,4 @@
 ﻿using OrchidCavalry.Domain;
-using OrchidCavalry.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

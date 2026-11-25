@@ -59,7 +59,7 @@ This document describes only what exists in the code. It does not invent or desc
 
 Dependency direction: App → Services → Domain.
 
-Domain model types are declared primarily under the `OrchidCavalry.Models` namespace, with some types under `OrchidCavalry.Domain.*` namespaces.
+Domain model types are declared under the `OrchidCavalry.Domain` namespace and its `OrchidCavalry.Domain.*` sub-namespaces.
 
 ## How to build and run
 

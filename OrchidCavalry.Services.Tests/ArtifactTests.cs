@@ -2,7 +2,6 @@ using OrchidCavalry.Domain;
 using OrchidCavalry.Domain.Enumerations;
 using OrchidCavalry.Domain.Quests;
 using OrchidCavalry.Domain.Services;
-using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Services.Tests
 {

@@ -1,5 +1,5 @@
-﻿using OrchidCavalry.Models;
-using OrchidCavalry.Models.ValueTypes;
+﻿using OrchidCavalry.Domain;
+using OrchidCavalry.Domain.ValueTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

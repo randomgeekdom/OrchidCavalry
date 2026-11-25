@@ -1,4 +1,4 @@
-﻿using OrchidCavalry.Models;
+﻿using OrchidCavalry.Domain;
 using Rollbard.Library.Rollers.Interfaces;
 
 namespace OrchidCavalry.Services

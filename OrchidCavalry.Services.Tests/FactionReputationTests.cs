@@ -1,5 +1,4 @@
 using OrchidCavalry.Domain;
-using OrchidCavalry.Models;
 
 namespace OrchidCavalry.Services.Tests
 {

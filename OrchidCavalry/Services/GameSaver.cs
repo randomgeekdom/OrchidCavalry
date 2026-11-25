@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 
 namespace OrchidCavalry.Services
 {

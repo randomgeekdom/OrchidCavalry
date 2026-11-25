@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrchidCavalry.Models.ValueTypes
+namespace OrchidCavalry.Domain.ValueTypes
 {
     public class SkillValue : ValueObject<byte>
     {

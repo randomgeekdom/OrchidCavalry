@@ -1,5 +1,5 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 
 namespace OrchidCavalry.Domain.Quests
 {

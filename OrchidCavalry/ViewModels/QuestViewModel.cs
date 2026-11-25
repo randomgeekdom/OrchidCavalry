@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using OrchidCavalry.Domain;
 using OrchidCavalry.Domain.Quests;
-using OrchidCavalry.Models;
 using OrchidCavalry.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

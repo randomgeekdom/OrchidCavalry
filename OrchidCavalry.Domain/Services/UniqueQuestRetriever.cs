@@ -1,6 +1,6 @@
 ﻿using OrchidCavalry.Domain.Quests;
 using OrchidCavalry.Domain.Quests.Unique;
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 
 namespace OrchidCavalry.Domain.Services
 {

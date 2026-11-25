@@ -1,5 +1,4 @@
 using OrchidCavalry.Domain;
-using OrchidCavalry.Models;
 using OrchidCavalry.ViewModels;
 
 namespace OrchidCavalry.Popups;

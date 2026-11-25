@@ -1,4 +1,4 @@
-﻿namespace OrchidCavalry.Models.ValueTypes
+﻿namespace OrchidCavalry.Domain.ValueTypes
 {
     public abstract class ValueObject<T> : IComparable
         where T : IComparable

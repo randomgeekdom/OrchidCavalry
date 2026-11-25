@@ -1,5 +1,5 @@
 ﻿
-namespace OrchidCavalry.Models
+namespace OrchidCavalry.Domain
 {
     public abstract class Entity
     {

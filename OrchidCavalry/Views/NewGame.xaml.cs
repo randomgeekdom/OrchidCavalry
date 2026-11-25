@@ -1,5 +1,5 @@
 
-using OrchidCavalry.Models;
+using OrchidCavalry.Domain;
 using OrchidCavalry.ViewModels;
 using System.ComponentModel;
 

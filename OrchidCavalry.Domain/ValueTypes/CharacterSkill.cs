@@ -1,6 +1,6 @@
 ﻿using OrchidCavalry.Domain.Enumerations;
 
-namespace OrchidCavalry.Models.ValueTypes
+namespace OrchidCavalry.Domain.ValueTypes
 {
     public class CharacterSkill : Entity
     {

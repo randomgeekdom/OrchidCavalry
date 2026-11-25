@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrchidCavalry.Models
+namespace OrchidCavalry.Domain
 {
     public class Alert
     {

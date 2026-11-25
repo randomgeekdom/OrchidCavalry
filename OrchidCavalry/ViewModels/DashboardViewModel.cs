@@ -1,4 +1,4 @@
-﻿using OrchidCavalry.Models;
+﻿using OrchidCavalry.Domain;
 using System.Windows.Input;
 using OrchidCavalry.Services;
 using CommunityToolkit.Mvvm.Input;
@@ -31,7 +31,7 @@ namespace OrchidCavalry.ViewModels
             this.gameSaver = gameSaver;
             this.gameViewPopupService = gameViewPopupService;
             this.EndTurnCommand = new AsyncRelayCommand(this.NextTurnAsync);
-            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Models.Character>(x => this.ShowCharacterPopupAsync(x));
+            this.ShowCharacterPopupCommand = new AsyncRelayCommand<Domain.Character>(x => this.ShowCharacterPopupAsync(x));
             this.ShowQuestPopupCommand = new AsyncRelayCommand(this.ShowQuestPopupAsync);
             this.ShowFactionPopupCommand = new AsyncRelayCommand(() => gameViewPopupService.ShowPopupAsync<FactionView>(this.game, this.navigation));
             this.ShowCitiesPopupCommand = new AsyncRelayCommand(() => gameViewPopupService.ShowPopupAsync<CitiesView>(this.game, this.navigation));
